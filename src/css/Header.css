@@ -1,0 +1,54 @@
+.header {
+  width: 100%;
+}
+
+.header__message {
+  padding: 5px 0px;
+  background-color: var(--color-secondary);
+  text-align: center;
+  color: white;
+  font-size: medium;
+  font-weight: 800;
+  text-transform: uppercase;
+}
+
+.header__main {
+  display: flex;
+  height: 120x;
+  background-color: #fff;
+}
+
+.header__mainLogo {
+  margin-top: 1rm;
+  margin-left: 1rm;
+}
+
+.header__mainAdvertisement {
+  margin-left: 30px;
+  background-color: #fff;
+  min-width: 45%;
+}
+
+.inner {
+  position: relative;
+  color: var(--color-secondary);
+  z-index: 1;
+  display: flex;
+  justify-content: left;
+  flex-direction: row;
+}
+
+a.inner:hover {
+  text-decoration: none;
+  color: var(--color-secondary);
+}
+
+.inner__smallText {
+  padding-left: 1px;
+  font-size: 10px;
+}
+
+.inner__largeText {
+  font-weight: 700;
+  font-size: 14px;
+}
