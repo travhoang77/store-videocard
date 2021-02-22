@@ -1,6 +1,6 @@
 .navBar {
   height: var(--nav-size);
-  background-color: var(--color-primary);
+  background-color: var(--color-light);
   padding: 0 1rem;
   border-bottom: var(--border);
 }
@@ -13,10 +13,13 @@
 
 .navBar__item {
   margin-top: 5px;
-  width: calc(var(--nav-size) * 0.8);
+  width: calc(var(--nav-size) * 3);
   display: flex;
   align-items: center;
   justify-content: center;
+  font-weight: 700;
+  color: white;
+  cursor: pointer;
 }
 
 .icon__button {
@@ -41,6 +44,7 @@
   width: 20px;
   height: 20px;
 }
+
 .center {
   margin-left: calc(var(--button-size) * 0.15);
   margin-top: calc(var(--button-size) * 0.1);
@@ -49,16 +53,16 @@
 }
 
 .fa__button {
-  color: var(--color-primary);
+  color: var(--color-light);
 }
 
 .dropdown {
   position: absolute;
-  top: 188px;
-  left: 160px;
+  top: 190px;
+  left: 150px;
   width: 230px;
   transform: translateX(-45%);
-  background-color: var(--color-primary);
+  background-color: var(--color-light);
   border: var(--border);
   border-radius: var(--border-radius);
   padding: 0.4em;

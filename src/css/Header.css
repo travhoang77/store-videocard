@@ -4,7 +4,7 @@
 
 .header__message {
   padding: 5px 0px;
-  background-color: var(--color-secondary);
+  background-color: var(--color-dark);
   text-align: center;
   color: white;
   font-size: medium;
@@ -31,7 +31,7 @@
 
 .inner {
   position: relative;
-  color: var(--color-secondary);
+  color: var(--color-dark);
   z-index: 1;
   display: flex;
   justify-content: left;
@@ -40,7 +40,7 @@
 
 a.inner:hover {
   text-decoration: none;
-  color: var(--color-secondary);
+  color: var(--color-dark);
 }
 
 .inner__smallText {

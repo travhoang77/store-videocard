@@ -10,6 +10,7 @@ import {
 import { Link } from "react-router-dom";
 import SiteNav from "./component/SiteNav";
 import ProductNav from "./component/ProductNav";
+import Logo from "./assets/logo.png";
 
 function Header() {
   return (
@@ -18,17 +19,14 @@ function Header() {
       <div className="header__main">
         <div className="header__mainLogo">
           <Link to={"/"}>
-            <img
-              alt="logo"
-              src="https://www.centralcomputer.com/static/version1612357798/frontend/centralcomputers/ultimate/en_US/images/logo.png"
-            />
+            <img src={Logo} className="pt-1 pb-1 pl-2" alt="Logo" />
           </Link>
         </div>
         <div className="header__mainAdvertisement">
           <p>Advertisement</p>
         </div>
 
-        <div className="mt-2 d-flex align-content-start flex-wrap">
+        <div className="ml-auto mt-2 d-flex align-content-start flex-wrap">
           {/* TO-DO Search Component */}
           <div className="header__mainSearch">
             <InputGroup className=" w-200">
@@ -50,7 +48,7 @@ function Header() {
               to="/cart"
               className="inner"
               title="Shopping Cart"
-              aria-label="Shopping Card"
+              aria-label="Shopping Cart"
             >
               <FontAwesomeIcon className=" fa fa-2x" icon={faShoppingCart} />
               <div className="ml-1">
@@ -64,7 +62,7 @@ function Header() {
           {/* TODO : ACCOUNT Component */}
           <div className="ml-2">
             <Link
-              to="/account"
+              to="/login"
               className="inner"
               title="Account"
               aria-label="Account"
@@ -79,7 +77,7 @@ function Header() {
           </div>
           <div>
             {/* TO-DO create NAVLIST component */}
-            <SiteNav />
+            {/* <SiteNav /> */}
           </div>
         </div>
       </div>

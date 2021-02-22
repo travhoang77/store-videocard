@@ -1,0 +1,38 @@
+.product-card {
+  width: 18rem;
+  color: var(--color-dark);
+  border: 1px solid var(--color-accent);
+}
+
+.product-card > .card-header {
+  background-color: var(--color-light);
+}
+
+.rating-star {
+  margin-right: -5px;
+  font-size: x-large;
+}
+.card-header {
+  background-color: var(--color-light);
+}
+.brand-logo {
+  float: right;
+  margin-top: 4px;
+  height: fit-content;
+  width: fit-content;
+}
+
+.button-cart {
+  background-color: var(--color-accent);
+  border: 1px solid var(--color-dark);
+}
+
+.out-of-stock {
+  margin-top: 0px;
+}
+
+/* Overirde of bootstrap class */
+.btn-primary:hover {
+  background-color: var(--color-accent);
+  filter: brightness(1.2);
+}

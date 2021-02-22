@@ -14,9 +14,10 @@ code {
 
 :root {
   --bg: #fff;
-  --color-primary: #c9a0dc;
-  --color-secondary: #190061;
+  --color-light: #c9a0dc;
+  --color-dark: #190061;
   --color-accent: #7851a9;
+  --color-logo: #ff8b2b;
   --nav-size: 50px;
   --nav-text-color: #dadce1;
   --border-radius: 8px;

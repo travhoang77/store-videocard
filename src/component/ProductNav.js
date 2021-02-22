@@ -1,14 +1,13 @@
-import React, { useState, useEffect, useRef } from "react";
-import { CSSTransition } from "react-transition-group";
-import { Link } from "react-router-dom";
-import "../css/ProductNav.css";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
-  faBars,
-  faCaretDown,
   faChevronLeft,
   faChevronRight,
 } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import React, { useEffect, useRef, useState } from "react";
+import { Link } from "react-router-dom";
+import { CSSTransition } from "react-transition-group";
+import gpuIcon from "../assets/video-card.svg";
+import "../css/ProductNav.css";
 
 function ProductNav(props) {
   return (
@@ -26,8 +25,7 @@ function ProductNav(props) {
     //   </Navbar>
     <nav className="navBar">
       <ul className="nav">
-        <NavItem icon={faBars} />
-        <NavItem icon={faCaretDown}>
+        <NavItem icon={gpuIcon} text="Video Cards">
           <DropdownMenu></DropdownMenu>
         </NavItem>
       </ul>
@@ -76,14 +74,19 @@ function DropdownMenu() {
         onEnter={calcHeight}
       >
         <div className="menu">
-          <DropDownItem rightIcon={faChevronRight} goToMenu="nvidia">
-            Nvidia
+          <DropDownItem rightIcon={faChevronRight} goToMenu="RTX_30">
+            Geforce RTX 30 Series
           </DropDownItem>
-          <DropDownItem rightIcon={faChevronRight}>AMD</DropDownItem>
+          <DropDownItem rightIcon={faChevronRight} goToMenu="RTX_20">
+            Geforce RTX 20 Series
+          </DropDownItem>
+          <DropDownItem rightIcon={faChevronRight} goToMenu="RTX_10">
+            Geforce GTX 10 Series
+          </DropDownItem>
         </div>
       </CSSTransition>
       <CSSTransition
-        in={activeMenu === "nvidia"}
+        in={activeMenu === "RTX_30"}
         unmountOnExit
         timeout={speed}
         classNames="menu-secondary"
@@ -91,15 +94,10 @@ function DropdownMenu() {
       >
         <div className="menu">
           <DropDownItem leftIcon={faChevronLeft} goToMenu="main" />
-          <DropDownItem rightIcon={faChevronRight}>
-            Geforce RTX 30 Series
-          </DropDownItem>
-          <DropDownItem rightIcon={faChevronRight}>
-            Geforce RTX 20 Series
-          </DropDownItem>
-          <DropDownItem rightIcon={faChevronRight}>
-            Geforce GTX 10 Series
-          </DropDownItem>
+          <DropDownItem>Geforce RTX 3060</DropDownItem>
+          <DropDownItem>Geforce RTX 3070</DropDownItem>
+          <DropDownItem>Geforce RTX 3080</DropDownItem>
+          <DropDownItem>Geforce RTX 3090</DropDownItem>
         </div>
       </CSSTransition>
     </div>
@@ -112,9 +110,15 @@ function NavItem(props) {
   return (
     <li className="navBar__item">
       <Link to="#" className="icon__button" onClick={() => setOpen(!open)}>
-        <FontAwesomeIcon className=" fa__button" icon={props.icon} />
+        {props.icon.prefix === "fas" ? (
+          <FontAwesomeIcon className=" fa__button" icon={props.icon} />
+        ) : (
+          <img src={gpuIcon} />
+        )}
       </Link>
-
+      <span className="pl-2" onClick={() => setOpen(!open)}>
+        {props.text}
+      </span>
       {open && props.children}
     </li>
   );
