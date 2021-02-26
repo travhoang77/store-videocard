@@ -20,13 +20,15 @@ function ProductCard(props) {
         <Card.Img className="brand-logo" src={brandLogo} />
       </Card.Header>
       <Card.Body>
-        <Card.Title>EVGA GeForce RTX 3070 XC3 ULTRA</Card.Title>
+        <Card.Title className="h6 fw-800 card-font">
+          EVGA Geforce RTX 3070 XC3 ULTRA
+        </Card.Title>
         <Card.Subtitle>
           08G-P5-3755-KR, 8GB GDDR6, iCX3 Cooling, ARGB LED, Metal Backplate
         </Card.Subtitle>
 
         <Card.Text className="mt-2">
-          <h3>$199.99</h3>
+          <h4>$199.99</h4>
         </Card.Text>
         <p className="out-of-stock text-danger">Out of stock</p>
         <Button className="button-cart">Add To Cart</Button>

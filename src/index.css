@@ -20,9 +20,10 @@ code {
   --color-logo: #ff8b2b;
   --nav-size: 50px;
   --nav-text-color: #dadce1;
-  --border-radius: 8px;
+  --border-radius: 3px;
   --speed: 500ms;
   --border: 1px solid var(--color-accent);
+  --body-height: 900px;
 }
 
 ul {

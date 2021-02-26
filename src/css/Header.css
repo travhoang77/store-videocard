@@ -52,3 +52,7 @@ a.inner:hover {
   font-weight: 700;
   font-size: 14px;
 }
+
+.search-button {
+  background-color: var(--color-dark);
+}

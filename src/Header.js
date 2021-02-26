@@ -10,6 +10,7 @@ import {
 import { Link } from "react-router-dom";
 import SiteNav from "./component/SiteNav";
 import ProductNav from "./component/ProductNav";
+import BreadCrumbs from "./component/Breadcrumbs";
 import Logo from "./assets/logo.png";
 
 function Header() {
@@ -36,7 +37,7 @@ function Header() {
                 aria-describedby="basic-addon1"
               />
               <InputGroup.Append>
-                <Button variant="primary">
+                <Button variant="primary" className="search-button">
                   <FontAwesomeIcon icon={faSearch} />
                 </Button>
               </InputGroup.Append>
@@ -83,6 +84,9 @@ function Header() {
       </div>
       <div>
         <ProductNav />
+      </div>
+      <div>
+        <BreadCrumbs />
       </div>
     </div>
   );
