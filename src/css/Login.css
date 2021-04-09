@@ -41,6 +41,12 @@
   border-radius: 3;
 }
 
+.login-container > form > input::placeholder {
+  color: var(--color-accent);
+  font-size: 14px;
+  font-style: italic;
+}
+
 h1,
 h6 {
   color: var(--color-dark);
