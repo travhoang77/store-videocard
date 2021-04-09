@@ -1,0 +1,16 @@
+.home {
+  max-width: 1130px;
+  margin-left: auto;
+  margin-right: auto;
+  /* height: var(--body-height); */
+  /* background-color: darkgray; */
+}
+
+.home-row {
+  display: flex;
+  z-index: 1;
+  flex-direction: row;
+  flex-wrap: wrap;
+  /* margin-right: 5px; */
+  /* margin-left: 5px; */
+}

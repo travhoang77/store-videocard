@@ -62,7 +62,7 @@
   left: 150px;
   width: 230px;
   transform: translateX(-45%);
-  background-color: var(--color-light);
+  background-color: var(--color-dark);
   border: var(--border);
   border-radius: var(--border-radius);
   padding: 0.4em;
