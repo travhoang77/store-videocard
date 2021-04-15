@@ -8,7 +8,14 @@ import {
   emailLoginValidation,
   passwordLoginValidation,
 } from "./validators/userValidator";
+import { storeToken } from "../actions/loginActions";
 import { useDispatch } from "react-redux";
+
+const axios = require("axios");
+
+const instance = axios.create({
+  baseURL: "http://localhost:5000/api",
+});
 
 function Login() {
   const history = useHistory();
@@ -16,53 +23,52 @@ function Login() {
   const [password, setPassword] = useState("");
   const [emailmessage, setEmailMessage] = useState("");
   const [passwordmessage, setPasswordMessage] = useState("");
+  const [toggle, setToggle] = useState("d-none");
 
   const dispatch = useDispatch();
 
-  const login = async (event) => {
+  const submit = async (event) => {
     event.preventDefault();
+    setToggle("d-none");
 
-    alert("login function called");
     const emailerror = await emailLoginValidation(email);
     const passworderror = passwordLoginValidation(password);
 
     emailerror ? setEmailMessage(emailerror) : setEmailMessage("");
     passworderror ? setPasswordMessage(passworderror) : setPasswordMessage("");
 
-    if (emailerror || password) {
+    if (emailerror || passworderror) {
       return;
     }
+    
+    let token = null;
 
-    alert("--no validation errors->");
+    await instance
+      .post("/auth", { email, password })
+      .then((response) => {
+        token = response.headers["authorization"];
+      })
+      .catch((error) => {
+        console.log(error);
+        setToggle("mb-1 error-container");
+      });
+
+    console.log("data -->", token);
   };
-  //   const loginuser = (event) => {
-  //     event.preventDefault();
-  //     auth
-  //       .signInWithEmailAndPassword(useremail, userpassword)
-  //       .then((auth) => {
-  //         history.push("/");
-  //       })
-  //       .catch((e) => alert(e.message));
-  //   };
-
-  //   const signupuser = (event) => {
-  //     event.preventDefault();
-  //     auth
-  //       .createUserWithEmailAndPassword(useremail, userpassword)
-  //       .then((auth) => {
-  //         history.push("/");
-  //       })
-  //       .catch((e) => alert(e.message));
-  //   };
 
   return (
     <div className="login">
       <Link to="/">
         <img className="login-logo" src={Logo} alt="" />
       </Link>
+      <div className={toggle}>
+        <span>
+          <span className="icon">&#9888;</span>Invalid email or password!
+        </span>
+      </div>
       <div className="login-container">
         <h3>Sign In</h3>
-        <Form onSubmit={login}>
+        <Form onSubmit={submit}>
           <h6>E-mail</h6>
           <input
             className="mb-0"
@@ -80,7 +86,7 @@ function Login() {
           />
           <ValidateMessage message={passwordmessage} />
           <br />
-          <button onClick={login} type="submit" className="login-signInButton">
+          <button onClick={submit} type="submit" className="login-signInButton">
             Submit
           </button>
           <p>By signing-in, you agree to the Terms and Conditions</p>

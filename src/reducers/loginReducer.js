@@ -4,7 +4,7 @@ const initialState = {
   token: {},
 };
 
-export default function (state = initialState, action) {
+export function login(state = initialState, action) {
   switch (action.type) {
     case LOGIN:
       return {

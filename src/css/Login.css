@@ -29,9 +29,14 @@
   border: 1px solid;
   margin-top: 10px;
   height: 30px;
-  border-radius: 2;
+  border-radius: 2px;
   color: #111;
   border-color: var(--color-light);
+}
+
+.login-signInButton:hover,
+.login-registerButton:hover {
+  filter: brightness(1.2);
 }
 
 .login-container > form > input {
@@ -45,6 +50,21 @@
   color: var(--color-accent);
   font-size: 14px;
   font-style: italic;
+}
+
+.error-container {
+  color: var(--color-error);
+  width: 300px;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  padding: 10px;
+  border: 2px solid var(--color-error);
+  border-radius: 5px;
+}
+
+.error-container .icon {
+  font-size: 32px;
 }
 
 h1,

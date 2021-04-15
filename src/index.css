@@ -18,6 +18,7 @@ code {
   --color-dark: #190061;
   --color-accent: #7851a9;
   --color-logo: #ff8b2b;
+  --color-error: #c40000;
   --nav-size: 50px;
   --nav-text-color: #dadce1;
   --border-radius: 3px;
@@ -35,4 +36,8 @@ ul {
 a {
   color: var(--nav-text-color);
   text-decoration: none;
+}
+
+input {
+  border: 1px solid var(--color-light);
 }

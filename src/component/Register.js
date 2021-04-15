@@ -12,7 +12,7 @@ import {
   passwordlength,
 } from "./validators/userValidator";
 import { useDispatch } from "react-redux";
-import { loginUser } from "../actions/loginActions";
+import { storeToken } from "../actions/loginActions";
 import { LOGIN } from "../actions/types";
 const axios = require("axios");
 
@@ -60,12 +60,12 @@ function Register() {
       password: password,
     };
 
-    alert("redux register");
-    const loginuser = loginUser("token");
-    alert(`TYPE - ${LOGIN}`);
-    alert(JSON.stringify(loginuser));
-    dispatch(loginuser);
-    return;
+    // alert("redux register");
+    // const loginuser = loginUser("token");
+    // alert(`TYPE - ${LOGIN}`);
+    // alert(JSON.stringify(loginuser));
+    // dispatch(loginuser);
+    // return;
 
     // instance
     //   .post("/users", user)
