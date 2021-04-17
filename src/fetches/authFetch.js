@@ -20,8 +20,23 @@ async function authenticate(email, password) {
       };
     })
     .catch((error) => {
-      console.log(error);
+      console.log("authentication ->", error);
     });
 
+  return result;
+}
+
+async function signout(token) {
+  let result = { success: false, user: null };
+  //- or after instance has been created
+  instance.defaults.headers.post["authorization"] = token;
+  await instance
+    .post("/signout")
+    .then((response) => {
+      result = { success: true, user: response.data.body };
+    })
+    .catch((error) => {
+      console.log("signout ->", error);
+    });
   return result;
 }
