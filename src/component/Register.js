@@ -13,6 +13,7 @@ import {
 } from "./validators/userValidator";
 import { create } from "../fetches/userFetch";
 import { useDispatch } from "react-redux";
+import { authenticate } from "../fetches/authFetch";
 import { storeToken } from "../actions/loginActions";
 import { LOGIN } from "../actions/types";
 
@@ -56,23 +57,12 @@ function Register() {
       password: password,
     };
 
-    let result = await create(user);
+    await create(user);
+    const result = await authenticate(email, password);
+    const token = storeToken(result.token);
+    dispatch(token);
 
     if (result.success) history.push("/");
-
-    // alert("redux register");
-    // const loginuser = loginUser("token");
-    // alert(`TYPE - ${LOGIN}`);
-    // alert(JSON.stringify(loginuser));
-    // dispatch(loginuser);
-    // return;
-
-    // instance
-    //   .post("/users", user)
-    //   .then((response) => {
-    //     history.push("/");
-    //   })
-    //   .catch((error) => console.log(`this error-> ${error}`));
   };
 
   return (
