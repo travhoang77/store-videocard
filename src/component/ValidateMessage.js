@@ -5,7 +5,7 @@ function ValidateMessage(props) {
   let classes = display(props);
   return (
     <span className={classes}>
-      <span className="font-italic">&#10071;</span>
+      <span className="font-italic">&#10071;</span>&nbsp;
       {props.message}
     </span>
   );

@@ -1,8 +1,4 @@
-const axios = require("axios");
-const instance = axios.create({
-  baseURL: "http://localhost:5000/api",
-});
-
+import { emailExists } from "../../fetches/userFetch";
 export const passwordlength = 6;
 
 export const nameValidation = (name) => {
@@ -32,16 +28,20 @@ export const emailValidation = async (email) => {
     return "Please enter a valid email";
   }
 
-  await instance
-    .get(`/auth/${email}`)
-    .then((response) => {
-      if (response.data.success) {
-        message = response.data.message;
-      }
-    })
-    .catch((error) => {
-      console.log("error-->", error);
-    });
+  const result = await emailExists(email);
+
+  if (result.success) message = result.message;
+
+  // await instance
+  //   .get(`/auth/${email}`)
+  //   .then((response) => {
+  //     if (response.data.success) {
+  //       message = response.data.message;
+  //     }
+  //   })
+  //   .catch((error) => {
+  //     console.log("error-->", error);
+  //   });
 
   return message;
 };

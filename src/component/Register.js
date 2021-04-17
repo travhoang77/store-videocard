@@ -11,14 +11,10 @@ import {
   confirmationValidation,
   passwordlength,
 } from "./validators/userValidator";
+import { create } from "../fetches/userFetch";
 import { useDispatch } from "react-redux";
 import { storeToken } from "../actions/loginActions";
 import { LOGIN } from "../actions/types";
-const axios = require("axios");
-
-const instance = axios.create({
-  baseURL: "http://localhost:5000/api",
-});
 
 function Register() {
   const history = useHistory();
@@ -59,6 +55,10 @@ function Register() {
       email: email,
       password: password,
     };
+
+    let result = await create(user);
+
+    if (result.success) history.push("/");
 
     // alert("redux register");
     // const loginuser = loginUser("token");

@@ -1,23 +1,17 @@
 // import logo from './logo.svg';
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./css/App.css";
-import React from "react";
-import { useEffect } from "react";
+import React, { Component } from "react";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
-import { useStateValue } from "./StateProvider";
 import Header from "./Header";
 import Login from "./component/Login";
 import Register from "./component/Register";
 import ProductCard from "./component/ProductCard";
-import { faSleigh } from "@fortawesome/free-solid-svg-icons";
+import { useSelector } from "react-redux";
 
-class App extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {};
-  }
-
-  render() {
+class App extends Component {
+  // const token = useSelector((state) => state.loginReducer.token);
+  render(props) {
     return (
       <Router>
         <div className="App">
@@ -40,4 +34,5 @@ class App extends React.Component {
     );
   }
 }
+
 export default App;

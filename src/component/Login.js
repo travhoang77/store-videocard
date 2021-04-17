@@ -3,19 +3,16 @@ import { Link, useHistory } from "react-router-dom";
 import { Form } from "react-bootstrap";
 import "../css/Login.css";
 import Logo from "../assets/logo.png";
+import { authenticate } from "../fetches/authFetch";
 import ValidateMessage from "./ValidateMessage";
 import {
   emailLoginValidation,
   passwordLoginValidation,
 } from "./validators/userValidator";
+
+import { LOGIN } from "../actions/types";
 import { storeToken } from "../actions/loginActions";
 import { useDispatch } from "react-redux";
-
-const axios = require("axios");
-
-const instance = axios.create({
-  baseURL: "http://localhost:5000/api",
-});
 
 function Login() {
   const history = useHistory();
@@ -40,20 +37,17 @@ function Login() {
     if (emailerror || passworderror) {
       return;
     }
-    
-    let token = null;
 
-    await instance
-      .post("/auth", { email, password })
-      .then((response) => {
-        token = response.headers["authorization"];
-      })
-      .catch((error) => {
-        console.log(error);
-        setToggle("mb-1 error-container");
-      });
+    const response = await authenticate(email, password);
 
-    console.log("data -->", token);
+    if (!response.success) {
+      setToggle("mb-2 error-container");
+      return;
+    } else {
+      const token = storeToken(response.token);
+      dispatch(token);
+      history.push("/");
+    }
   };
 
   return (

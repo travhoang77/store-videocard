@@ -1,7 +1,9 @@
-import { LOGIN, LOGOFF } from "../actions/types";
+import { LOGIN, LOGOUT } from "../actions/types";
+const jwt = require("jsonwebtoken");
 
 const initialState = {
   token: {},
+  user: {},
 };
 
 export function login(state = initialState, action) {
@@ -10,6 +12,13 @@ export function login(state = initialState, action) {
       return {
         ...state,
         token: action.token,
+        user: jwt.decode(action.token),
+      };
+    case LOGOUT:
+      return {
+        ...state,
+        token: {},
+        user: {},
       };
     default:
       return state;
