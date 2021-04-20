@@ -9,10 +9,8 @@ import {
   emailLoginValidation,
   passwordLoginValidation,
 } from "./validators/userValidator";
-
-import { LOGIN } from "../actions/types";
 import { storeToken } from "../actions/loginActions";
-import { useDispatch } from "react-redux";
+import { useStateValue } from "../StateProvider";
 
 function Login() {
   const history = useHistory();
@@ -21,8 +19,7 @@ function Login() {
   const [emailmessage, setEmailMessage] = useState("");
   const [passwordmessage, setPasswordMessage] = useState("");
   const [toggle, setToggle] = useState("d-none");
-
-  const dispatch = useDispatch();
+  const [{ token }, dispatch] = useStateValue();
 
   const submit = async (event) => {
     event.preventDefault();
@@ -38,13 +35,13 @@ function Login() {
       return;
     }
 
-    const response = await authenticate(email, password);
+    const result = await authenticate(email, password);
 
-    if (!response.success) {
+    if (!result.success) {
       setToggle("mb-2 error-container");
       return;
     } else {
-      const token = storeToken(response.token);
+      const token = storeToken(result.token);
       dispatch(token);
       history.push("/");
     }

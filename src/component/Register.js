@@ -12,10 +12,9 @@ import {
   passwordlength,
 } from "./validators/userValidator";
 import { create } from "../fetches/userFetch";
-import { useDispatch } from "react-redux";
 import { authenticate } from "../fetches/authFetch";
 import { storeToken } from "../actions/loginActions";
-import { LOGIN } from "../actions/types";
+import { useStateValue } from "../StateProvider";
 
 function Register() {
   const history = useHistory();
@@ -30,7 +29,7 @@ function Register() {
   const complexitymessage =
     "Password must have a uppercase, a lowercase, a number and a symbol";
 
-  const dispatch = useDispatch();
+  const [dispatch] = useStateValue();
 
   const signup = async (event) => {
     event.preventDefault();

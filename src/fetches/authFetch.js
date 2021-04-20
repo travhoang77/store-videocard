@@ -6,6 +6,7 @@ const instance = axios.create({
 
 module.exports = {
   authenticate,
+  signout,
 };
 
 async function authenticate(email, password) {
@@ -28,10 +29,16 @@ async function authenticate(email, password) {
 
 async function signout(token) {
   let result = { success: false, user: null };
-  //- or after instance has been created
-  instance.defaults.headers.post["authorization"] = token;
   await instance
-    .post("/signout")
+    .post(
+      "/auth/signout",
+      {},
+      {
+        headers: {
+          authorization: token,
+        },
+      }
+    )
     .then((response) => {
       result = { success: true, user: response.data.body };
     })
