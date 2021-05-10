@@ -13,7 +13,10 @@ a {
   color: var(--nav-text-color);
   text-decoration: none;
 }
-
+.error {
+  font-size: x-large;
+  color: var(--color-error);
+}
 .fa {
   color: var(--color-secondary);
 }

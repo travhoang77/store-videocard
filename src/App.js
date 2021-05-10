@@ -7,12 +7,14 @@ import Header from "./Header";
 import Login from "./component/Login";
 import Register from "./component/Register";
 import ProductCard from "./component/ProductCard";
+import Products from "./Products";
 
 class App extends Component {
   render(props) {
     return (
       <Router>
         <div className="App">
+          <Header />
           <Switch>
             <Route path="/test">
               <ProductCard />
@@ -23,9 +25,10 @@ class App extends Component {
             <Route path="/register">
               <Register />
             </Route>
-            <Route path="/">
-              <Header />
+            <Route path="/products/:type">
+              <Products />
             </Route>
+            <Route path="/"></Route>
           </Switch>
         </div>
       </Router>

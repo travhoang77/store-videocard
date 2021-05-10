@@ -6,6 +6,7 @@ import reportWebVitals from "./reportWebVitals";
 import { StateProvider } from "./StateProvider";
 
 import loginReducer, { initialState } from "./reducers/loginReducer";
+require("dotenv").config();
 
 ReactDOM.render(
   <React.StrictMode>

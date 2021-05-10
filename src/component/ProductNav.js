@@ -94,9 +94,11 @@ function DropdownMenu() {
       >
         <div className="menu">
           <DropDownItem leftIcon={faChevronLeft} goToMenu="main" />
-          <DropDownItem>Geforce RTX 3060</DropDownItem>
+          <DropDownItem>
+            <Link to="/products">Geforce RTX 3080</Link>
+          </DropDownItem>
           <DropDownItem>Geforce RTX 3070</DropDownItem>
-          <DropDownItem>Geforce RTX 3080</DropDownItem>
+          <DropDownItem>Geforce RTX 3060</DropDownItem>
           <DropDownItem>Geforce RTX 3090</DropDownItem>
         </div>
       </CSSTransition>

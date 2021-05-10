@@ -1,10 +1,11 @@
 .product-card {
   width: 14rem;
+  height: 28rem;
   color: var(--color-dark);
   border: 1px solid var(#eeeeee);
   border-radius: 0;
   margin-right: 2px;
-  margin-bottom: 2px;
+  margin-bottom: 10px;
 }
 
 .product-card > .card-header {
@@ -23,6 +24,11 @@
   margin-top: 4px;
   height: fit-content;
   width: fit-content;
+}
+
+.bottom-card {
+  position: absolute;
+  bottom: 2px;
 }
 
 .button-cart {

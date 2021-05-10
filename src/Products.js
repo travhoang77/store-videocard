@@ -1,18 +1,29 @@
-import React from "react";
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import { BrowserRouter as Route, useParams } from "react-router-dom";
+import ProductCard from "./component/ProductCard";
+import { getProductsBy } from "./fetches/productFetch";
 import "./css/Products.css";
 
-function Products(pros) {
+function Products() {
+  const { type } = useParams();
+  const [products, setProducts] = useState([]);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const results = await getProductsBy(type);
+      if (results.success) setProducts(results.products);
+    };
+    fetchData();
+  }, []);
+
+  const empty = products.length === 0 ? "error" : "d-none";
   return (
-    <Router>
-      <div className="product">
-        <Switch>
-          <Route path="/">
-            <p>Hello Products</p>
-          </Route>
-        </Switch>
-      </div>
-    </Router>
+    <div className="product">
+      <span className={empty}>NO PRODUCTS</span>
+      {products.map((product) => (
+        <ProductCard product={product} />
+      ))}
+    </div>
   );
 }
 
