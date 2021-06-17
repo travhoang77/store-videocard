@@ -30,6 +30,11 @@ function ProductCard(props) {
           {Array(props.product.rating)
             .fill()
             .map((_) => (
+              <span className="rating-star">&#9733;</span>
+            ))}
+          {Array(5 - props.product.rating)
+            .fill()
+            .map((_) => (
               <span className="rating-star">&#9734;</span>
             ))}
         </span>
