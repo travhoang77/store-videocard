@@ -3,6 +3,7 @@ import { Card, Button } from "react-bootstrap";
 import "../css/ProductCard.css";
 
 function ProductCard(props) {
+  const { id } = props;
   let card = props.product.images.find((image) => {
     return image.type === "card";
   });
@@ -19,11 +20,7 @@ function ProductCard(props) {
     props.product.quantity === 0 ? "Out of Stock" : "Add to cart";
 
   return (
-    <Card
-      className="product-card"
-      id={props.product._id}
-      key={props.product._id}
-    >
+    <Card className="product-card" id={id}>
       <Card.Img variant="top" src={`/img/${card}`} />
       <Card.Header>
         <span className="product-rating">
@@ -45,10 +42,8 @@ function ProductCard(props) {
           {props.product.name}
         </Card.Title>
         <div className="bottom-card">
-          <Card.Text>
-            <h4>${props.product.price}</h4>
-          </Card.Text>
-          <Button className="button-cart" id={props.product._id}>
+          <Card.Text>${props.product.price}</Card.Text>
+          <Button className="button-cart" id={id}>
             {buttontext}
           </Button>
         </div>

@@ -37,6 +37,7 @@ function DropdownMenu() {
   const [menuHeight, setMenuHeight] = useState(null);
   const dropdownRef = useRef(null);
   const height_fix = 13;
+
   useEffect(() => {
     setMenuHeight(dropdownRef.current?.firstChild.offsetHeight + height_fix); // + 10 is a hack to intialize correct menu height
   }, []);
@@ -49,9 +50,10 @@ function DropdownMenu() {
   }
 
   function DropDownItem(props) {
+    const { to } = props;
     return (
       <Link
-        to="#menu"
+        to={to}
         className="menu-item"
         onClick={() => props.goToMenu && setActiveMenu(props.goToMenu)}
       >
@@ -94,9 +96,9 @@ function DropdownMenu() {
       >
         <div className="menu">
           <DropDownItem leftIcon={faChevronLeft} goToMenu="main" />
-          <DropDownItem>
-            <Link to="/products">Geforce RTX 3080</Link>
-          </DropDownItem>
+
+          <DropDownItem to="/products/3080">Geforce RTX 3080</DropDownItem>
+
           <DropDownItem>Geforce RTX 3070</DropDownItem>
           <DropDownItem>Geforce RTX 3060</DropDownItem>
           <DropDownItem>Geforce RTX 3090</DropDownItem>

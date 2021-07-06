@@ -1,28 +1,57 @@
 import React, { useEffect, useState } from "react";
 import { BrowserRouter as Route, useParams } from "react-router-dom";
 import ProductCard from "./component/ProductCard";
+import Paginators from "./component/Paginators";
 import { getProductsBy } from "./fetches/productFetch";
+import { paginate } from "./utils/paginate";
 import "./css/Products.css";
 
 function Products() {
   const { type } = useParams();
   const [products, setProducts] = useState([]);
+  const [paginatedProducts, setPaginatedProducts] = useState([]);
+  const [currentPage, setCurrentPage] = useState(1);
+  const pageSize = 10;
+
+  const handlePageChange = (page) => {
+    setCurrentPage(page);
+  };
 
   useEffect(() => {
     const fetchData = async () => {
       const results = await getProductsBy(type);
-      if (results.success) setProducts(results.products);
+      if (results.success) {
+        setProducts(results.products);
+        setPaginatedProducts(paginate(results.products, currentPage, pageSize));
+      }
     };
     fetchData();
-  }, []);
+  }, [type, currentPage, pageSize]);
 
-  const empty = products.length === 0 ? "error" : "d-none";
   return (
-    <div className="product">
-      <span className={empty}>NO PRODUCTS</span>
-      {products.map((product) => (
-        <ProductCard product={product} />
-      ))}
+    <div>
+      <div className="d-flex justify-content-center mb-2">
+        <Paginators
+          itemsCount={products.length}
+          pageSize={pageSize}
+          currentPage={currentPage}
+          onPageChange={handlePageChange}
+        />
+      </div>
+
+      <div className="product">
+        {paginatedProducts.map((product) => (
+          <ProductCard id={product._id} product={product} />
+        ))}
+      </div>
+      <div className="d-flex justify-content-center">
+        <Paginators
+          itemsCount={products.length}
+          pageSize={pageSize}
+          currentPage={currentPage}
+          onPageChange={handlePageChange}
+        />
+      </div>
     </div>
   );
 }

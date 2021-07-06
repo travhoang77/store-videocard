@@ -1,0 +1,8 @@
+.page-link {
+  font-style: normal;
+  color: var(--color-accent);
+}
+.page-item.active .page-link {
+  background-color: var(--color-accent);
+  border-color: var(--color-accent);
+}
