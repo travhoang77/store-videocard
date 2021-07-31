@@ -5,8 +5,25 @@ const instance = axios.create({
 });
 
 module.exports = {
+  getProductBy,
   getProductsBy,
 };
+
+async function getProductBy(id) {
+  let result = { success: false, product: null };
+
+  await instance
+    .get(`/products/${id}`)
+    .then((response) => {
+      if (response.data.success)
+        result = { success: true, product: response.data.body };
+    })
+    .catch((error) => {
+      console.log(`getProductBy(${id}) error-->`, error);
+    });
+
+  return result;
+}
 
 async function getProductsBy(type) {
   let results = { success: false, products: null };

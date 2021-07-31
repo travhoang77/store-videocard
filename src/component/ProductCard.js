@@ -8,7 +8,7 @@ function ProductCard(props) {
     return image.type === "card";
   });
 
-  card = card === undefined ? "nvidiageneric.jpg" : card.url;
+  const imgurl = card === undefined ? "nvidiageneric.jpg" : card.url;
 
   let brandLogo = props.product.images.find((image) => {
     return image.type === "brandsmall";
@@ -21,9 +21,9 @@ function ProductCard(props) {
 
   return (
     <Card className="product-card" id={id}>
-      <Card.Img variant="top" src={`/img/${card}`} />
+      <Card.Img variant="top" src={`/img/${imgurl}`} />
       <Card.Header>
-        <span className="product-rating">
+        <span>
           {Array(props.product.rating)
             .fill()
             .map((_) => (

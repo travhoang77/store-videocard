@@ -39,7 +39,7 @@ function DropdownMenu() {
   const height_fix = 13;
 
   useEffect(() => {
-    setMenuHeight(dropdownRef.current?.firstChild.offsetHeight + height_fix); // + 10 is a hack to intialize correct menu height
+    setMenuHeight(dropdownRef.current.firstChild.offsetHeight + height_fix); // + 10 is a hack to intialize correct menu height
   }, []);
 
   const speed = 500; //Please make sure this matches the CSS variable --speed
@@ -96,12 +96,42 @@ function DropdownMenu() {
       >
         <div className="menu">
           <DropDownItem leftIcon={faChevronLeft} goToMenu="main" />
-
+          <DropDownItem to="/products/3060">Geforce RTX 3060</DropDownItem>
+          <DropDownItem to="/products/3070">Geforce RTX 3070</DropDownItem>
           <DropDownItem to="/products/3080">Geforce RTX 3080</DropDownItem>
-
-          <DropDownItem>Geforce RTX 3070</DropDownItem>
-          <DropDownItem>Geforce RTX 3060</DropDownItem>
-          <DropDownItem>Geforce RTX 3090</DropDownItem>
+          <DropDownItem to="/products/3090">Geforce RTX 3090</DropDownItem>
+        </div>
+      </CSSTransition>
+      <CSSTransition
+        in={activeMenu === "RTX_20"}
+        unmountOnExit
+        timeout={speed}
+        classNames="menu-secondary"
+        onEnter={calcHeight}
+      >
+        <div className="menu">
+          <DropDownItem leftIcon={faChevronLeft} goToMenu="main" />
+          <DropDownItem to="/products/2060">Geforce RTX 2060</DropDownItem>
+          <DropDownItem to="/products/2070">Geforce RTX 2070</DropDownItem>
+          <DropDownItem to="/products/2080">Geforce RTX 2080</DropDownItem>
+          <DropDownItem to="/products/1650">Geforce GTX 1650</DropDownItem>
+          <DropDownItem to="/products/1660">Geforce GTX 1660</DropDownItem>
+        </div>
+      </CSSTransition>
+      <CSSTransition
+        in={activeMenu === "RTX_10"}
+        unmountOnExit
+        timeout={speed}
+        classNames="menu-secondary"
+        onEnter={calcHeight}
+      >
+        <div className="menu">
+          <DropDownItem leftIcon={faChevronLeft} goToMenu="main" />
+          <DropDownItem to="/products/1030">Geforce GTX 1030</DropDownItem>
+          <DropDownItem to="/products/1050">Geforce GTX 1050</DropDownItem>
+          <DropDownItem to="/products/1060">Geforce GTX 1060</DropDownItem>
+          <DropDownItem to="/products/1070">Geforce GTX 1070</DropDownItem>
+          <DropDownItem to="/products/1080">Geforce GTX 1080</DropDownItem>
         </div>
       </CSSTransition>
     </div>

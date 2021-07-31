@@ -1,0 +1,24 @@
+.description {
+  width: 80%;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: row;
+}
+
+.description-rating-star {
+  max-width: 20px;
+  color: var(--color-dark);
+  font-size: x-large;
+}
+
+.description ul li {
+  list-style: circle outside;
+}
+
+.description-features {
+  min-height: 12rem;
+}
+
+.price {
+  bottom: 2px;
+}

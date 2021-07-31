@@ -6,7 +6,8 @@ import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import Header from "./Header";
 import Login from "./component/Login";
 import Register from "./component/Register";
-import ProductCard from "./component/ProductCard";
+import Counter from "./component/Counter";
+import ProductDescription from "./component/ProductDescription";
 import Products from "./Products";
 
 class App extends Component {
@@ -17,13 +18,16 @@ class App extends Component {
           <Header />
           <Switch>
             <Route path="/test">
-              <ProductCard />
+              <Counter />
             </Route>
             <Route path="/login">
               <Login />
             </Route>
             <Route path="/register">
               <Register />
+            </Route>
+            <Route path="/product/:id">
+              <ProductDescription />
             </Route>
             <Route path="/products/:type">
               <Products />
