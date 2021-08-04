@@ -11,18 +11,6 @@ import "../css/ProductNav.css";
 
 function ProductNav(props) {
   return (
-    //     <Navbar className="product__nav" variant="light">
-    //     <Navbar.Brand href="#home">
-    //       <img
-    //         alt=""
-    //         src="/logo.svg"
-    //         width="30"
-    //         height="30"
-    //         className="d-inline-block align-top"
-    //       />{' '}
-    //       Products
-    //     </Navbar.Brand>
-    //   </Navbar>
     <nav className="navBar">
       <ul className="nav">
         <NavItem icon={gpuIcon} text="Video Cards">
@@ -39,7 +27,7 @@ function DropdownMenu() {
   const height_fix = 13;
 
   useEffect(() => {
-    setMenuHeight(dropdownRef.current.firstChild.offsetHeight + height_fix); // + 10 is a hack to intialize correct menu height
+    setMenuHeight(dropdownRef.current.firstChild.offsetHeight + height_fix); // + 10 is a hack to intialize
   }, []);
 
   const speed = 500; //Please make sure this matches the CSS variable --speed
@@ -140,9 +128,26 @@ function DropdownMenu() {
 
 function NavItem(props) {
   const [open, setOpen] = useState(false);
+  const ref = useRef(null);
+
+  //Close Dropdown if clicked outside;
+  const handleClick = (event) => {
+    if (ref.current.contains(event.target)) {
+      // inside click
+      return;
+    }
+    setOpen(false);
+  };
+
+  useEffect(() => {
+    document.addEventListener("mousedown", handleClick);
+    return () => {
+      document.removeEventListener("mousedown", handleClick);
+    };
+  }, [open]);
 
   return (
-    <li className="navBar__item">
+    <li className="navBar__item" ref={ref}>
       <Link to="#" className="icon__button" onClick={() => setOpen(!open)}>
         {props.icon.prefix === "fas" ? (
           <FontAwesomeIcon className=" fa__button" icon={props.icon} />

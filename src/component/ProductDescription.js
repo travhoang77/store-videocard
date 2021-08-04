@@ -4,6 +4,7 @@ import { useParams } from "react-router-dom";
 import { Button } from "react-bootstrap";
 import Counter from "./Counter";
 import { getProductBy } from "../fetches/productFetch";
+import FourZeroFour from "../FourZeroFour";
 import _ from "lodash";
 import "../css/ProductDescription.css";
 
@@ -90,7 +91,7 @@ function ProductDescription(props) {
           )}
         </div>
       </div>
-      {_.isEmpty(product) && <span>Product does not exist</span>}
+      {_.isEmpty(product) && <FourZeroFour />}
     </div>
   );
 }

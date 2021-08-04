@@ -9,6 +9,7 @@ import Register from "./component/Register";
 import Counter from "./component/Counter";
 import ProductDescription from "./component/ProductDescription";
 import Products from "./Products";
+import FourZeroFour from "./FourZeroFour";
 
 class App extends Component {
   render(props) {
@@ -32,7 +33,9 @@ class App extends Component {
             <Route path="/products/:type">
               <Products />
             </Route>
-            <Route path="/"></Route>
+            <Route path="*">
+              <FourZeroFour />
+            </Route>
           </Switch>
         </div>
       </Router>
