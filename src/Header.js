@@ -85,25 +85,29 @@ function Header() {
                 title="Account"
                 aria-label="Account"
               >
-                <FontAwesomeIcon className="fa fa-2x" icon={faUser} />
-
                 <div className="ml-1">
                   <div className="inner__smallText">Welcome Guest</div>
                   <div className="inner__largeText">Sign in / Register</div>
                 </div>
               </Link>
             ) : (
-              <Link
-                onClick={logout}
-                className="inner"
-                title="Account"
-                aria-label="Account"
-              >
-                <FontAwesomeIcon className="fa fa-2x" icon={faUser} />
+              <Link className="inner">
+                <FontAwesomeIcon
+                  className="fa fa-2x"
+                  icon={faUser}
+                  aria-label="Account"
+                  title="Account Settings"
+                />
 
                 <div className="ml-1">
                   <div className="inner__smallText">Welcome {firstname}</div>
-                  <div className="inner__largeText">Sign Out</div>
+                  <div
+                    className="inner__largeText"
+                    title="Sign Out"
+                    onClick={logout}
+                  >
+                    Sign Out
+                  </div>
                 </div>
               </Link>
             )}

@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import { Card, Button } from "react-bootstrap";
 import "../css/ProductCard.css";
 
@@ -21,7 +22,9 @@ function ProductCard(props) {
 
   return (
     <Card className="product-card" id={id}>
-      <Card.Img variant="top" src={`/img/${imgurl}`} />
+      <Link to={`/product/${id}`}>
+        <Card.Img variant="top" src={`/img/${imgurl}`} />
+      </Link>
       <Card.Header>
         <span>
           {Array(props.product.rating)

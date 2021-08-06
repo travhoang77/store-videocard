@@ -29,7 +29,7 @@ function Register() {
   const complexitymessage =
     "Password must have a uppercase, a lowercase, a number and a symbol";
 
-  const [dispatch] = useStateValue();
+  const [{ token }, dispatch] = useStateValue();
 
   const signup = async (event) => {
     event.preventDefault();
