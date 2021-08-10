@@ -1,101 +1,84 @@
 import React, { useState } from "react";
-import { Link, useHistory } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import { Form } from "react-bootstrap";
-import "../css/User.css";
-import Logo from "../assets/logo.png";
 import ValidateMessage from "./ValidateMessage";
 import {
-  nameValidation,
-  emailValidation,
   passwordValidation,
   confirmationValidation,
+  currentPasswordValidation,
   passwordlength,
 } from "./validators/userValidator";
-import { create } from "../fetches/userFetch";
-import { authenticate } from "../fetches/authFetch";
-import { storeToken } from "../actions/loginActions";
-import { useStateValue } from "../StateProvider";
+import "../css/User.css";
+const jwt = require("jsonwebtoken");
 
-function Register() {
+function PasswordReset() {
   const history = useHistory();
-  const [firstname, setFirstName] = useState("");
-  const [email, setEmail] = useState("");
+  const authtoken = localStorage.getItem("token");
+  const [currentpassword, setCurrentPassword] = useState("");
   const [password, setPassword] = useState("");
   const [confirmpassword, setConfirmPassword] = useState("");
-  const [namemessage, setNameMessage] = useState("");
-  const [emailmessage, setEmailMessage] = useState("");
+  const [currentpasswordmessage, setCurrrentPasswordMessage] = useState("");
   const [passwordmessage, setPasswordMessage] = useState("");
   const [confirmationmessage, setConfirmationMessage] = useState("");
   const complexitymessage =
     "Password must have a uppercase, a lowercase, a number and a symbol";
 
-  const [{ token }, dispatch] = useStateValue();
-
-  const signup = async (event) => {
+  const reset = async (event) => {
     event.preventDefault();
 
-    const nameerror = nameValidation(firstname);
-    const emailerror = await emailValidation(email);
+    const currentpassworderror = await currentPasswordValidation(
+      authtoken,
+      jwt.decode(authtoken)["_id"],
+      currentpassword
+    );
     const passworderror = passwordValidation(password);
     const confirmationerror = confirmationValidation(password, confirmpassword);
 
-    nameerror ? setNameMessage(nameerror) : setNameMessage("");
-    emailerror ? setEmailMessage(emailerror) : setEmailMessage("");
+    currentpassworderror
+      ? setCurrrentPasswordMessage(currentpassworderror)
+      : setCurrrentPasswordMessage("");
+
     passworderror ? setPasswordMessage(passworderror) : setPasswordMessage("");
 
     confirmationerror
       ? setConfirmationMessage(confirmationerror)
       : setConfirmationMessage("");
 
-    if (nameerror || emailerror || passworderror || confirmationerror) {
+    if (currentpassworderror || passworderror || confirmationerror) {
       return;
     }
-    const user = {
-      firstname: firstname,
-      email: email,
-      password: password,
-    };
-
-    await create(user);
-    const result = await authenticate(email, password);
-    const token = storeToken(result.token);
-    dispatch(token);
-
-    if (result.success) history.push("/");
   };
 
   return (
     <div className="user">
-      <Link to="/">
-        <img className="user-logo" src={Logo} alt="" />
-      </Link>
       <div className="user-container">
-        <h3>Create account</h3>
-        <Form onSubmit={(event) => signup(event)}>
-          <h6>Your name</h6>
+        <h4>Password Reset</h4>
+        <Form onSubmit={(event) => reset(event)}>
+          <h6
+            className="mt-2"
+            data-toggle="tooltip"
+            data-placement="top"
+            title="Please enter current password"
+          >
+            Current Password
+          </h6>
           <input
             className="mb-0"
-            value={firstname}
-            onChange={(event) => setFirstName(event.target.value)}
-            type="text"
+            value={currentpassword}
+            n
+            onChange={(event) => setCurrentPassword(event.target.value)}
+            type="password"
+            data-toggle="tooltip"
+            data-placement="top"
           />
-          <ValidateMessage message={namemessage} />
-          <h6 className="mt-2">Email</h6>
-          <input
-            className="mb-0"
-            value={email}
-            onChange={(event) => setEmail(event.target.value)}
-            type="email"
-          />
-          <ValidateMessage message={emailmessage} />
-
+          <ValidateMessage message={currentpasswordmessage} />
           <h6
             className="mt-2"
             data-toggle="tooltip"
             data-placement="top"
             title={complexitymessage}
           >
-            Password
+            New Password
           </h6>
           <input
             className="mb-0"
@@ -124,9 +107,9 @@ function Register() {
           <span className="d-none input-warning">
             <span className="font-italic">!</span> Passwords must match
           </span>
-          <p>By signing up, you agree to the Terms and Conditions</p>
+
           <button type="submit" className="user-button">
-            Create your account
+            Reset
           </button>
         </Form>
       </div>
@@ -134,4 +117,4 @@ function Register() {
   );
 }
 
-export default Register;
+export default PasswordReset;

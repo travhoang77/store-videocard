@@ -1,4 +1,4 @@
-import { emailExists } from "../../fetches/userFetch";
+import { emailExists, validateCurrentPassword } from "../../fetches/userFetch";
 export const passwordlength = 6;
 
 export const nameValidation = (name) => {
@@ -32,20 +32,9 @@ export const emailValidation = async (email) => {
 
   if (result.success) message = result.message;
 
-  // await instance
-  //   .get(`/auth/${email}`)
-  //   .then((response) => {
-  //     if (response.data.success) {
-  //       message = response.data.message;
-  //     }
-  //   })
-  //   .catch((error) => {
-  //     console.log("error-->", error);
-  //   });
-
   return message;
 };
-export const emailLoginValidation = async (email) => {
+export const emailLoginValidation = (email) => {
   let message = null;
   if (email.trim() === "") {
     return "Email is required";
@@ -61,6 +50,7 @@ export const emailLoginValidation = async (email) => {
 
   return message;
 };
+
 export const passwordValidation = (password) => {
   if (password.trim() === "") {
     return "Password is required";
@@ -85,6 +75,20 @@ export const passwordValidation = (password) => {
     return "Must have a symbol";
   }
   return null;
+};
+
+export const currentPasswordValidation = async (
+  authtoken,
+  userid,
+  password
+) => {
+  if (password.trim() === "") {
+    return "Current password is required";
+  }
+
+  const result = await validateCurrentPassword(authtoken, userid, password);
+
+  return result.success ? null : result.message;
 };
 
 export const passwordLoginValidation = (password) => {

@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Link, useHistory } from "react-router-dom";
 import { Form } from "react-bootstrap";
-import "../css/Login.css";
+import "../css/User.css";
 import Logo from "../assets/logo.png";
 import { authenticate } from "../fetches/authFetch";
 import ValidateMessage from "./ValidateMessage";
@@ -48,16 +48,16 @@ function Login() {
   };
 
   return (
-    <div className="login">
+    <div className="user">
       <Link to="/">
-        <img className="login-logo" src={Logo} alt="" />
+        <img className="user-logo" src={Logo} alt="" />
       </Link>
       <div className={toggle}>
         <span>
           <span className="icon">&#9888;</span>Invalid email or password!
         </span>
       </div>
-      <div className="login-container">
+      <div className="user-container">
         <h3>Sign In</h3>
         <Form onSubmit={submit}>
           <h6>E-mail</h6>
@@ -77,12 +77,12 @@ function Login() {
           />
           <ValidateMessage message={passwordmessage} />
           <br />
-          <button onClick={submit} type="submit" className="login-signInButton">
+          <button onClick={submit} type="submit" className="user-button">
             Submit
           </button>
           <p>By signing-in, you agree to the Terms and Conditions</p>
           <Link to="/register">
-            <button type="button" className="login-signInButton">
+            <button type="button" className="user-button">
               Create your account
             </button>
           </Link>

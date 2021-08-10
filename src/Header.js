@@ -10,17 +10,18 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { Link } from "react-router-dom";
 import SiteNav from "./component/SiteNav";
-import ProductNav from "./component/ProductNav";
-import BreadCrumbs from "./component/Breadcrumbs";
 import Logo from "./assets/logo.png";
 import { signout } from "./fetches/authFetch";
 import { removeToken } from "./actions/loginActions";
 import { useStateValue } from "./StateProvider";
+const jwt = require("jsonwebtoken");
 const _ = require("lodash");
 
 function Header() {
   const history = useHistory();
   const firstname = localStorage.getItem("firstname");
+  const authtoken = localStorage.getItem("token");
+  const userid = authtoken ? jwt.decode(authtoken)["_id"] : undefined;
   const [{ token }, dispatch] = useStateValue();
 
   const logout = async (event) => {
@@ -67,7 +68,7 @@ function Header() {
               title="Shopping Cart"
               aria-label="Shopping Cart"
             >
-              <FontAwesomeIcon className=" fa fa-2x" icon={faShoppingCart} />
+              <FontAwesomeIcon className="fa fa-2x" icon={faShoppingCart} />
               <div className="ml-1">
                 <div className="inner__smallText">$1999.99</div>
                 <div className="inner__largeText">
@@ -97,6 +98,9 @@ function Header() {
                   icon={faUser}
                   aria-label="Account"
                   title="Account Settings"
+                  onClick={() => {
+                    history.push(`/account/resetpw`);
+                  }}
                 />
 
                 <div className="ml-1">
@@ -117,12 +121,6 @@ function Header() {
             {/* <SiteNav /> */}
           </div>
         </div>
-      </div>
-      <div>
-        <ProductNav />
-      </div>
-      <div>
-        <BreadCrumbs />
       </div>
     </div>
   );

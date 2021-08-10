@@ -7,6 +7,7 @@ const instance = axios.create({
 module.exports = {
   emailExists,
   create,
+  validateCurrentPassword,
 };
 
 async function emailExists(email) {
@@ -36,5 +37,28 @@ async function create(user) {
     })
     .catch((error) => console.log(`create user error-> ${error}`));
 
+  return result;
+}
+
+async function validateCurrentPassword(token, id, password) {
+  let result = { success: false, message: "Invalid Password" };
+
+  await instance
+    .post(
+      "/auth/validatepassword",
+      { id, password },
+      {
+        headers: {
+          authorization: token,
+        },
+      }
+    )
+    .then((response) => {
+      if (response.status === 200 && response.data.success)
+        result = { success: true, message: response.data.message };
+    })
+    .catch((error) => {
+      console.log("validateCurrentPassword ->", error);
+    });
   return result;
 }

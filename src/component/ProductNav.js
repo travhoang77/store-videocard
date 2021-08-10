@@ -7,7 +7,7 @@ import React, { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import { CSSTransition } from "react-transition-group";
 import gpuIcon from "../assets/video-card.svg";
-import "../css/ProductNav.css";
+import "../css/Nav.css";
 
 function ProductNav(props) {
   return (
@@ -147,7 +147,7 @@ function NavItem(props) {
   }, [open]);
 
   return (
-    <li className="navBar__item" ref={ref}>
+    <li className="navBar__item navBar__account_item" ref={ref}>
       <Link to="#" className="icon__button" onClick={() => setOpen(!open)}>
         {props.icon.prefix === "fas" ? (
           <FontAwesomeIcon className=" fa__button" icon={props.icon} />
