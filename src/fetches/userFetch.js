@@ -8,13 +8,14 @@ module.exports = {
   emailExists,
   create,
   validateCurrentPassword,
+  updatePassword,
 };
 
 async function emailExists(email) {
   let result = { success: false, message: "Email does not exists" };
 
   await instance
-    .get(`/auth/${email}`)
+    .get(`/authService/doesEmailExists/${email}`)
     .then((response) => {
       if (response.data.success) {
         result = { success: true, message: response.data.message };
@@ -31,7 +32,7 @@ async function create(user) {
   let result = { success: false, user: null };
 
   await instance
-    .post("/users", user)
+    .post("/userService", user)
     .then((response) => {
       result = { success: true, user: response.data.body };
     })
@@ -45,7 +46,7 @@ async function validateCurrentPassword(token, id, password) {
 
   await instance
     .post(
-      "/auth/validatepassword",
+      "/authService/validatePassword",
       { id, password },
       {
         headers: {
@@ -59,6 +60,32 @@ async function validateCurrentPassword(token, id, password) {
     })
     .catch((error) => {
       console.log("validateCurrentPassword ->", error);
+    });
+  return result;
+}
+
+async function updatePassword(token, id, password) {
+  let result = { success: false, message: null };
+
+  await instance
+    .post(
+      "/userService/updatePassword",
+      { id, password },
+      {
+        headers: {
+          authorization: token,
+        },
+      }
+    )
+    .then((response) => {
+      if (response.status === 200)
+        result = {
+          success: response.data.success,
+          message: response.data.message,
+        };
+    })
+    .catch((error) => {
+      console.log("updatePassword ->", error);
     });
   return result;
 }

@@ -60,8 +60,10 @@ function DropdownMenu() {
         onEnter={calcHeight}
       >
         <div className="menu">
-          <DropDownItem>Account Profile</DropDownItem>
-          <DropDownItem>Password Reset</DropDownItem>
+          <DropDownItem to="/account/profile">Account Profile</DropDownItem>
+          <DropDownItem to="/account/passwordchange">
+            Password Reset
+          </DropDownItem>
         </div>
       </CSSTransition>
     </div>

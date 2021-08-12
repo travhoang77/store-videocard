@@ -99,7 +99,7 @@ function Header() {
                   aria-label="Account"
                   title="Account Settings"
                   onClick={() => {
-                    history.push(`/account/resetpw`);
+                    history.push(`/account/profile`);
                   }}
                 />
 

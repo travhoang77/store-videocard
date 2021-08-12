@@ -12,7 +12,7 @@ import AccountNav from "./component/AccountNav";
 import BreadCrumbs from "./component/Breadcrumbs";
 import Products from "./Products";
 import FourZeroFour from "./FourZeroFour";
-import PasswordReset from "./component/PasswordReset";
+import PasswordChange from "./component/PasswordChange";
 
 class App extends Component {
   render(props) {
@@ -23,10 +23,10 @@ class App extends Component {
 
           <Switch>
             <Route path="/test"></Route>
-            <Route path="/account/resetpw">
+            <Route path="/account/passwordchange">
               <AccountNav />
               <BreadCrumbs />
-              <PasswordReset />
+              <PasswordChange />
             </Route>
             <Route path="/account">
               <AccountNav />

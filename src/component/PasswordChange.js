@@ -8,18 +8,22 @@ import {
   currentPasswordValidation,
   passwordlength,
 } from "./validators/userValidator";
+
+import { updatePassword } from "../fetches/userFetch";
 import "../css/User.css";
 const jwt = require("jsonwebtoken");
 
 function PasswordReset() {
   const history = useHistory();
   const authtoken = localStorage.getItem("token");
+  const id = jwt.decode(authtoken)["_id"];
   const [currentpassword, setCurrentPassword] = useState("");
   const [password, setPassword] = useState("");
   const [confirmpassword, setConfirmPassword] = useState("");
   const [currentpasswordmessage, setCurrrentPasswordMessage] = useState("");
   const [passwordmessage, setPasswordMessage] = useState("");
   const [confirmationmessage, setConfirmationMessage] = useState("");
+  const [toggle, setToggle] = useState("d-none");
   const complexitymessage =
     "Password must have a uppercase, a lowercase, a number and a symbol";
 
@@ -28,7 +32,7 @@ function PasswordReset() {
 
     const currentpassworderror = await currentPasswordValidation(
       authtoken,
-      jwt.decode(authtoken)["_id"],
+      id,
       currentpassword
     );
     const passworderror = passwordValidation(password);
@@ -47,12 +51,24 @@ function PasswordReset() {
     if (currentpassworderror || passworderror || confirmationerror) {
       return;
     }
+
+    const result = await updatePassword(authtoken, id, password);
+
+    if (result.success) {
+      setToggle("");
+      setCurrentPassword("");
+      setPassword("");
+      setConfirmPassword("");
+    }
   };
 
   return (
     <div className="user">
+      <div className={toggle}>
+        <h5 className="text-success">Password change successful!</h5>
+      </div>
       <div className="user-container">
-        <h4>Password Reset</h4>
+        <h4>Change Password</h4>
         <Form onSubmit={(event) => reset(event)}>
           <h6
             className="mt-2"
@@ -83,7 +99,6 @@ function PasswordReset() {
           <input
             className="mb-0"
             value={password}
-            n
             onChange={(event) => setPassword(event.target.value)}
             type="password"
             placeholder={`At least ${passwordlength} characters`}
@@ -92,25 +107,19 @@ function PasswordReset() {
             title={complexitymessage}
           />
           <ValidateMessage message={passwordmessage} />
-          <span className="d-none input-warning">
-            <span className="font-italic">!</span> At least {passwordlength}{" "}
-            characters
-          </span>
           <h6 className="mt-2">Confirm Password</h6>
           <input
-            className="mb-0"
+            className="pb-0 mb-0"
             value={confirmpassword}
             onChange={(event) => setConfirmPassword(event.target.value)}
             type="password"
           />
           <ValidateMessage message={confirmationmessage} />
-          <span className="d-none input-warning">
-            <span className="font-italic">!</span> Passwords must match
-          </span>
-
-          <button type="submit" className="user-button">
-            Reset
-          </button>
+          <div>
+            <button type="submit" className="user-button">
+              Save Changes
+            </button>
+          </div>
         </Form>
       </div>
     </div>

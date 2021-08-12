@@ -14,7 +14,7 @@ async function authenticate(email, password) {
   let result = { success: false, token: null };
 
   await instance
-    .post("/auth", { email, password })
+    .post("/authService/authenticate", { email, password })
     .then((response) => {
       result = {
         success: true,
@@ -22,7 +22,7 @@ async function authenticate(email, password) {
       };
     })
     .catch((error) => {
-      console.log("authentication ->", error);
+      console.log("authenticate ->", error);
     });
 
   return result;
@@ -32,7 +32,7 @@ async function signout(token) {
   let result = { success: false, user: null };
   await instance
     .post(
-      "/auth/signout",
+      "/authService/signOut",
       {},
       {
         headers: {

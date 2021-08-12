@@ -13,7 +13,7 @@ async function getProductBy(id) {
   let result = { success: false, product: null };
 
   await instance
-    .get(`/products/${id}`)
+    .get(`/productService/${id}`)
     .then((response) => {
       if (response.data.success)
         result = { success: true, product: response.data.body };
@@ -29,7 +29,7 @@ async function getProductsBy(type) {
   let results = { success: false, products: null };
 
   await instance
-    .get(`/products?chipset=${type}`)
+    .get(`/productService?chipset=${type}`)
     .then((response) => {
       if (response.data.success) {
         results = { success: true, products: response.data.body };
