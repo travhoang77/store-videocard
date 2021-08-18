@@ -14,7 +14,6 @@ import "../css/User.css";
 const jwt = require("jsonwebtoken");
 
 function PasswordReset() {
-  const history = useHistory();
   const authtoken = localStorage.getItem("token");
   const id = jwt.decode(authtoken)["_id"];
   const [currentpassword, setCurrentPassword] = useState("");

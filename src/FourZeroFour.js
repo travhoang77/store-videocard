@@ -1,7 +1,7 @@
 import React from "react";
 import { useLocation } from "react-router-dom";
 
-function FourZeroFour() {
+function FourZeroFour(props) {
   const { pathname } = useLocation();
 
   return (

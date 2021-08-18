@@ -20,7 +20,7 @@ function ProductDescription(props) {
       }
     };
     fetchData();
-  }, []);
+  }, [id]);
 
   const description = _.isEmpty(product) ? "description d-none" : "description";
   const rating = product.rating ? product.rating : 0;

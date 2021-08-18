@@ -9,7 +9,6 @@ import {
   faUser,
 } from "@fortawesome/free-solid-svg-icons";
 import { Link } from "react-router-dom";
-import SiteNav from "./component/SiteNav";
 import Logo from "./assets/logo.png";
 import { signout } from "./fetches/authFetch";
 import { removeToken } from "./actions/loginActions";
@@ -21,7 +20,7 @@ function Header() {
   const history = useHistory();
   const firstname = localStorage.getItem("firstname");
   const authtoken = localStorage.getItem("token");
-  const userid = authtoken ? jwt.decode(authtoken)["_id"] : undefined;
+  const userid = !_.isNull(authtoken) ? jwt.decode(authtoken)["_id"] : null;
   const [{ token }, dispatch] = useStateValue();
 
   const logout = async (event) => {

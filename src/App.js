@@ -3,6 +3,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import "./css/App.css";
 import React, { Component } from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import { ProtectedRoute } from "./protectedRoute";
 import Header from "./Header";
 import Login from "./component/Login";
 import Register from "./component/Register";
@@ -23,16 +24,16 @@ class App extends Component {
 
           <Switch>
             <Route path="/test"></Route>
-            <Route path="/account/passwordchange">
+            <ProtectedRoute path="/account/passwordchange" redirectTo="/404">
               <AccountNav />
               <BreadCrumbs />
               <PasswordChange />
-            </Route>
-            <Route path="/account">
+            </ProtectedRoute>
+            <ProtectedRoute path="/account" redirectTo="404">
               <AccountNav />
               <BreadCrumbs />
               {/* <Profile/> */}
-            </Route>
+            </ProtectedRoute>
 
             <Route path="/login">
               <ProductNav />
@@ -54,13 +55,14 @@ class App extends Component {
               <BreadCrumbs />
               <Products />
             </Route>
-            <Route path="/">
+            <Route path="/404">
+              <ProductNav />
+              <FourZeroFour />
+            </Route>
+            <Route exact path="/">
               <ProductNav />
               <BreadCrumbs />
               <p>Future Landing Page</p>
-            </Route>
-            <Route path="*">
-              <FourZeroFour />
             </Route>
           </Switch>
         </div>
