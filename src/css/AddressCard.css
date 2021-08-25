@@ -1,0 +1,26 @@
+.address-card {
+  width: 22rem;
+  height: 14rem;
+  border-left: 0.5rem solid var(--color-dark);
+}
+
+.lh {
+  line-height: 95%;
+}
+
+.address-card__default-banner {
+  position: absolute;
+  top: -0.1rem;
+  right: -0.1rem;
+  background-color: var(--color-accent);
+  color: #fff;
+  border-radius: 0 0.3rem;
+  font-size: 1rem;
+  padding: 0.5rem 1.2rem 0.4rem;
+  text-transform: capitalize;
+}
+
+.clickable:hover {
+  text-decoration: underline;
+  cursor: pointer;
+}

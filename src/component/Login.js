@@ -31,9 +31,7 @@ function Login() {
     emailerror ? setEmailMessage(emailerror) : setEmailMessage("");
     passworderror ? setPasswordMessage(passworderror) : setPasswordMessage("");
 
-    if (emailerror || passworderror) {
-      return;
-    }
+    if (emailerror || passworderror) return;
 
     const result = await authenticate(email, password);
 

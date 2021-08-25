@@ -13,7 +13,7 @@ function Products() {
   const [paginatedProducts, setPaginatedProducts] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [notFound, setNotFound] = useState(false);
-  const pageSize = 10;
+  const pageSize = 12;
 
   const handlePageChange = (page) => {
     setCurrentPage(page);

@@ -14,6 +14,8 @@ import BreadCrumbs from "./component/Breadcrumbs";
 import Products from "./Products";
 import FourZeroFour from "./FourZeroFour";
 import PasswordChange from "./component/PasswordChange";
+import Address from "./component/Address";
+import AddressCard from "./component/AddressCard";
 
 class App extends Component {
   render(props) {
@@ -23,7 +25,25 @@ class App extends Component {
           <Header />
 
           <Switch>
-            <Route path="/test"></Route>
+            <Route path="/test">
+              <AddressCard
+                object={{
+                  _id: "6124926d691b1912600ae80c",
+                  firstname: "Bama",
+                  lastname: "Hoang",
+                  address: "2060 Nieman Road",
+                  city: "San Jose",
+                  zipcode: "95121",
+                  state: "CA",
+                  description: "Shipping",
+                }}
+              />
+            </Route>
+
+            <Route path="/test/address">
+              <Address label="Primary" />
+            </Route>
+
             <ProtectedRoute path="/account/passwordchange" redirectTo="/404">
               <AccountNav />
               <BreadCrumbs />

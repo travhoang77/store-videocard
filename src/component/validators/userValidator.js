@@ -11,6 +11,9 @@ export const nameValidation = (name) => {
   if (name.trim().length < 3) {
     return "Name require at least 3 characters";
   }
+  if (name.trim().length > 100) {
+    return "Name too long";
+  }
   return null;
 };
 
