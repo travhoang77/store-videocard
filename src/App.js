@@ -14,11 +14,12 @@ import BreadCrumbs from "./component/Breadcrumbs";
 import Products from "./Products";
 import FourZeroFour from "./FourZeroFour";
 import PasswordChange from "./component/PasswordChange";
-import Address from "./component/Address";
+import AddressEdit from "./component/AddressEdit";
 import AddressCard from "./component/AddressCard";
+import AddressAddressCard from "./component/AddAddressCard";
 
 class App extends Component {
-  render(props) {
+  render() {
     return (
       <Router>
         <div className="App">
@@ -38,10 +39,12 @@ class App extends Component {
                   description: "Shipping",
                 }}
               />
+
+              <AddressAddressCard />
             </Route>
 
             <Route path="/test/address">
-              <Address label="Primary" />
+              <AddressEdit label="Primary" />
             </Route>
 
             <ProtectedRoute path="/account/passwordchange" redirectTo="/404">

@@ -19,7 +19,7 @@ function AddressCard(props) {
   const unit = props.object.unit ? "text-uppercase lh" : "d-none";
   return (
     <Card
-      className="address-card ml-2 shadow p-2 mb-4 bg-white rounded"
+      className="address-card shadow p-2 mb-4 bg-white rounded"
       id={props.object._Id}
     >
       <Card.Body className="p-0 mb-3">

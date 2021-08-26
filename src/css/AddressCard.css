@@ -4,6 +4,11 @@
   border-left: 0.5rem solid var(--color-dark);
 }
 
+.add-address-card {
+  width: 22rem;
+  height: 14rem;
+}
+
 .lh {
   line-height: 95%;
 }
@@ -20,7 +25,15 @@
   text-transform: capitalize;
 }
 
+.address-card-align {
+  vertical-align: 0.2rem;
+}
+
 .clickable:hover {
   text-decoration: underline;
+  cursor: pointer;
+}
+
+.clickable-no-underline:hover {
   cursor: pointer;
 }
