@@ -64,6 +64,7 @@ function DropdownMenu() {
           <DropDownItem to="/account/passwordchange">
             Password Reset
           </DropDownItem>
+          <DropDownItem to="/account/addresses">Manage Address</DropDownItem>
         </div>
       </CSSTransition>
     </div>

@@ -1,0 +1,11 @@
+.addresses {
+  width: 46rem;
+  margin-left: auto;
+  margin-right: auto;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.shipping-address:nth-child(even) {
+  margin-left: 2rem;
+}

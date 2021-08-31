@@ -9,6 +9,7 @@ module.exports = {
   create,
   validateCurrentPassword,
   updatePassword,
+  getAddressesFromUser,
 };
 
 async function emailExists(email) {
@@ -86,6 +87,31 @@ async function updatePassword(token, id, password) {
     })
     .catch((error) => {
       console.log("updatePassword ->", error);
+    });
+  return result;
+}
+
+async function getAddressesFromUser(userid, token) {
+  let result = {
+    success: false,
+    message: "Addresses could not be retrieved",
+  };
+
+  await instance
+    .get(`/userService/${userid}/getAddresses`, {
+      headers: {
+        authorization: token,
+      },
+    })
+    .then((response) => {
+      if (response.status === 200)
+        result = {
+          success: response.data.success,
+          addresses: response.data.addresses,
+        };
+    })
+    .catch((error) => {
+      console.log("getAddressesFromUser ->", error);
     });
   return result;
 }
