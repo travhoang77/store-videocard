@@ -10,6 +10,8 @@ module.exports = {
   validateCurrentPassword,
   updatePassword,
   getAddressesFromUser,
+  deleteAddressFromUser,
+  setDefaultShipppingAddressById,
 };
 
 async function emailExists(email) {
@@ -112,6 +114,70 @@ async function getAddressesFromUser(userid, token) {
     })
     .catch((error) => {
       console.log("getAddressesFromUser ->", error);
+    });
+  return result;
+}
+
+async function deleteAddressFromUser(addressid, userid, token) {
+  let result = {
+    success: false,
+    message: "Unable to delete Address",
+  };
+
+  await instance
+    .delete(`/userService/${userid}/deleteAddressById/${addressid}`, {
+      headers: {
+        authorization: token,
+      },
+    })
+    .then((response) => {
+      if (response.data.success)
+        result = response.data.success
+          ? {
+              success: response.data.success,
+              addresses: response.data.addresses,
+            }
+          : {
+              success: response.data.success,
+              message: response.data.message,
+            };
+    })
+    .catch((error) => {
+      console.log("deleteAddressFromUser ->", error);
+    });
+  return result;
+}
+
+async function setDefaultShipppingAddressById(id, userid, token) {
+  let result = {
+    success: false,
+    message: "Unable to set default shipping address",
+  };
+
+  await instance
+    .put(
+      `/userService/${userid}/setDefaultShippingAddressById/${id}`,
+      {},
+      {
+        headers: {
+          authorization: token,
+        },
+      }
+    )
+    .then((response) => {
+      if (response.data.success)
+        result = response.data.success
+          ? {
+              success: response.data.success,
+              addresses: response.data.addresses,
+            }
+          : {
+              success: response.data.success,
+              message: response.data.message,
+            };
+    })
+    .catch((error) => {
+      console.log("setDefaultShipppingAddressById ->", error);
     });
   return result;
 }

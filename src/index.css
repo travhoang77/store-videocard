@@ -43,9 +43,9 @@ input {
 }
 
 .all-dropdown {
-    color: var(--bg);
-    background-color: var(--color-accent);
-    padding: 8px;
-    border: none;
-    cursor: pointer;
-} 
+  color: var(--bg);
+  background-color: var(--color-accent);
+  padding: 8px;
+  border: none;
+  cursor: pointer;
+}

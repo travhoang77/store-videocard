@@ -24,6 +24,7 @@
     "react-router-dom": "^5.2.0",
     "react-scripts": "^4.0.3",
     "react-select-us-states": "^0.1.2",
+    "react-spinners": "^0.11.0",
     "react-svg": "^11.2.5",
     "react-transition-group": "^4.4.2",
     "react-zipcode": "^1.0.1",

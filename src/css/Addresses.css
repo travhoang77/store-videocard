@@ -6,6 +6,19 @@
   flex-wrap: wrap;
 }
 
+.shipping-addresses {
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+}
+
 .shipping-address:nth-child(even) {
   margin-left: 2rem;
+}
+
+.spinner {
+  position: absolute;
+  top: 35rem;
+  left: 76rem;
+  z-index: 999;
 }

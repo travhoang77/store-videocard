@@ -1,22 +1,9 @@
 import React from "react";
-import { Link } from "react-router-dom";
-import { Card, Button } from "react-bootstrap";
+import { Card } from "react-bootstrap";
 import "../css/AddressCard.css";
 import _ from "lodash";
 
 function AddressCard(props) {
-  const change = () => {
-    alert(`change ${props.object._id}`);
-  };
-
-  const remove = () => {
-    alert("remove");
-  };
-
-  const setDefault = () => {
-    alert("setDefault");
-  };
-
   const bar =
     _.isEqual(props.type, "shipping") ||
     _.isEqual(props.type, "shippingdefault")
@@ -62,15 +49,21 @@ function AddressCard(props) {
         <span aria-hidden="true">default</span>
       </div>
       <div className="text-primary">
-        <span className="clickable" onClick={() => change()}>
+        <span className="clickable">
           <small>Change</small>
         </span>
         <span className={bar}>|</span>
-        <span className={removestyle} onClick={() => remove()}>
+        <span
+          className={removestyle}
+          onClick={() => props.onDelete(props.object._id)}
+        >
           <small>Remove</small>
         </span>
 
-        <span className={clickshippingdefault} onClick={() => setDefault()}>
+        <span
+          className={clickshippingdefault}
+          onClick={() => props.onSetDefault(props.object._id)}
+        >
           <small>Set Default</small>
         </span>
       </div>
