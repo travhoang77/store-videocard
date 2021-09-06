@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React from "react";
 import { useHistory } from "react-router-dom";
 import "./css/Header.css";
 import { InputGroup, Button, FormControl } from "react-bootstrap";
@@ -11,24 +11,25 @@ import {
 import { Link } from "react-router-dom";
 import Logo from "./assets/logo.png";
 import { signout } from "./fetches/authFetch";
-import { removeToken } from "./actions/loginActions";
-import { useStateValue } from "./StateProvider";
-const jwt = require("jsonwebtoken");
-const _ = require("lodash");
+import { useSelector, useDispatch } from "react-redux";
+import { removeToken } from "./redux/actions/loginActions";
+import { getToken } from "./utils/utils";
 
 function Header() {
   const history = useHistory();
-  const firstname = localStorage.getItem("firstname");
-  const authtoken = localStorage.getItem("token");
-  const userid = !_.isNull(authtoken) ? jwt.decode(authtoken)["_id"] : null;
-  const [{ token }, dispatch] = useStateValue();
+  const state = useSelector((state) => state);
+  const dispatch = useDispatch();
+
+  const authenticated = state.login.authenticated;
+  const firstname = state.login.firstname;
+  const authtoken = getToken();
 
   const logout = async (event) => {
-    const result = await signout(localStorage.getItem("token"));
+    event.preventDefault();
+    const result = await signout(authtoken);
 
     if (result.success) {
-      const token = removeToken();
-      dispatch(token);
+      dispatch(removeToken());
       history.push("/");
     }
   };
@@ -78,7 +79,7 @@ function Header() {
           </div>
           {/* TODO : ACCOUNT Component */}
           <div className="ml-2 mr-2">
-            {firstname === null ? (
+            {!authenticated ? (
               <Link
                 to="/login"
                 className="inner"
@@ -107,7 +108,7 @@ function Header() {
                   <div
                     className="inner__largeText"
                     title="Sign Out"
-                    onClick={logout}
+                    onClick={(event) => logout(event)}
                   >
                     Sign Out
                   </div>

@@ -35,9 +35,10 @@ async function create(user) {
   let result = { success: false, user: null };
 
   await instance
-    .post("/userService", user)
+    .post("/userService/addUser", user)
     .then((response) => {
-      result = { success: true, user: response.data.body };
+      if (response.status === 200 && response.data.success)
+        result = { success: true, user: response.data.body };
     })
     .catch((error) => console.log(`create user error-> ${error}`));
 

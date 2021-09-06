@@ -16,10 +16,11 @@ async function authenticate(email, password) {
   await instance
     .post("/authService/authenticate", { email, password })
     .then((response) => {
-      result = {
-        success: true,
-        token: response.headers["authorization"],
-      };
+      if (response.status === 200 && response.data.success)
+        result = {
+          success: true,
+          token: response.headers["authorization"],
+        };
     })
     .catch((error) => {
       console.log("authenticate ->", error);

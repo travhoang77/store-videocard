@@ -1,7 +1,9 @@
+import store from "../redux/store";
 const jwt = require("jsonwebtoken");
 
 export function getToken() {
-  return localStorage.getItem("token");
+  const state = store.getState();
+  return state.login.token;
 }
 
 export function getUserIdFromToken(token) {

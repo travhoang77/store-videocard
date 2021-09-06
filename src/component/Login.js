@@ -9,8 +9,8 @@ import {
   emailLoginValidation,
   passwordLoginValidation,
 } from "./validators/userValidator";
-import { storeToken } from "../actions/loginActions";
-import { useStateValue } from "../StateProvider";
+import { setToken } from "../redux/actions/loginActions";
+import { useDispatch } from "react-redux";
 
 function Login() {
   const history = useHistory();
@@ -19,7 +19,7 @@ function Login() {
   const [emailmessage, setEmailMessage] = useState("");
   const [passwordmessage, setPasswordMessage] = useState("");
   const [toggle, setToggle] = useState("d-none");
-  const [{ token }, dispatch] = useStateValue();
+  const dispatch = useDispatch();
 
   const submit = async (event) => {
     event.preventDefault();
@@ -39,8 +39,7 @@ function Login() {
       setToggle("mb-2 error-container");
       return;
     } else {
-      const token = storeToken(result.token);
-      dispatch(token);
+      dispatch(setToken(result.token));
       history.push("/");
     }
   };

@@ -13,8 +13,8 @@ import {
 } from "./validators/userValidator";
 import { create } from "../fetches/userFetch";
 import { authenticate } from "../fetches/authFetch";
-import { storeToken } from "../actions/loginActions";
-import { useStateValue } from "../StateProvider";
+import { useDispatch } from "react-redux";
+import { setToken } from "../redux/actions/loginActions";
 
 function Register() {
   const history = useHistory();
@@ -28,12 +28,9 @@ function Register() {
   const [confirmationmessage, setConfirmationMessage] = useState("");
   const complexitymessage =
     "Password must have a uppercase, a lowercase, a number and a symbol";
-
-  const [{ token }, dispatch] = useStateValue();
-
+  const dispatch = useDispatch();
   const signup = async (event) => {
     event.preventDefault();
-
     const nameerror = nameValidation(firstname);
     const emailerror = await emailValidation(email);
     const passworderror = passwordValidation(password);
@@ -56,12 +53,17 @@ function Register() {
       password: password,
     };
 
-    await create(user);
-    const result = await authenticate(email, password);
-    const token = storeToken(result.token);
-    dispatch(token);
+    const userresult = await create(user);
 
-    if (result.success) history.push("/");
+    if (userresult.success) {
+      const authresult = await authenticate(email, password);
+      if (authresult.success) {
+        dispatch(setToken(authresult.token));
+        history.push("/");
+      }
+    } else {
+      alert("User could not be created");
+    }
   };
 
   return (
