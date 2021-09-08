@@ -14,6 +14,7 @@ import BreadCrumbs from "./component/Breadcrumbs";
 import Products from "./Products";
 import FourZeroFour from "./FourZeroFour";
 import PasswordChange from "./component/PasswordChange";
+import AddressCreate from "./component/AddressCreate";
 import AddressEdit from "./component/AddressEdit";
 import Addresses from "./component/Addresses";
 
@@ -27,9 +28,20 @@ class App extends Component {
           <Switch>
             <Route path="/test"></Route>
 
-            <Route path="/test/address">
-              <AddressEdit label="Primary" />
-            </Route>
+            <Route path="/test"></Route>
+            <ProtectedRoute path="/account/addresses/create" redirectTo="/404">
+              <AccountNav />
+              <BreadCrumbs />
+              <AddressCreate />
+            </ProtectedRoute>
+            <ProtectedRoute
+              path="/account/addresses/update/:addressid"
+              redirectTo="/404"
+            >
+              <AccountNav />
+              <BreadCrumbs />
+              <AddressEdit />
+            </ProtectedRoute>
             <ProtectedRoute path="/account/addresses" redirectTo="/404">
               <AccountNav />
               <BreadCrumbs />

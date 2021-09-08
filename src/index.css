@@ -43,6 +43,7 @@ input {
 }
 
 .all-dropdown {
+  width: 100%;
   color: var(--bg);
   background-color: var(--color-accent);
   padding: 8px;

@@ -49,7 +49,10 @@ function AddressCard(props) {
         <span aria-hidden="true">default</span>
       </div>
       <div className="text-primary">
-        <span className="clickable">
+        <span
+          className="clickable"
+          onClick={() => props.onUpdate(props.object._id)}
+        >
           <small>Change</small>
         </span>
         <span className={bar}>|</span>

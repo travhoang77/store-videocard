@@ -10,10 +10,11 @@ import {
 
 import { updatePassword } from "../fetches/userFetch";
 import "../css/User.css";
+import { getToken } from "../utils/utils";
 const jwt = require("jsonwebtoken");
 
 function PasswordReset() {
-  const authtoken = localStorage.getItem("token");
+  const authtoken = getToken();
   const id = jwt.decode(authtoken)["_id"];
   const [currentpassword, setCurrentPassword] = useState("");
   const [password, setPassword] = useState("");

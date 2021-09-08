@@ -1,6 +1,7 @@
 import React, { useEffect, useState, useCallback } from "react";
+import { useHistory } from "react-router-dom";
 import { getToken, getUserIdFromToken } from "../utils/utils";
-import { BounceLoader } from "react-spinners";
+import { CircleLoader } from "react-spinners";
 import {
   getAddressesFromUser,
   deleteAddressFromUser,
@@ -10,11 +11,12 @@ import {
 import "../css/Addresses.css";
 import AddAddressCard from "./AddAddressCard";
 import AddressCard from "./AddressCard";
+import { spinnerduration } from "../utils/constants";
 const _ = require("lodash");
 
 function Addresses(props) {
   const maximum = props.maximum ? props.maximum : 2;
-  const spinnerduration = 300;
+
   const [shippingAddressContent, setShippingAddressContent] =
     useState("shipping-addresses");
   const [addresscount, setAddressCount] = useState(0);
@@ -25,10 +27,15 @@ function Addresses(props) {
   const userid = getUserIdFromToken(token);
   const spinnercolor = "#190061";
   const [showSpinner, setShowSpinner] = useState(false);
+  const history = useHistory();
   const primaryAddressExist = useCallback(() => {
     return !_.isEmpty(primaryaddress);
   }, [primaryaddress]);
   //useCallback to prevent flickering
+
+  const handleChange = (addressid) => {
+    history.push(`/account/addresses/update/${addressid}`);
+  };
 
   const PrimaryAddress = useCallback(
     (props) => {
@@ -37,12 +44,15 @@ function Addresses(props) {
           type="primary"
           object={props.address}
           key={props.address._id}
+          onUpdate={() => {
+            history.push(`/account/addresses/update/${props.address._id}`);
+          }}
         />
       ) : (
         <AddAddressCard />
       );
     },
-    [primaryAddressExist]
+    [primaryAddressExist, history]
   );
 
   const runSpinner = () => {
@@ -76,7 +86,7 @@ function Addresses(props) {
       }
     };
     fetchData();
-  }, [maximum]);
+  }, [maximum, userid, token]);
 
   const handleDelete = async (addressid) => {
     const results = await deleteAddressFromUser(addressid, userid, token);
@@ -137,6 +147,7 @@ function Addresses(props) {
                 key={defaultShippingAddresss._id}
                 type="shippingdefault"
                 object={defaultShippingAddresss}
+                onUpdate={handleChange}
                 onDelete={handleDelete}
               />
             </span>
@@ -148,6 +159,7 @@ function Addresses(props) {
                   key={object._id}
                   type="shipping"
                   object={object}
+                  onUpdate={handleChange}
                   onDelete={handleDelete}
                   onSetDefault={handleSetDefault}
                 />
@@ -161,7 +173,7 @@ function Addresses(props) {
         </div>
       </div>
       <div className="spinner">
-        <BounceLoader size={60} color={spinnercolor} loading={showSpinner} />
+        <CircleLoader size={60} color={spinnercolor} loading={showSpinner} />
       </div>
     </div>
   );

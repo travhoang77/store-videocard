@@ -1,14 +1,15 @@
 import React from "react";
-import _ from "lodash";
 import { Redirect, Route } from "react-router-dom";
+import { isAuthenticated } from "./utils/utils";
 
 export function ProtectedRoute({ children, redirectTo, ...rest }) {
-  const token = localStorage.getItem("token");
+  const authenticated = isAuthenticated();
+
   return (
     <Route
       {...rest}
       render={(props) => {
-        return !_.isNull(token) ? (
+        return authenticated ? (
           children
         ) : (
           <Redirect

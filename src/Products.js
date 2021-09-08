@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { BrowserRouter as Route, useParams } from "react-router-dom";
+import { useParams } from "react-router";
 import ProductCard from "./component/ProductCard";
 import Paginators from "./component/Paginators";
 import { getProductsBy } from "./fetches/productFetch";

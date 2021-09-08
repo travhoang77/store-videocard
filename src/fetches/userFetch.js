@@ -10,6 +10,9 @@ module.exports = {
   validateCurrentPassword,
   updatePassword,
   getAddressesFromUser,
+  getAddressById,
+  createAddress,
+  updateAddress,
   deleteAddressFromUser,
   setDefaultShipppingAddressById,
 };
@@ -94,6 +97,67 @@ async function updatePassword(token, id, password) {
   return result;
 }
 
+async function createAddress(userid, token, address) {
+  let result = { success: false, addresses: null };
+
+  await instance
+    .post(`/userService/${userid}/createAddress`, address, {
+      headers: {
+        authorization: token,
+      },
+    })
+    .then((response) => {
+      if (response.status === 200 && response.data.success)
+        result = { success: true, addresses: response.data.addresses };
+    })
+    .catch((error) => console.log(`createAddress error-> ${error}`));
+
+  return result;
+}
+
+async function updateAddress(userid, token, address) {
+  let result = { success: false, addresses: null };
+
+  await instance
+    .put(`/userService/${userid}/updateAddressById/${address._id}`, address, {
+      headers: {
+        authorization: token,
+      },
+    })
+    .then((response) => {
+      if (response.status === 200 && response.data.success)
+        result = {
+          success: response.data.success,
+          address: response.data.address,
+        };
+    })
+    .catch((error) => console.log(`createAddress error-> ${error}`));
+
+  return result;
+}
+
+async function getAddressById(userid, token, addressid) {
+  let result = { success: false, message: "Address could not be retrieved" };
+
+  await instance
+    .get(`/userService/${userid}/getAddressById/${addressid}`, {
+      headers: {
+        authorization: token,
+      },
+    })
+    .then((response) => {
+      if (response.status === 200 && response.data.success)
+        result = {
+          success: response.data.success,
+          address: response.data.address,
+        };
+    })
+    .catch((error) => {
+      console.log("getAddressById ->", error);
+    });
+  return result;
+}
+
 async function getAddressesFromUser(userid, token) {
   let result = {
     success: false,
@@ -107,7 +171,7 @@ async function getAddressesFromUser(userid, token) {
       },
     })
     .then((response) => {
-      if (response.status === 200)
+      if (response.status === 200 && response.data.success)
         result = {
           success: response.data.success,
           addresses: response.data.addresses,

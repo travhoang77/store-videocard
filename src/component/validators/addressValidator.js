@@ -58,5 +58,9 @@ export const zipCodeValidation = (zipcode) => {
     return "Zipcode is required";
   }
 
+  if (!/^\d{5}(-\d{4})?$/.test(zipcode)) {
+    return "Invalid zipcode";
+  }
+
   return null;
 };

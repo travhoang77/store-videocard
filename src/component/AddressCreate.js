@@ -1,6 +1,7 @@
-import React, { useEffect, useState } from "react";
-import { useParams } from "react-router";
+import React, { useState } from "react";
+
 import { Form } from "react-bootstrap";
+
 import {
   firstNameValidation,
   lastNameValidation,
@@ -8,21 +9,18 @@ import {
   cityValidation,
   zipCodeValidation,
 } from "./validators/addressValidator";
+import { createAddress } from "../fetches/userFetch";
 import ValidateMessage from "../component/ValidateMessage";
-import { getAddressById } from "../fetches/userFetch";
-import { stateoptions } from "../utils/constants";
-import { updateAddress } from "../fetches/userFetch";
+import "../css/User.css";
 import { getToken, getUserIdFromToken } from "../utils/utils";
 import { useHistory } from "react-router-dom";
-import "../css/User.css";
 
-function AddressEdit() {
-  const { addressid } = useParams();
-  const authtoken = getToken();
-  const userid = getUserIdFromToken(authtoken);
+import { stateoptions } from "../utils/constants";
+
+function AddressCreate() {
   const [firstname, setFirstName] = useState("");
   const [lastname, setLastName] = useState("");
-  const [streetaddress, setStreetAddress] = useState("");
+  const [address, setAddress] = useState("");
   const [unit, setUnit] = useState("");
   const [city, setCity] = useState("");
   const [state, setState] = useState("");
@@ -33,31 +31,18 @@ function AddressEdit() {
   const [streetaddressmessage, setStreetAddressMessage] = useState("");
   const [citymessage, setCityMessage] = useState("");
   const [zipcodemessage, setZipCodeMessage] = useState("");
+  const authtoken = getToken();
+  const userid = getUserIdFromToken(authtoken);
+
   const [addressclasses, setAddressesClasses] = useState("mb-3");
   const history = useHistory();
 
-  useEffect(() => {
-    const fetchData = async () => {
-      const result = await getAddressById(userid, authtoken, addressid);
-      if (result.success) {
-        setFirstName(result.address.firstname);
-        setLastName(result.address.lastname);
-        setStreetAddress(result.address.address);
-        setUnit(result.address.unit);
-        setCity(result.address.city);
-        setState(result.address.state);
-        setZipCode(result.address.zipcode);
-      }
-    };
-    fetchData();
-  }, [userid, authtoken, addressid]);
-
-  const save = async (event) => {
+  const submit = async (event) => {
     event.preventDefault();
 
     const firstnameerror = firstNameValidation(firstname);
     const lastnameerror = lastNameValidation(lastname);
-    const streetaddresserror = streetAddressValidation(streetaddress);
+    const streetaddresserror = streetAddressValidation(address);
     const cityerror = cityValidation(city);
     const zipcodeerror = zipCodeValidation(zipcode);
 
@@ -85,30 +70,27 @@ function AddressEdit() {
     )
       return;
 
-    const updatedaddress = {
-      _id: addressid,
+    const newaddress = {
       firstname: firstname,
       lastname: lastname,
-      address: streetaddress,
+      address: address,
       unit: unit,
       city: city,
       state: state,
       zipcode: zipcode,
     };
-    const result = await updateAddress(userid, authtoken, updatedaddress);
+    const result = await createAddress(userid, authtoken, newaddress);
 
     if (result.success) {
       history.push("/account/addresses");
-    } else {
-      alert("Address was not updated");
-    }
+    } else alert("Address was not created");
   };
 
   return (
     <div className="user">
       <div className="user-container">
-        <h3>Update address</h3>
-        <Form onSubmit={(event) => save(event)}>
+        <h3>Create address</h3>
+        <Form onSubmit={(event) => submit(event)}>
           <h6>First Name</h6>
           <input
             className="mb-1"
@@ -128,8 +110,8 @@ function AddressEdit() {
           <h6>Address</h6>
           <input
             className={addressclasses}
-            value={streetaddress}
-            onChange={(event) => setStreetAddress(event.target.value)}
+            value={address}
+            onChange={(event) => setAddress(event.target.value)}
             type="text"
           />
           <ValidateMessage message={streetaddressmessage} />
@@ -149,6 +131,7 @@ function AddressEdit() {
           />
           <ValidateMessage message={citymessage} />
           <h6>State</h6>
+
           <select
             value={state}
             className="all-dropdown mb-1"
@@ -166,10 +149,11 @@ function AddressEdit() {
             onChange={(event) => setZipCode(event.target.value)}
             type="text"
           />
+
           <ValidateMessage message={zipcodemessage} />
           <div>
             <button type="submit" className="user-button">
-              Save
+              Create
             </button>
           </div>
         </Form>
@@ -178,4 +162,4 @@ function AddressEdit() {
   );
 }
 
-export default AddressEdit;
+export default AddressCreate;
