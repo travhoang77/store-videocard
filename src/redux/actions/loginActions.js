@@ -1,14 +1,14 @@
-import { ActionTypes } from "../constants/action-types";
+import { LoginActionTypes } from "../constants/loginaction-types";
 
 export const setToken = (token) => {
   return {
-    type: ActionTypes.LOGIN,
+    type: LoginActionTypes.LOGIN,
     payload: token,
   };
 };
 
 export const removeToken = () => {
   return {
-    type: ActionTypes.LOGOUT,
+    type: LoginActionTypes.LOGOUT,
   };
 };

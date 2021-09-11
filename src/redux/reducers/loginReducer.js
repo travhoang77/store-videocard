@@ -1,4 +1,4 @@
-import { ActionTypes } from "../constants/action-types";
+import { LoginActionTypes } from "../constants/loginaction-types";
 const jwt = require("jsonwebtoken");
 
 const initialState = {
@@ -7,17 +7,17 @@ const initialState = {
   firstname: null,
 };
 
-export const loginReducer = (state = initialState, { type, payload }) => {
-  switch (type) {
-    case ActionTypes.LOGIN:
-      const decodeduser = jwt.decode(payload);
+export const loginReducer = (state = initialState, action) => {
+  switch (action.type) {
+    case LoginActionTypes.LOGIN:
+      const decodeduser = jwt.decode(action.payload);
       return {
         ...state,
         authenticated: true,
-        token: payload,
+        token: action.payload,
         firstname: decodeduser["firstname"],
       };
-    case ActionTypes.LOGOUT:
+    case LoginActionTypes.LOGOUT:
       return {
         ...state,
         authenticated: false,

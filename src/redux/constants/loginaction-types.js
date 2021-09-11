@@ -1,4 +1,4 @@
-export const ActionTypes = {
+export const LoginActionTypes = {
   LOGIN: "LOGIN",
   LOGOUT: "LOGOUT",
 };

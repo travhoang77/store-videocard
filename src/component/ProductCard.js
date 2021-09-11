@@ -1,10 +1,12 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { Card, Button } from "react-bootstrap";
+import { addToCart, resetCart } from "../redux/actions/cartActions";
+import { useDispatch } from "react-redux";
 import "../css/ProductCard.css";
 
 function ProductCard(props) {
-  const { id } = props;
+  const id = props.product._id;
   let card = props.product.images.find((image) => {
     return image.type === "card";
   });
@@ -19,6 +21,8 @@ function ProductCard(props) {
 
   const buttontext =
     props.product.quantity === 0 ? "Out of Stock" : "Add to cart";
+
+  const dispatch = useDispatch();
 
   return (
     <Card className="product-card" id={id}>
@@ -46,7 +50,13 @@ function ProductCard(props) {
         </Card.Title>
         <div className="bottom-card">
           <Card.Text>${props.product.price}</Card.Text>
-          <Button className="button-cart" id={id}>
+          <Button
+            className="button-cart"
+            id={IdleDeadline}
+            onClick={() => {
+              dispatch(addToCart(props.product._id));
+            }}
+          >
             {buttontext}
           </Button>
         </div>
