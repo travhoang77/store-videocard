@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import { connect } from "react-redux";
 import { useHistory } from "react-router-dom";
 import "./css/Header.css";
 import { InputGroup, Button, FormControl } from "react-bootstrap";
@@ -13,16 +14,25 @@ import Logo from "./assets/logo.png";
 import { signout } from "./fetches/authFetch";
 import { useSelector, useDispatch } from "react-redux";
 import { removeToken } from "./redux/actions/loginActions";
-import { getToken } from "./utils/utils";
+import { getToken, getCartCount, getCartSubtotal } from "./utils/utils";
 
-function Header() {
+const Header = ({ cart }) => {
   const history = useHistory();
   const state = useSelector((state) => state);
   const dispatch = useDispatch();
+  const [cartCount, setCartCount] = useState();
+  const [subtotal, setSubtotal] = useState();
+  const [itemtext, setItemText] = useState();
 
   const authenticated = state.login.authenticated;
   const firstname = state.login.firstname;
   const authtoken = getToken();
+
+  useEffect(() => {
+    setCartCount(getCartCount(cart));
+    setSubtotal(getCartSubtotal(cart));
+    getCartCount(cart) > 1 ? setItemText("Items") : setItemText("Item");
+  }, [cart]);
 
   const logout = async (event) => {
     event.preventDefault();
@@ -70,9 +80,10 @@ function Header() {
             >
               <FontAwesomeIcon className="fa fa-2x" icon={faShoppingCart} />
               <div className="ml-1">
-                <div className="inner__smallText">$1999.99</div>
+                <div className="inner__smallText">${subtotal}</div>
                 <div className="inner__largeText">
-                  <span>15</span> Item
+                  <span className="mr-1">{cartCount}</span>
+                  {itemtext}
                 </div>
               </div>
             </Link>
@@ -124,6 +135,12 @@ function Header() {
       </div>
     </div>
   );
-}
+};
 
-export default Header;
+const mapStateToProps = (state) => {
+  return {
+    cart: state.cart.cart,
+  };
+};
+
+export default connect(mapStateToProps)(Header);

@@ -17,6 +17,7 @@ import PasswordChange from "./component/PasswordChange";
 import AddressCreate from "./component/AddressCreate";
 import AddressEdit from "./component/AddressEdit";
 import Addresses from "./component/Addresses";
+import CartItem from "./component/CartItem";
 
 class App extends Component {
   render() {
@@ -26,9 +27,10 @@ class App extends Component {
           <Header />
 
           <Switch>
-            <Route path="/test"></Route>
+            <Route path="/test">
+              <CartItem />
+            </Route>
 
-            <Route path="/test"></Route>
             <ProtectedRoute path="/account/addresses/create" redirectTo="/404">
               <AccountNav />
               <BreadCrumbs />

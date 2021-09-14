@@ -42,3 +42,17 @@ export function moveItemToFront(prop, value, data) {
     return x[prop] === value ? -1 : y[prop] === data ? 1 : 0;
   });
 }
+
+export function getCartCount(cart) {
+  return cart.reduce(function (x, y) {
+    return x + y.qty;
+  }, 0);
+}
+
+export function getCartSubtotal(cart) {
+  return cart
+    .reduce(function (x, y) {
+      return x + y.price;
+    }, 0)
+    .toFixed(2);
+}

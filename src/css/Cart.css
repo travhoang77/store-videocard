@@ -1,0 +1,11 @@
+.cartitem {
+  width: 45rem;
+  height: 10rem;
+  border: 0.1rem solid var(--color-dark);
+  border-left: 0.5rem solid var(--color-dark);
+}
+
+.remove:hover {
+  cursor: pointer;
+  text-decoration: underline;
+}

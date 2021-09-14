@@ -53,8 +53,11 @@ function ProductCard(props) {
           <Button
             className="button-cart"
             id={IdleDeadline}
+            // onClick={() => {
+            //   dispatch(resetCart());
+            // }}
             onClick={() => {
-              dispatch(addToCart(props.product._id));
+              dispatch(addToCart(props.product._id, props.product.price));
             }}
           >
             {buttontext}

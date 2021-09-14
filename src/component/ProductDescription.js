@@ -4,6 +4,7 @@ import { useParams } from "react-router-dom";
 import { Button } from "react-bootstrap";
 import Counter from "./Counter";
 import { getProductBy } from "../fetches/productFetch";
+import { counterlimit } from "../utils/constants";
 import _ from "lodash";
 import "../css/ProductDescription.css";
 
@@ -27,7 +28,6 @@ function ProductDescription(props) {
   const features = product.features ? product.features : [];
 
   //Hard coded product limit for now
-  const limit = 5;
 
   const image = _.isEmpty(product)
     ? undefined
@@ -69,7 +69,9 @@ function ProductDescription(props) {
             ))}
           </ul>
 
-          {product.quantity > 0 && limit > 1 && <Counter limit={limit} />}
+          {product.quantity > 0 && counterlimit > 1 && (
+            <Counter limit={counterlimit} />
+          )}
           <div className="mt-2">
             <span className={msrp}>
               $<del></del>
