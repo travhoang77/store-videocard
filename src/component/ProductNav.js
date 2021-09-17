@@ -9,7 +9,7 @@ import { CSSTransition } from "react-transition-group";
 import gpuIcon from "../assets/video-card.svg";
 import "../css/Nav.css";
 
-function ProductNav(props) {
+function ProductNav() {
   return (
     <nav className="navBar">
       <ul className="nav">
@@ -38,7 +38,8 @@ function DropdownMenu() {
   }
 
   function DropDownItem(props) {
-    const { to } = props;
+    let { to } = props;
+    to = to ? to : "/";
     return (
       <Link
         to={to}

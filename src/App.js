@@ -10,6 +10,7 @@ import Register from "./component/Register";
 import ProductDescription from "./component/ProductDescription";
 import ProductNav from "./component/ProductNav";
 import AccountNav from "./component/AccountNav";
+import EmptyNav from "./component/EmptyNav";
 import BreadCrumbs from "./component/Breadcrumbs";
 import Products from "./Products";
 import FourZeroFour from "./FourZeroFour";
@@ -17,6 +18,7 @@ import PasswordChange from "./component/PasswordChange";
 import AddressCreate from "./component/AddressCreate";
 import AddressEdit from "./component/AddressEdit";
 import Addresses from "./component/Addresses";
+import Cart from "./component/Cart";
 import CartItem from "./component/CartItem";
 
 class App extends Component {
@@ -59,7 +61,11 @@ class App extends Component {
               <BreadCrumbs />
               {/* <Profile/> */}
             </ProtectedRoute>
-
+            <Route path="/cart">
+              <EmptyNav />
+              <BreadCrumbs />
+              <Cart />
+            </Route>
             <Route path="/login">
               <ProductNav />
               <BreadCrumbs />

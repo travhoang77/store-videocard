@@ -29,9 +29,11 @@ const Header = ({ cart }) => {
   const authtoken = getToken();
 
   useEffect(() => {
-    setCartCount(getCartCount(cart));
-    setSubtotal(getCartSubtotal(cart));
-    getCartCount(cart) > 1 ? setItemText("Items") : setItemText("Item");
+    if (!isNaN(getCartCount(cart))) {
+      setCartCount(getCartCount(cart));
+      setSubtotal(getCartSubtotal(cart));
+      getCartCount(cart) > 1 ? setItemText("Items") : setItemText("Item");
+    }
   }, [cart]);
 
   const logout = async (event) => {
@@ -103,9 +105,9 @@ const Header = ({ cart }) => {
                 </div>
               </Link>
             ) : (
-              <Link className="inner">
+              <div className="inner">
                 <FontAwesomeIcon
-                  className="fa fa-2x"
+                  className="fa fa-2x clickable"
                   icon={faUser}
                   aria-label="Account"
                   title="Account Settings"
@@ -117,14 +119,14 @@ const Header = ({ cart }) => {
                 <div className="ml-1">
                   <div className="inner__smallText">Welcome {firstname}</div>
                   <div
-                    className="inner__largeText"
+                    className="inner__largeText click"
                     title="Sign Out"
                     onClick={(event) => logout(event)}
                   >
                     Sign Out
                   </div>
                 </div>
-              </Link>
+              </div>
             )}
           </div>
           <div>

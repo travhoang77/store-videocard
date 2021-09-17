@@ -1,40 +1,74 @@
-import React from "react";
+import React, { useState } from "react";
 import { Image } from "react-bootstrap";
 import { Link } from "react-router-dom";
-import Counter from "./Counter";
+import { adjustQty } from "../redux/actions/cartActions";
+import { useDispatch } from "react-redux";
 import "../css/Cart.css";
 function CartItem(props) {
-  const remove = (event) => {
-    event.preventDefault();
-    alert("Remove");
+  const [qty, setQty] = useState(props.object.qty);
+  const [total, settotal] = useState(
+    (props.object.qty * props.object.price).toFixed(2)
+  );
+  const imgurl =
+    props.object.image === undefined ? "nvidiageneric.jpg" : props.object.image;
+
+  const itemurl = `/product/${props.object.id}`;
+  const dispatch = useDispatch();
+
+  const updateqty = (value) => {
+    if (isNaN(value)) return;
+    if (value === "0") return;
+    if (value.length > 2) return;
+    if (parseInt(value) > props.maximum) return;
+    setQty(value);
+
+    if (!isNaN(value) && value !== "")
+      settotal((value * props.object.price).toFixed(2));
+    dispatch(adjustQty(props.object.id, parseInt(value)));
   };
+
   return (
     <div className="cartitem d-flex flex-row shadow p-2 mb-4 bg-white rounded">
-      <div className="">
-        <Image src={props.imgUrl} style={{ maxHeight: "9rem" }} />
+      <div>
+        <Link to={itemurl}>
+          <Image src={`/img/${imgurl}`} style={{ maxHeight: "9rem" }} />
+        </Link>
       </div>
       <div
         className="ml-3 my-auto"
         style={{ maxWidth: "9rem", fontSize: "0.9rem" }}
       >
-        <Link to="/" className="text-primary">
-          {props.title}
+        <Link to={itemurl} className="text-primary">
+          {props.object.name}
         </Link>
       </div>
       <div style={{ minWidth: "1rem" }}></div>
-      <div className="my-auto">
-        <Counter limit={1} />
+
+      <div className="ml-4 my-auto d-flex flex-column">
+        <div className="d-flex justify-content-center">
+          <input
+            className="text-center"
+            type="text"
+            value={qty}
+            style={{ maxWidth: "2rem" }}
+            onChange={(event) => updateqty(event.target.value)}
+          />
+        </div>
+        <div className="d-flex justify-content-center">
+          <small>Max:{props.maximum}</small>
+        </div>
       </div>
       <div className="ml-4 my-auto">
-        <span className="text-primary">
-          <small className="remove" onClick={(event) => remove(event)}>
-            Remove
-          </small>
-        </span>
+        <small
+          className="ml-1 text-primary textlink"
+          onClick={() => props.onDelete(props.object.id)}
+        >
+          Remove
+        </small>
       </div>
-      <div style={{ minWidth: "5rem" }}></div>
+      <div style={{ minWidth: "2rem" }}></div>
       <div className="ml-1 my-auto">
-        <h6>{props.price}</h6>
+        <h5 className="font-weight-bold">${total}</h5>
       </div>
     </div>
   );

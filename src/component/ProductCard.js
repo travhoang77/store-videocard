@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { Card, Button } from "react-bootstrap";
-import { addToCart, resetCart } from "../redux/actions/cartActions";
+import { addToCart } from "../redux/actions/cartActions";
 import { useDispatch } from "react-redux";
 import "../css/ProductCard.css";
 
@@ -53,11 +53,15 @@ function ProductCard(props) {
           <Button
             className="button-cart"
             id={IdleDeadline}
-            // onClick={() => {
-            //   dispatch(resetCart());
-            // }}
             onClick={() => {
-              dispatch(addToCart(props.product._id, props.product.price));
+              dispatch(
+                addToCart(
+                  props.product._id,
+                  props.product.name,
+                  imgurl,
+                  props.product.price
+                )
+              );
             }}
           >
             {buttontext}

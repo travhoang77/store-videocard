@@ -56,3 +56,8 @@ a.inner:hover {
 .search-button {
   background-color: var(--color-dark);
 }
+
+.click:hover {
+  cursor: pointer;
+  text-decoration: none;
+}

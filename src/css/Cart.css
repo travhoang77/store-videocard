@@ -1,11 +1,23 @@
+.cart-main {
+  width: 64rem;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.cart-summary {
+  background-color: var(--bg-dull);
+  border: 0.01rem solid var(--color-light);
+  border-radius: 5px;
+}
+
 .cartitem {
-  width: 45rem;
+  width: 100%;
   height: 10rem;
-  border: 0.1rem solid var(--color-dark);
+  border: 0.01rem solid var(--color-light);
   border-left: 0.5rem solid var(--color-dark);
 }
 
-.remove:hover {
+.textlink:hover {
   cursor: pointer;
   text-decoration: underline;
 }

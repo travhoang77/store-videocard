@@ -52,7 +52,7 @@ export function getCartCount(cart) {
 export function getCartSubtotal(cart) {
   return cart
     .reduce(function (x, y) {
-      return x + y.price;
+      return x + y.qty * y.price;
     }, 0)
     .toFixed(2);
 }
