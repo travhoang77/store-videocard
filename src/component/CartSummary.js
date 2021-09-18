@@ -40,7 +40,7 @@ function CartSummary({ cart }) {
   return (
     <div
       className="ml-4 cart-summary"
-      style={{ width: "35%", height: "30rem" }}
+      style={{ width: "35%", height: "35rem" }}
     >
       <div className="ml-3 mr-3">
         <div className="d-flex justify-content-center border-dark border-bottom">

@@ -10,7 +10,6 @@ import Register from "./component/Register";
 import ProductDescription from "./component/ProductDescription";
 import ProductNav from "./component/ProductNav";
 import AccountNav from "./component/AccountNav";
-import EmptyNav from "./component/EmptyNav";
 import BreadCrumbs from "./component/Breadcrumbs";
 import Products from "./Products";
 import FourZeroFour from "./FourZeroFour";
@@ -62,7 +61,7 @@ class App extends Component {
               {/* <Profile/> */}
             </ProtectedRoute>
             <Route path="/cart">
-              <EmptyNav />
+              <ProductNav />
               <BreadCrumbs />
               <Cart />
             </Route>

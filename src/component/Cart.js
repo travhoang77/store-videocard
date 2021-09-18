@@ -5,6 +5,7 @@ import { useDispatch } from "react-redux";
 import CartItem from "./CartItem";
 import CartSummary from "./CartSummary";
 import store from "../redux/store";
+import { CART_LIMIT } from "../utils/constants";
 
 import "../css/Cart.css";
 
@@ -27,7 +28,11 @@ function Cart({ cart }) {
       <div className="d-flex flex-row" style={{ width: "100%" }}>
         <div style={{ width: "65%" }}>
           {cart.map((item) => (
-            <CartItem object={item} maximum={25} onDelete={handleDelete} />
+            <CartItem
+              object={item}
+              maximum={CART_LIMIT}
+              onDelete={handleDelete}
+            />
           ))}
         </div>
         <CartSummary />

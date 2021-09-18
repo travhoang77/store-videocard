@@ -73,5 +73,5 @@ export const stateoptions = [
 ];
 
 export const spinnerduration = 400;
-
 export const counterlimit = 5;
+export const CART_LIMIT = 20;

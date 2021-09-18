@@ -5,6 +5,7 @@ import { adjustQty } from "../redux/actions/cartActions";
 import { useDispatch } from "react-redux";
 import "../css/Cart.css";
 function CartItem(props) {
+  const { id } = props.object;
   const [qty, setQty] = useState(props.object.qty);
   const [total, settotal] = useState(
     (props.object.qty * props.object.price).toFixed(2)
@@ -12,20 +13,37 @@ function CartItem(props) {
   const imgurl =
     props.object.image === undefined ? "nvidiageneric.jpg" : props.object.image;
 
-  const itemurl = `/product/${props.object.id}`;
+  const itemurl = `/product/${id}`;
   const dispatch = useDispatch();
 
-  const updateqty = (value) => {
+  const updateQty = (value) => {
+    dispatch(adjustQty(id, parseInt(value)));
+    settotal((parseInt(value) * props.object.price).toFixed(2));
+  };
+
+  const validateqty = (event) => {
+    event.preventDefault();
+    const value = event.target.value;
     if (isNaN(value)) return;
     if (value === "0") return;
     if (value.length > 2) return;
     if (parseInt(value) > props.maximum) return;
     setQty(value);
-
-    if (!isNaN(value) && value !== "")
-      settotal((value * props.object.price).toFixed(2));
-    dispatch(adjustQty(props.object.id, parseInt(value)));
   };
+
+  const leavefocus = (event) => {
+    event.preventDefault();
+    const value = event.target.value;
+    if (value === "") {
+      setQty(props.object.qty);
+      return;
+    }
+    updateQty(value);
+  };
+
+  function handleKeyDown(e) {
+    if (e.key === "Enter") updateQty(e.target.value);
+  }
 
   return (
     <div className="cartitem d-flex flex-row shadow p-2 mb-4 bg-white rounded">
@@ -51,7 +69,9 @@ function CartItem(props) {
             type="text"
             value={qty}
             style={{ maxWidth: "2rem" }}
-            onChange={(event) => updateqty(event.target.value)}
+            onChange={validateqty}
+            onBlur={leavefocus}
+            onKeyDown={handleKeyDown}
           />
         </div>
         <div className="d-flex justify-content-center">
@@ -67,8 +87,19 @@ function CartItem(props) {
         </small>
       </div>
       <div style={{ minWidth: "2rem" }}></div>
-      <div className="ml-1 my-auto">
-        <h5 className="font-weight-bold">${total}</h5>
+      <div className="ml-1 my-auto flex flex-column">
+        <div>
+          <h5 className="font-weight-bold d-flex justify-content-center">
+            ${total}
+          </h5>
+        </div>
+        {props.object.qty > 1 && (
+          <div>
+            <small className="d-flex justify-content-center">
+              (${props.object.price} ea.)
+            </small>
+          </div>
+        )}
       </div>
     </div>
   );
