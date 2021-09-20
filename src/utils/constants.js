@@ -72,6 +72,7 @@ export const stateoptions = [
   //   { label: "Yukon Territory", value: "YT" },
 ];
 
+export const PAGE_SIZE = 15;
 export const spinnerduration = 400;
 export const counterlimit = 5;
 export const CART_LIMIT = 20;

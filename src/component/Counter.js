@@ -3,14 +3,20 @@ import "../css/Counter.css";
 
 function Counter(props) {
   const max = props.limit ? props.limit : 1;
-  const [count, setCount] = useState(1);
+  const [count, setCount] = useState(props.value);
 
   const decrement = () => {
-    if (count > 1) setCount(count - 1);
+    if (count > 1) {
+      setCount(count - 1);
+      props.onUpdate(count - 1);
+    }
   };
 
   const increment = () => {
-    if (count < max) setCount(count + 1);
+    if (count < max) {
+      setCount(count + 1);
+      props.onUpdate(count + 1);
+    }
   };
 
   return (

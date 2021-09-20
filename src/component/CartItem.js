@@ -96,7 +96,7 @@ function CartItem(props) {
         {props.object.qty > 1 && (
           <div>
             <small className="d-flex justify-content-center">
-              (${props.object.price} ea.)
+              ${props.object.price} ea.
             </small>
           </div>
         )}

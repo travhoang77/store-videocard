@@ -61,6 +61,10 @@
   font-weight: 600;
 }
 
+.card-title:hover {
+  cursor: pointer;
+}
+
 .card-subtitle {
   font-size: smaller;
 }

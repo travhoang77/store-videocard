@@ -29,6 +29,7 @@ function Cart({ cart }) {
         <div style={{ width: "65%" }}>
           {cart.map((item) => (
             <CartItem
+              key={item.id}
               object={item}
               maximum={CART_LIMIT}
               onDelete={handleDelete}

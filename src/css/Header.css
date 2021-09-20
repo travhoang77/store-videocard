@@ -38,9 +38,9 @@
   flex-direction: row;
 }
 
-a.inner:hover {
+.inner:hover {
   text-decoration: none;
-  color: var(--color-dark);
+  color: var(--color-accent);
 }
 
 .inner__smallText {

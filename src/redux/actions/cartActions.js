@@ -1,12 +1,13 @@
 import { CartActionTypes } from "../constants/cartaction-types";
 
-export const addToCart = (itemId, name, image, price) => {
+export const addToCart = (itemId, name, image, price, qty) => {
   return {
     type: CartActionTypes.ADD_TO_CART,
     id: itemId,
     name: name,
     image: image,
     price: price,
+    qty: qty,
   };
 };
 

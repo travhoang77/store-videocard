@@ -6,6 +6,7 @@ import { getProductsBy } from "./fetches/productFetch";
 import { paginate } from "./utils/paginate";
 import "./css/Products.css";
 import FourZeroFour from "./FourZeroFour";
+import { PAGE_SIZE } from "./utils/constants";
 
 function Products() {
   const { type } = useParams();
@@ -13,7 +14,7 @@ function Products() {
   const [paginatedProducts, setPaginatedProducts] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [notFound, setNotFound] = useState(false);
-  const pageSize = 12;
+  const pageSize = PAGE_SIZE;
 
   const handlePageChange = (page) => {
     setCurrentPage(page);
@@ -45,7 +46,7 @@ function Products() {
 
       <div className="product">
         {paginatedProducts.map((product) => (
-          <ProductCard id={product._id} product={product} />
+          <ProductCard key={product._id} id={product._id} product={product} />
         ))}
       </div>
       <div className="d-flex justify-content-center">

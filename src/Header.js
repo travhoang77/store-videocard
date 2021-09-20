@@ -38,12 +38,10 @@ const Header = ({ cart }) => {
 
   const logout = async (event) => {
     event.preventDefault();
-    const result = await signout(authtoken);
+    await signout(authtoken);
 
-    if (result.success) {
-      dispatch(removeToken());
-      history.push("/");
-    }
+    dispatch(removeToken());
+    history.push("/");
   };
   return (
     <div className="header">

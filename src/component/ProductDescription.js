@@ -4,14 +4,23 @@ import { useParams } from "react-router-dom";
 import { Button } from "react-bootstrap";
 import Counter from "./Counter";
 import { getProductBy } from "../fetches/productFetch";
-import { counterlimit } from "../utils/constants";
+import { CART_LIMIT } from "../utils/constants";
 import _ from "lodash";
+import { addToCart, adjustQty } from "../redux/actions/cartActions";
+import { useDispatch } from "react-redux";
+import store from "../redux/store";
 import "../css/ProductDescription.css";
 
 function ProductDescription(props) {
   const { id } = useParams();
   const [product, setProduct] = useState({});
+  const dispatch = useDispatch();
+
   const msrp = "h3 text-danger mr-4 d-none";
+  let state = store.getState();
+  const item = state.cart.cart.find((item) => item.id === id);
+
+  const [qty, setqty] = useState(item ? item.qty : 1);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -27,15 +36,30 @@ function ProductDescription(props) {
   const rating = product.rating ? product.rating : 0;
   const features = product.features ? product.features : [];
 
-  //Hard coded product limit for now
-
   const image = _.isEmpty(product)
     ? undefined
     : product.images.find((image) => {
         return image.type === "main";
       });
 
+  const cardimage = _.isEmpty(product)
+    ? undefined
+    : product.images.find((image) => {
+        return image.type === "card";
+      });
+
   const imgurl = _.isUndefined(image) ? "nvidiageneric.jpg" : image.url;
+  const cardimgurl = _.isUndefined(image) ? "nvidiageneric.jpg" : cardimage.url;
+
+  const handleCounter = (value) => {
+    setqty(value);
+  };
+
+  const sendToCart = () => {
+    item
+      ? dispatch(adjustQty(id, qty))
+      : dispatch(addToCart(id, product.name, cardimgurl, product.price, qty));
+  };
 
   return (
     <div>
@@ -65,12 +89,16 @@ function ProductDescription(props) {
           </div>
           <ul className="ml-4" style={{ minHeight: "12rem" }}>
             {features.map((feature) => (
-              <li>{feature}</li>
+              <li key={feature}>{feature}</li>
             ))}
           </ul>
 
-          {product.quantity > 0 && counterlimit > 1 && (
-            <Counter limit={counterlimit} />
+          {product.quantity > 0 && CART_LIMIT > 1 && (
+            <Counter
+              limit={CART_LIMIT}
+              value={item ? item.qty : 1}
+              onUpdate={handleCounter}
+            />
           )}
           <div className="mt-2">
             <span className={msrp}>
@@ -80,7 +108,11 @@ function ProductDescription(props) {
           </div>
 
           {product.quantity > 0 && (
-            <Button className="button-cart mt-2" id={product._id}>
+            <Button
+              className="button-cart mt-2"
+              id={product._id}
+              onClick={sendToCart}
+            >
               Add to Cart
             </Button>
           )}

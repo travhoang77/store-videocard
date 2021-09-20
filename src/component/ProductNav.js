@@ -153,7 +153,7 @@ function NavItem(props) {
         {props.icon.prefix === "fas" ? (
           <FontAwesomeIcon className=" fa__button" icon={props.icon} />
         ) : (
-          <img src={gpuIcon} />
+          <img src={gpuIcon} alt=">" />
         )}
       </Link>
       <span className="pl-2" onClick={() => setOpen(!open)}>

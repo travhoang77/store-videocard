@@ -25,7 +25,7 @@ export const cartReducer = (state = initialState, action) => {
                 name: action.name,
                 image: action.image,
                 price: action.price,
-                qty: 1,
+                qty: action.qty,
               },
             ],
       };
