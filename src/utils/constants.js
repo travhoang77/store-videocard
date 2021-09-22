@@ -74,5 +74,5 @@ export const stateoptions = [
 
 export const PAGE_SIZE = 15;
 export const spinnerduration = 400;
-export const counterlimit = 5;
 export const CART_LIMIT = 20;
+export const CAROUSEL_TIME = 5000;

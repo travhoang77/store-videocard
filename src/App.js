@@ -18,8 +18,7 @@ import AddressCreate from "./component/AddressCreate";
 import AddressEdit from "./component/AddressEdit";
 import Addresses from "./component/Addresses";
 import Cart from "./component/Cart";
-import CartItem from "./component/CartItem";
-
+import Landing from "./component/Landing";
 class App extends Component {
   render() {
     return (
@@ -28,8 +27,10 @@ class App extends Component {
           <Header />
 
           <Switch>
-            <Route path="/test">
-              <CartItem />
+            <Route exact path="/">
+              <ProductNav />
+              <BreadCrumbs />
+              <Landing />
             </Route>
 
             <ProtectedRoute path="/account/addresses/create" redirectTo="/404">
