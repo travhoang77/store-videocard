@@ -91,7 +91,7 @@ function Addresses(props) {
   const handleDelete = async (addressid) => {
     const results = await deleteAddressFromUser(addressid, userid, token);
     if (results.success) {
-      runSpinner();
+      // runSpinner();
       setAddressCount(results.addresses.length);
       if (results.addresses.length === 1) {
         setDefaultShippingAddress({});
@@ -111,7 +111,7 @@ function Addresses(props) {
       token
     );
     if (results.success) {
-      runSpinner();
+      // runSpinner();
 
       setDefaultShippingAddress(results.addresses[1]);
       setShippingAddresses(results.addresses.slice(2));
@@ -119,7 +119,7 @@ function Addresses(props) {
   };
 
   return (
-    <div>
+    <div style={{ minHeight: "42rem" }}>
       <div className="addresses">
         <span style={{ width: "100%", height: "3rem" }}>
           <h4 className="border-dark border-bottom">Addresses</h4>

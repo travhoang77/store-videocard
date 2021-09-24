@@ -5,6 +5,7 @@ import React, { Component } from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import { ProtectedRoute } from "./protectedRoute";
 import Header from "./Header";
+import Footer from "./Footer";
 import Login from "./component/Login";
 import Register from "./component/Register";
 import ProductDescription from "./component/ProductDescription";
@@ -93,9 +94,10 @@ class App extends Component {
             <Route exact path="/">
               <ProductNav />
               <BreadCrumbs />
-              <p>Future Landing Page</p>
+              <Landing />
             </Route>
           </Switch>
+          <Footer />
         </div>
       </Router>
     );

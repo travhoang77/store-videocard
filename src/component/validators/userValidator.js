@@ -8,8 +8,8 @@ export const nameValidation = (name) => {
   if (/[^a-zA-Z -]/.test(name)) {
     return "Invalid characters";
   }
-  if (name.trim().length < 3) {
-    return "Name require at least 3 characters";
+  if (name.trim().length < 2) {
+    return "Name require at least 2 characters";
   }
   if (name.trim().length > 100) {
     return "Name too long";

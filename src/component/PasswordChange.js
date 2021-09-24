@@ -62,7 +62,7 @@ function PasswordReset() {
   };
 
   return (
-    <div className="user">
+    <div className="user" style={{ minHeight: "25rem" }}>
       <div className={toggle}>
         <h5 className="text-success">Password change successful!</h5>
       </div>

@@ -13,9 +13,9 @@ function Landing() {
       <div className="landing-rectangle">
         <div className="m-2">
           <iframe
-            width="448"
-            height="252"
-            src="https://www.youtube-nocookie.com/embed/lf1OWiTNY60?controls=0"
+            width="560"
+            height="315"
+            src="https://www.youtube-nocookie.com/embed/xg0FI4QX8eQ?controls=0"
             title="YouTube video player"
             frameborder="0"
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
@@ -24,6 +24,9 @@ function Landing() {
         </div>{" "}
         <div className="mt-auto mb-auto">
           <p>Unboxing of the Geforce RTX 3080!</p>
+          <Link to="/product/614c11b6dcdeb36321f5b2c6" className="text-primary">
+            <h5>Check out ASUS Geforce RTX 3080 Ti!</h5>
+          </Link>
         </div>
       </div>
       <div className="d-flex flex-column">

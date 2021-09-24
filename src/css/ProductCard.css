@@ -33,31 +33,29 @@
 
 .button-cart {
   background-color: var(--color-accent);
-  border: 1px solid var(--color-dark);
 }
 
 .out-of-stock {
   margin-top: 0px;
 }
 
-/* Overirde of bootstrap class */
-
-.btn-primary:hover {
+.button-cart:hover {
   background-color: var(--color-accent);
   border-color: var(--color-accent);
   filter: brightness(1.2);
 }
-.btn-primary:active {
+.button-cart:active {
   background-color: var(--color-accent) !important;
   border-color: var(--color-accent) !important;
   filter: brightness(1) !important;
 }
 
-.btn-primary:focus {
+.button-cart:focus {
   background-color: var(--color-accent);
 }
+
 .card-title {
-  /* font-family: Helvetica, Arial, sans-serif; */
+  font-family: Helvetica, Arial, sans-serif;
   font-weight: 600;
 }
 

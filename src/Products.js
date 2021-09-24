@@ -33,7 +33,7 @@ function Products() {
   }, [type, currentPage, pageSize]);
 
   return (
-    <div>
+    <div style={{ minHeight: "35rem" }}>
       {notFound && <FourZeroFour />}
       <div className="d-flex justify-content-center mb-2">
         <Paginators

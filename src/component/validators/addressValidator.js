@@ -5,8 +5,8 @@ export const firstNameValidation = (firstname) => {
   if (/[^a-zA-Z -]/.test(firstname)) {
     return "Invalid characters";
   }
-  if (firstname.trim().length < 3) {
-    return "First name require at least 3 characters";
+  if (firstname.trim().length < 2) {
+    return "First name require at least 2 characters";
   }
   if (firstname.trim().length > 100) {
     return "First name too long";

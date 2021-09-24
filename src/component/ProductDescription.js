@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useLayoutEffect } from "react";
 import { Image } from "react-bootstrap";
 import { useParams } from "react-router-dom";
 import { Button } from "react-bootstrap";
@@ -12,6 +12,10 @@ import store from "../redux/store";
 import "../css/ProductDescription.css";
 
 function ProductDescription(props) {
+  useLayoutEffect(() => {
+    //ensure page renders at thge top
+    window.scrollTo(0, 0);
+  });
   const { id } = useParams();
   const [product, setProduct] = useState({});
   const dispatch = useDispatch();
@@ -62,7 +66,7 @@ function ProductDescription(props) {
   };
 
   return (
-    <div>
+    <div style={{ minHeight: "35rem" }}>
       <div className={description}>
         <div className="float-left">
           <Image
