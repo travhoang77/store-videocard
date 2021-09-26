@@ -6,9 +6,14 @@ import { getProductsBy } from "./fetches/productFetch";
 import { paginate } from "./utils/paginate";
 import "./css/Products.css";
 import FourZeroFour from "./FourZeroFour";
+import { useMediaQuery } from "./utils/useMediaQuery";
 import { PAGE_SIZE } from "./utils/constants";
 
 function Products() {
+  const [width] = useMediaQuery();
+  const componentheightInRem = (width) => {
+    return ((width * 0.269) / 16).toString() + "rem";
+  };
   const { type } = useParams();
   const [products, setProducts] = useState([]);
   const [paginatedProducts, setPaginatedProducts] = useState([]);
@@ -33,7 +38,7 @@ function Products() {
   }, [type, currentPage, pageSize]);
 
   return (
-    <div style={{ minHeight: "35rem" }}>
+    <div style={{ minHeight: componentheightInRem(width) }}>
       {notFound && <FourZeroFour />}
       <div className="d-flex justify-content-center mb-2">
         <Paginators

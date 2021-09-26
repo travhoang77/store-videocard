@@ -15,8 +15,13 @@ import { create } from "../fetches/userFetch";
 import { authenticate } from "../fetches/authFetch";
 import { useDispatch } from "react-redux";
 import { setToken } from "../redux/actions/loginActions";
+import { useMediaQuery } from "../utils/useMediaQuery";
 
 function Register() {
+  const [width] = useMediaQuery();
+  const componentheightInRem = (width) => {
+    return ((width * 0.269) / 16).toString() + "rem";
+  };
   const history = useHistory();
   const [firstname, setFirstName] = useState("");
   const [email, setEmail] = useState("");
@@ -67,7 +72,7 @@ function Register() {
   };
 
   return (
-    <div className="user">
+    <div className="user" style={{ minHeight: componentheightInRem(width) }}>
       <Link to="/">
         <img className="user-logo" src={Logo} alt="" />
       </Link>

@@ -11,8 +11,13 @@ import {
 } from "./validators/userValidator";
 import { setToken } from "../redux/actions/loginActions";
 import { useDispatch } from "react-redux";
+import { useMediaQuery } from "../utils/useMediaQuery";
 
 function Login() {
+  const [width] = useMediaQuery();
+  const componentheightInRem = (width) => {
+    return ((width * 0.269) / 16).toString() + "rem";
+  };
   const history = useHistory();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -45,7 +50,7 @@ function Login() {
   };
 
   return (
-    <div className="user">
+    <div className="user" style={{ minHeight: componentheightInRem(width) }}>
       <Link to="/">
         <img className="user-logo" src={Logo} alt="" />
       </Link>

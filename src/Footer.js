@@ -46,20 +46,23 @@ function Footer(props) {
                   <FontAwesomeIcon icon={faGem} className="mr-1" />
                   GPU World
                 </h6>
-                <p>GPU at amazing prices.</p>
+                <p>
+                  Our e-commerce site is dedicated to the passion of graphic
+                  cards at unbeatable prices.
+                </p>
               </div>
               <div className="col-md-2 col-lg-2 col-xl-2 mx-auto mb-4">
                 <h6 className="text-uppercase fw-bold mb-4 text-light">
                   Partners
                 </h6>
                 <p>
-                  <a href="#!">Nvidia</a>
+                  <a href="http://www.nvidia.com">Nvidia</a>
                 </p>
                 <p>
-                  <a href="#!">AMD</a>
+                  <a href="http://www.amd.com">AMD</a>
                 </p>
                 <p>
-                  <a href="#!">Intel</a>
+                  <a href="http://www.intel.com">Intel</a>
                 </p>
               </div>
               <div className="col-md-3 col-lg-2 col-xl-2 mx-auto mb-4">
@@ -67,16 +70,16 @@ function Footer(props) {
                   Useful links
                 </h6>
                 <p>
-                  <a href="#!">About</a>
+                  <a href="/about">About</a>
                 </p>
                 <p>
                   <a href="#!">Settings</a>
                 </p>
                 <p>
-                  <a href="#!">Orders</a>
+                  <a href="/orders">Orders</a>
                 </p>
                 <p>
-                  <a href="#!">Help</a>
+                  <a href="/help">Help</a>
                 </p>
               </div>
               <div className="col-md-4 col-lg-3 col-xl-3 mx-auto mb-md-0 mb-4">

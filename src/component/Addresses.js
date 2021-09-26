@@ -12,9 +12,14 @@ import "../css/Addresses.css";
 import AddAddressCard from "./AddAddressCard";
 import AddressCard from "./AddressCard";
 import { spinnerduration } from "../utils/constants";
+import { useMediaQuery } from "../utils/useMediaQuery";
 const _ = require("lodash");
 
 function Addresses(props) {
+  const [width] = useMediaQuery();
+  const componentheightInRem = (width) => {
+    return ((width * 0.269) / 16).toString() + "rem";
+  };
   const maximum = props.maximum ? props.maximum : 2;
 
   const [shippingAddressContent, setShippingAddressContent] =
@@ -119,7 +124,7 @@ function Addresses(props) {
   };
 
   return (
-    <div style={{ minHeight: "42rem" }}>
+    <div style={{ minHeight: componentheightInRem(width) }}>
       <div className="addresses">
         <span style={{ width: "100%", height: "3rem" }}>
           <h4 className="border-dark border-bottom">Addresses</h4>

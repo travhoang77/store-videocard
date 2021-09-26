@@ -1,22 +1,8 @@
-import React, { useLayoutEffect, useState } from "react";
+import React from "react";
 import { Link } from "react-router-dom";
 import "../css/Landing.css";
 import MainCarousel from "./MainCarousel";
-
-function useMediaQuery() {
-  const [screenSize, setScreenSize] = useState([0, 0]);
-
-  useLayoutEffect(() => {
-    function updateScreenSize() {
-      setScreenSize([window.innerWidth, window.innerHeight]);
-    }
-    window.addEventListener("resize", updateScreenSize);
-    updateScreenSize();
-    return () => window.removeEventListener("resize", updateScreenSize);
-  }, []);
-
-  return screenSize;
-}
+import { useMediaQuery } from "../utils/useMediaQuery";
 
 function Landing() {
   const [width] = useMediaQuery();
@@ -35,7 +21,6 @@ function Landing() {
 
   return (
     <div className="landing" style={{ width: componentwidthInRem(width) }}>
-      <div>{frameDimension(width).framewidth}</div>
       <div>
         <MainCarousel />
       </div>

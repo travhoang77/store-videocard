@@ -6,10 +6,15 @@ import CartItem from "./CartItem";
 import CartSummary from "./CartSummary";
 import store from "../redux/store";
 import { CART_LIMIT } from "../utils/constants";
+import { useMediaQuery } from "../utils/useMediaQuery";
 
 import "../css/Cart.css";
 
 function Cart({ cart }) {
+  const [width] = useMediaQuery();
+  const componentheightInRem = (width) => {
+    return ((width * 0.269) / 16).toString() + "rem";
+  };
   const empty = "Your cart is empty";
   const [carttext, setcarttext] = useState(cart.length > 0 ? "Cart" : empty);
   const dispatch = useDispatch();
@@ -20,7 +25,10 @@ function Cart({ cart }) {
   };
 
   return (
-    <div className="cart-main">
+    <div
+      className="cart-main"
+      style={{ minHeight: componentheightInRem(width) }}
+    >
       <div style={{ width: "100%", height: "5rem" }}>
         <h4>{carttext}</h4>
         <div className="border-dark mb-10 border-bottom"></div>

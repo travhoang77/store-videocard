@@ -11,9 +11,14 @@ import {
 import { updatePassword } from "../fetches/userFetch";
 import "../css/User.css";
 import { getToken } from "../utils/utils";
+import { useMediaQuery } from "../utils/useMediaQuery";
 const jwt = require("jsonwebtoken");
 
 function PasswordReset() {
+  const [width] = useMediaQuery();
+  const componentheightInRem = (width) => {
+    return ((width * 0.269) / 16).toString() + "rem";
+  };
   const authtoken = getToken();
   const id = jwt.decode(authtoken)["_id"];
   const [currentpassword, setCurrentPassword] = useState("");
@@ -62,7 +67,8 @@ function PasswordReset() {
   };
 
   return (
-    <div className="user" style={{ minHeight: "25rem" }}>
+    <div className="user" style={{ minHeight: componentheightInRem(width) }}>
+      <div>{width}</div>
       <div className={toggle}>
         <h5 className="text-success">Password change successful!</h5>
       </div>

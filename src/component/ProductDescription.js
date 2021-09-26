@@ -9,9 +9,14 @@ import _ from "lodash";
 import { addToCart, adjustQty } from "../redux/actions/cartActions";
 import { useDispatch } from "react-redux";
 import store from "../redux/store";
+import { useMediaQuery } from "../utils/useMediaQuery";
 import "../css/ProductDescription.css";
 
 function ProductDescription(props) {
+  const [width] = useMediaQuery();
+  const componentheightInRem = (width) => {
+    return ((width * 0.269) / 16).toString() + "rem";
+  };
   const text = "Add to cart";
   useLayoutEffect(() => {
     //ensure page renders at thge top
@@ -79,7 +84,7 @@ function ProductDescription(props) {
   };
 
   return (
-    <div style={{ minHeight: "35rem" }}>
+    <div style={{ minHeight: componentheightInRem(width) }}>
       <div className={description}>
         <div className="float-left">
           <Image
