@@ -77,11 +77,11 @@ function ProductCard(props) {
         </Card.Title>
         <div className="bottom-card">
           <Card.Text>${props.product.price}</Card.Text>
-          {props.product.quantity === 0 && (
+          {props.product.quanitiy === 0 && (
             <Button
-              className="btn btn-secondary"
-              style={{ minWidth: "6rem" }}
-              disabled
+              className="btn"
+              style={{ minWidth: "7rem" }}
+              variant="danger"
             >
               Out of Stock
             </Button>

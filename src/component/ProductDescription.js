@@ -12,12 +12,18 @@ import store from "../redux/store";
 import "../css/ProductDescription.css";
 
 function ProductDescription(props) {
+  const text = "Add to cart";
   useLayoutEffect(() => {
     //ensure page renders at thge top
     window.scrollTo(0, 0);
   });
   const { id } = useParams();
   const [product, setProduct] = useState({});
+  const [spinner, setspinner] = useState(
+    "spinner-border spinner-border-sm d-none"
+  );
+
+  const [buttontext, setbuttontext] = useState(text);
   const dispatch = useDispatch();
 
   const msrp = "h3 text-danger mr-4 d-none";
@@ -60,9 +66,16 @@ function ProductDescription(props) {
   };
 
   const sendToCart = () => {
-    item
-      ? dispatch(adjustQty(id, qty))
-      : dispatch(addToCart(id, product.name, cardimgurl, product.price, qty));
+    setbuttontext("");
+    setspinner("spinner-border spinner-border-sm");
+
+    setTimeout(() => {
+      setbuttontext(text);
+      setspinner("spinner-border spinner-border-sm d-none");
+      item
+        ? dispatch(adjustQty(id, qty))
+        : dispatch(addToCart(id, product.name, cardimgurl, product.price, qty));
+    }, 500);
   };
 
   return (
@@ -116,8 +129,10 @@ function ProductDescription(props) {
               className="button-cart mt-2"
               id={product._id}
               onClick={sendToCart}
+              style={{ minWidth: "7rem" }}
             >
-              Add to Cart
+              <span className={spinner} role="status" aria-hidden="true"></span>
+              {buttontext}
             </Button>
           )}
 

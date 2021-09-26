@@ -26,14 +26,41 @@ class App extends Component {
       <Router>
         <div className="App">
           <Header />
-
           <Switch>
+            <Route path="/cart">
+              <ProductNav />
+              <BreadCrumbs />
+              <Cart />
+            </Route>
+            <Route path="/login">
+              <ProductNav />
+              <BreadCrumbs />
+              <Login />
+            </Route>
+            <Route path="/register">
+              <ProductNav />
+              <BreadCrumbs />
+              <Register />
+            </Route>
+            <Route path="/product/:id">
+              <ProductNav />
+              <BreadCrumbs />
+              <ProductDescription />
+            </Route>
+            <Route path="/products/:type">
+              <ProductNav />
+              <BreadCrumbs />
+              <Products />
+            </Route>
+            <Route exact path="/404">
+              <ProductNav />
+              <FourZeroFour />
+            </Route>
             <Route exact path="/">
               <ProductNav />
               <BreadCrumbs />
               <Landing />
             </Route>
-
             <ProtectedRoute path="/account/addresses/create" redirectTo="/404">
               <AccountNav />
               <BreadCrumbs />
@@ -62,40 +89,6 @@ class App extends Component {
               <BreadCrumbs />
               {/* <Profile/> */}
             </ProtectedRoute>
-            <Route path="/cart">
-              <ProductNav />
-              <BreadCrumbs />
-              <Cart />
-            </Route>
-            <Route path="/login">
-              <ProductNav />
-              <BreadCrumbs />
-              <Login />
-            </Route>
-            <Route path="/register">
-              <ProductNav />
-              <BreadCrumbs />
-              <Register />
-            </Route>
-            <Route path="/product/:id">
-              <ProductNav />
-              <BreadCrumbs />
-              <ProductDescription />
-            </Route>
-            <Route path="/products/:type">
-              <ProductNav />
-              <BreadCrumbs />
-              <Products />
-            </Route>
-            <Route path="/404">
-              <ProductNav />
-              <FourZeroFour />
-            </Route>
-            <Route exact path="/">
-              <ProductNav />
-              <BreadCrumbs />
-              <Landing />
-            </Route>
           </Switch>
           <Footer />
         </div>

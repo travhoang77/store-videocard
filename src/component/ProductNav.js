@@ -2,6 +2,7 @@ import {
   faChevronLeft,
   faChevronRight,
 } from "@fortawesome/free-solid-svg-icons";
+import { useLocation } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React, { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
@@ -38,8 +39,9 @@ function DropdownMenu() {
   }
 
   function DropDownItem(props) {
+    const location = useLocation();
     let { to } = props;
-    to = to ? to : "/";
+    to = to ? to : location.pathname;
     return (
       <Link
         to={to}

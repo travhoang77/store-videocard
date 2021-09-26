@@ -1,20 +1,49 @@
-import React from "react";
+import React, { useLayoutEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import "../css/Landing.css";
 import MainCarousel from "./MainCarousel";
 
+function useMediaQuery() {
+  const [screenSize, setScreenSize] = useState([0, 0]);
+
+  useLayoutEffect(() => {
+    function updateScreenSize() {
+      setScreenSize([window.innerWidth, window.innerHeight]);
+    }
+    window.addEventListener("resize", updateScreenSize);
+    updateScreenSize();
+    return () => window.removeEventListener("resize", updateScreenSize);
+  }, []);
+
+  return screenSize;
+}
+
 function Landing() {
+  const [width] = useMediaQuery();
+  const componentwidthInRem = (width) => {
+    return ((width * 0.61) / 16).toString() + "rem";
+  };
+
+  const frameDimension = (width) => {
+    return {
+      framewidth: (width * 0.31).toString(),
+      frameheight: (width * 0.17).toString(),
+    };
+  };
+
   const spantext = "d-flex justify-content-center font-weight-bold text-dark";
+
   return (
-    <div className="landing">
+    <div className="landing" style={{ width: componentwidthInRem(width) }}>
+      <div>{frameDimension(width).framewidth}</div>
       <div>
         <MainCarousel />
       </div>
       <div className="landing-rectangle">
         <div className="m-2">
           <iframe
-            width="560"
-            height="315"
+            width={frameDimension(width).framewidth}
+            height={frameDimension(width).frameheight}
             src="https://www.youtube-nocookie.com/embed/xg0FI4QX8eQ?controls=0"
             title="YouTube video player"
             frameborder="0"
@@ -23,9 +52,11 @@ function Landing() {
           ></iframe>
         </div>{" "}
         <div className="mt-auto mb-auto">
-          <p>Unboxing of the Geforce RTX 3080!</p>
+          <p style={{ fontSize: "1rem" }}>Unboxing of the Geforce RTX 3080!</p>
           <Link to="/product/614c11b6dcdeb36321f5b2c6" className="text-primary">
-            <h5>Check out ASUS Geforce RTX 3080 Ti!</h5>
+            <p style={{ fontSize: "1.2rem" }}>
+              Check out ASUS Geforce RTX 3080 Ti!
+            </p>
           </Link>
         </div>
       </div>
