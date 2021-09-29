@@ -1,7 +1,7 @@
 const axios = require("axios");
 
 const instance = axios.create({
-  baseURL: process.env.REACT_APP_API_URL,
+  baseURL: "https://videocard-node-api.herokuapp.com/",
 });
 
 export async function emailExists(email) {
