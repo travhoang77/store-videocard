@@ -3,7 +3,6 @@ import { Link, useHistory } from "react-router-dom";
 import { Form } from "react-bootstrap";
 import "../css/User.css";
 import Logo from "../assets/logo.png";
-import { authenticate } from "../fetches/authFetch";
 import ValidateMessage from "./ValidateMessage";
 import {
   emailLoginValidation,
@@ -12,6 +11,31 @@ import {
 import { setToken } from "../redux/actions/loginActions";
 import { useDispatch } from "react-redux";
 import { useMediaQuery } from "../utils/useMediaQuery";
+
+const axios = require("axios");
+
+const instance = axios.create({
+  baseURL: process.env.REACT_APP_API_URL,
+});
+
+async function authenticate(email, password) {
+  let result = { success: false, token: null };
+
+  await instance
+    .post("/authService/authenticate", { email, password })
+    .then((response) => {
+      if (response.status === 200 && response.data.success)
+        result = {
+          success: true,
+          token: response.headers["authorization"],
+        };
+    })
+    .catch((error) => {
+      console.log("authenticate ->", error);
+    });
+
+  return result;
+}
 
 function Login(props) {
   const [width] = useMediaQuery();
