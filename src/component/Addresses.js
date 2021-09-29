@@ -1,7 +1,6 @@
 import React, { useEffect, useState, useCallback } from "react";
 import { useHistory } from "react-router-dom";
 import { getToken, getUserIdFromToken } from "../utils/utils";
-import { CircleLoader } from "react-spinners";
 import {
   getAddressesFromUser,
   deleteAddressFromUser,
@@ -11,7 +10,6 @@ import {
 import "../css/Addresses.css";
 import AddAddressCard from "./AddAddressCard";
 import AddressCard from "./AddressCard";
-import { spinnerduration } from "../utils/constants";
 import { useMediaQuery } from "../utils/useMediaQuery";
 const _ = require("lodash");
 
@@ -22,52 +20,21 @@ function Addresses(props) {
   };
   const maximum = props.maximum ? props.maximum : 2;
 
-  const [shippingAddressContent, setShippingAddressContent] =
-    useState("shipping-addresses");
-  const [addresscount, setAddressCount] = useState(0);
+  const shippingAddressContent = "shipping-addresses";
+  const [addresscount, setAddressCount] = useState();
   const [primaryaddress, setPrimaryAddress] = useState({});
   const [defaultShippingAddresss, setDefaultShippingAddress] = useState({});
   const [shippingAddresses, setShippingAddresses] = useState([]);
   const token = getToken();
   const userid = getUserIdFromToken(token);
-  const spinnercolor = "#190061";
-  const [showSpinner, setShowSpinner] = useState(false);
   const history = useHistory();
-  const primaryAddressExist = useCallback(() => {
-    return !_.isEmpty(primaryaddress);
-  }, [primaryaddress]);
+
   //useCallback to prevent flickering
 
   const handleChange = (addressid) => {
     history.push(`/account/addresses/update/${addressid}`);
   };
 
-  const PrimaryAddress = useCallback(
-    (props) => {
-      return primaryAddressExist ? (
-        <AddressCard
-          type="primary"
-          object={props.address}
-          key={props.address._id}
-          onUpdate={() => {
-            history.push(`/account/addresses/update/${props.address._id}`);
-          }}
-        />
-      ) : (
-        <AddAddressCard />
-      );
-    },
-    [primaryAddressExist, history]
-  );
-
-  const runSpinner = () => {
-    setShowSpinner(true);
-    setShippingAddressContent("d-none");
-    setTimeout(() => {
-      setShowSpinner(false);
-      setShippingAddressContent("shipping-addresses");
-    }, spinnerduration);
-  };
   useEffect(() => {
     const fetchData = async () => {
       const result = await getAddressesFromUser(userid, token);
@@ -123,6 +90,24 @@ function Addresses(props) {
     } else alert("Action Failed");
   };
 
+  const PrimaryAddress = useCallback(
+    (props) => {
+      return addresscount === 0 ? (
+        <AddAddressCard />
+      ) : (
+        <AddressCard
+          type="primary"
+          object={props.address}
+          key={props.address._id}
+          onUpdate={() => {
+            history.push(`/account/addresses/update/${props.address._id}`);
+          }}
+        />
+      );
+    },
+    [history, addresscount]
+  );
+
   return (
     <div style={{ minHeight: componentheightInRem(width) }}>
       <div className="addresses">
@@ -136,7 +121,7 @@ function Addresses(props) {
           </small>
         </span>
         <span className="mb-3">
-          {primaryaddress && <PrimaryAddress address={primaryaddress} />}
+          <PrimaryAddress address={primaryaddress} />
         </span>
 
         {addresscount > 0 && (
@@ -176,9 +161,6 @@ function Addresses(props) {
             </span>
           )}
         </div>
-      </div>
-      <div className="spinner">
-        <CircleLoader size={60} color={spinnercolor} loading={showSpinner} />
       </div>
     </div>
   );

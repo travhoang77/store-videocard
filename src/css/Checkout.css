@@ -1,0 +1,10 @@
+.checkout-main {
+  width: 55rem;
+  margin: 0 auto;
+}
+
+#checkout-shipping {
+  width: 100%;
+  height: 12rem;
+  border: 0.01rem solid var(--color-light);
+}

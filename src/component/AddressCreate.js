@@ -17,7 +17,7 @@ import { useHistory } from "react-router-dom";
 
 import { stateoptions } from "../utils/constants";
 
-function AddressCreate() {
+function AddressCreate(props) {
   const [firstname, setFirstName] = useState("");
   const [lastname, setLastName] = useState("");
   const [address, setAddress] = useState("");

@@ -17,7 +17,7 @@ import { useDispatch } from "react-redux";
 import { setToken } from "../redux/actions/loginActions";
 import { useMediaQuery } from "../utils/useMediaQuery";
 
-function Register() {
+function Register(props) {
   const [width] = useMediaQuery();
   const componentheightInRem = (width) => {
     return ((width * 0.269) / 16).toString() + "rem";
@@ -71,12 +71,16 @@ function Register() {
     }
   };
 
+  const border = props.border
+    ? { border: "1px solid #c9a0dc", borderRadius: "5px" }
+    : {};
+
   return (
     <div className="user" style={{ minHeight: componentheightInRem(width) }}>
       <Link to="/">
         <img className="user-logo" src={Logo} alt="" />
       </Link>
-      <div className="user-container">
+      <div className="user-container" style={border}>
         <h3>Create account</h3>
         <Form onSubmit={(event) => signup(event)}>
           <h6>Your name</h6>

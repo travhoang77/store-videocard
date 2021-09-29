@@ -13,7 +13,7 @@ import { setToken } from "../redux/actions/loginActions";
 import { useDispatch } from "react-redux";
 import { useMediaQuery } from "../utils/useMediaQuery";
 
-function Login() {
+function Login(props) {
   const [width] = useMediaQuery();
   const componentheightInRem = (width) => {
     return ((width * 0.269) / 16).toString() + "rem";
@@ -49,6 +49,10 @@ function Login() {
     }
   };
 
+  const border = props.border
+    ? { border: "1px solid #c9a0dc", borderRadius: "5px" }
+    : {};
+
   return (
     <div className="user" style={{ minHeight: componentheightInRem(width) }}>
       <Link to="/">
@@ -59,7 +63,7 @@ function Login() {
           <span className="icon">&#9888;</span>Invalid email or password!
         </span>
       </div>
-      <div className="user-container">
+      <div className="user-container" style={border}>
         <h3>Sign In</h3>
         <Form onSubmit={submit}>
           <h6>E-mail</h6>
