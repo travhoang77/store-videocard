@@ -4,12 +4,7 @@ const instance = axios.create({
   baseURL: process.env.REACT_APP_API_URL,
 });
 
-module.exports = {
-  getProductBy,
-  getProductsBy,
-};
-
-async function getProductBy(id) {
+export async function getProductBy(id) {
   let result = { success: false, product: null };
 
   await instance
@@ -25,7 +20,7 @@ async function getProductBy(id) {
   return result;
 }
 
-async function getProductsBy(type) {
+export async function getProductsBy(type) {
   let results = { success: false, products: null };
 
   await instance
