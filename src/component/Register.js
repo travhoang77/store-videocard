@@ -12,34 +12,10 @@ import {
   passwordlength,
 } from "./validators/userValidator";
 import { create } from "../fetches/userFetch";
+import { authenticate } from "../fetches/authFetch";
 import { useDispatch } from "react-redux";
 import { setToken } from "../redux/actions/loginActions";
 import { useMediaQuery } from "../utils/useMediaQuery";
-
-const axios = require("axios");
-
-const instance = axios.create({
-  baseURL: process.env.REACT_APP_API_URL,
-});
-
-async function authenticate(email, password) {
-  let result = { success: false, token: null };
-
-  await instance
-    .post("/authService/authenticate", { email, password })
-    .then((response) => {
-      if (response.status === 200 && response.data.success)
-        result = {
-          success: true,
-          token: response.headers["authorization"],
-        };
-    })
-    .catch((error) => {
-      console.log("authenticate ->", error);
-    });
-
-  return result;
-}
 
 function Register(props) {
   const [width] = useMediaQuery();
