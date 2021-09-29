@@ -4,12 +4,7 @@ const instance = axios.create({
   baseURL: process.env.REACT_APP_API_URL,
 });
 
-module.exports = {
-  authenticate,
-  signout,
-};
-
-async function authenticate(email, password) {
+export async function authenticate(email, password) {
   let result = { success: false, token: null };
 
   await instance
@@ -28,7 +23,7 @@ async function authenticate(email, password) {
   return result;
 }
 
-async function signout(token) {
+export async function signout(token) {
   let result = { success: false, user: null };
   await instance
     .post(

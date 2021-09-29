@@ -4,20 +4,7 @@ const instance = axios.create({
   baseURL: process.env.REACT_APP_API_URL,
 });
 
-module.exports = {
-  emailExists,
-  create,
-  validateCurrentPassword,
-  updatePassword,
-  getAddressesFromUser,
-  getAddressById,
-  createAddress,
-  updateAddress,
-  deleteAddressFromUser,
-  setDefaultShipppingAddressById,
-};
-
-async function emailExists(email) {
+export async function emailExists(email) {
   let result = { success: false, message: "Email does not exists" };
 
   await instance
@@ -34,7 +21,7 @@ async function emailExists(email) {
   return result;
 }
 
-async function create(user) {
+export async function create(user) {
   let result = { success: false, user: null };
 
   await instance
@@ -48,7 +35,7 @@ async function create(user) {
   return result;
 }
 
-async function validateCurrentPassword(token, id, password) {
+export async function validateCurrentPassword(token, id, password) {
   let result = { success: false, message: "Invalid Password" };
 
   await instance
@@ -71,7 +58,7 @@ async function validateCurrentPassword(token, id, password) {
   return result;
 }
 
-async function updatePassword(token, id, password) {
+export async function updatePassword(token, id, password) {
   let result = { success: false, message: null };
 
   await instance
@@ -97,7 +84,7 @@ async function updatePassword(token, id, password) {
   return result;
 }
 
-async function createAddress(userid, token, address) {
+export async function createAddress(userid, token, address) {
   let result = { success: false, addresses: null };
 
   await instance
@@ -115,7 +102,7 @@ async function createAddress(userid, token, address) {
   return result;
 }
 
-async function updateAddress(userid, token, address) {
+export async function updateAddress(userid, token, address) {
   let result = { success: false, addresses: null };
 
   await instance
@@ -136,7 +123,7 @@ async function updateAddress(userid, token, address) {
   return result;
 }
 
-async function getAddressById(userid, token, addressid) {
+export async function getAddressById(userid, token, addressid) {
   let result = { success: false, message: "Address could not be retrieved" };
 
   await instance
@@ -158,7 +145,7 @@ async function getAddressById(userid, token, addressid) {
   return result;
 }
 
-async function getAddressesFromUser(userid, token) {
+export async function getAddressesFromUser(userid, token) {
   let result = {
     success: false,
     message: "Addresses could not be retrieved",
@@ -183,7 +170,7 @@ async function getAddressesFromUser(userid, token) {
   return result;
 }
 
-async function deleteAddressFromUser(addressid, userid, token) {
+export async function deleteAddressFromUser(addressid, userid, token) {
   let result = {
     success: false,
     message: "Unable to delete Address",
@@ -213,7 +200,7 @@ async function deleteAddressFromUser(addressid, userid, token) {
   return result;
 }
 
-async function setDefaultShipppingAddressById(id, userid, token) {
+export async function setDefaultShipppingAddressById(id, userid, token) {
   let result = {
     success: false,
     message: "Unable to set default shipping address",
