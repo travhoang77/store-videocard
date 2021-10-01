@@ -25,6 +25,7 @@ code {
   --border-radius: 3px;
   --speed: 500ms;
   --border: 1px solid var(--color-accent);
+  --body-width: 80%;
   --body-height: 900px;
 }
 

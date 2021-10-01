@@ -55,7 +55,7 @@ function CartSummary({ cart }) {
         <div>
           <span>
             <small>Shipping</small>
-            <small className="float-right">FREE</small>
+            <small className="float-right">TBD</small>
           </span>
         </div>
         <div className="border-dark border-bottom">

@@ -21,6 +21,7 @@ import { stateoptions } from "../utils/constants";
 import "../css/User.css";
 import "../css/Checkout.css";
 import "rodal/lib/rodal.css";
+import CreditCardForm from "./creditcard/CreditCardForm";
 
 const _ = require("lodash");
 
@@ -28,7 +29,10 @@ function Checkout({ cart }) {
   const [width] = useMediaQuery();
   const [shippingAddress, setShippingAddress] = useState({});
   const [addressCount, setAddressCount] = useState();
-  const [shippingOption, setShippingOption] = useState();
+  const [shippingOption, setShippingOption] = useState({
+    type: "FREE",
+    price: 0,
+  });
   const [showModal, setshowModal] = useState(false);
   const token = getToken();
   const userid = getUserIdFromToken(token);
@@ -39,15 +43,22 @@ function Checkout({ cart }) {
   let subtotal = getCartSubtotal(cart);
   let shippingoptions = [
     { type: "FREE", label: "Free 7 Day", price: 0 },
-    { type: "2DAY", label: "2 Day", price: (subtotal * 0.05).toFixed(2) },
+    { type: "2DAY", label: "2 Day", price: (subtotal * 0.02).toFixed(2) },
     {
       type: "OVERNIGHT",
       label: "Overnight",
-      price: (subtotal * 0.09).toFixed(2),
+      price: (subtotal * 0.04).toFixed(2),
     },
-    { type: "SAMEDAY", label: "Same Day", price: (subtotal * 0.12).toFixed(2) },
+    {
+      type: "SAMEDAY",
+      label: "Same Day",
+      price: (subtotal * 0.12).toFixed(2),
+    },
   ];
 
+  const testHandler = (value) => {
+    alert(value.number);
+  };
   const AddressForm = () => {
     const [firstname, setFirstName] = useState("");
     const [lastname, setLastName] = useState("");
@@ -239,7 +250,7 @@ function Checkout({ cart }) {
   };
 
   const tabalateShipping = (value) => {
-    console.log(value);
+    setShippingOption({ type: value.type, price: value.price });
   };
 
   return (
@@ -295,13 +306,19 @@ function Checkout({ cart }) {
                 <div key={`default-radio`} className="mb-2">
                   {shippingoptions.map((option) => (
                     <Form.Check
+                      onChange={(event) =>
+                        tabalateShipping(
+                          shippingoptions.find(
+                            (x) => x.type === event.target.value
+                          )
+                        )
+                      }
                       type="radio"
                       id={option.type}
                       name="shipping-option"
                       label={option.label}
                       value={option.type}
-                      onClick={(event) => tabalateShipping(event.target.value)}
-                      defaultChecked={true}
+                      defaultChecked={option.type === "FREE" ? true : false}
                     />
                   ))}
                 </div>
@@ -310,9 +327,16 @@ function Checkout({ cart }) {
             <div className="d-flex flex-column" style={{ width: "auto" }}>
               <div className="mb-3">&nbsp;</div>
               {shippingoptions.map((option) => (
-                <span>${option.price}</span>
+                <span className="font-weight-bold">
+                  {option.price === 0 ? "FREE" : `$${option.price}`}
+                </span>
               ))}
             </div>
+          </div>
+          <div className="d-flex flex-column shadow p-2 mb-4 bg-white rounded">
+            <div className="font-weight-bold mb-1">Payment Information</div>
+
+            <CreditCardForm />
           </div>
         </div>
         <Rodal

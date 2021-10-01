@@ -33,6 +33,7 @@
 
 .button-cart {
   background-color: var(--color-accent);
+  border-color: var(--color-accent);
 }
 
 .out-of-stock {
