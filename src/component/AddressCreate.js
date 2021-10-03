@@ -16,8 +16,13 @@ import { getToken, getUserIdFromToken } from "../utils/utils";
 import { useHistory } from "react-router-dom";
 
 import { stateoptions } from "../utils/constants";
+import { useMediaQuery } from "../utils/useMediaQuery";
 
-function AddressCreate(props) {
+function AddressCreate() {
+  const [width] = useMediaQuery();
+  const componentheightInRem = (width) => {
+    return ((width * 0.269) / 16).toString() + "rem";
+  };
   const [firstname, setFirstName] = useState("");
   const [lastname, setLastName] = useState("");
   const [address, setAddress] = useState("");
@@ -87,7 +92,7 @@ function AddressCreate(props) {
   };
 
   return (
-    <div className="user">
+    <div className="user" style={{ minHeight: componentheightInRem(width) }}>
       <div className="user-container">
         <h3>Create address</h3>
         <Form onSubmit={(event) => submit(event)}>

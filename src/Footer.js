@@ -120,6 +120,8 @@ function Footer(props) {
           <a className="text-reset fw-bold" href="https://mdbootstrap.com/">
             MDBootstrap.com
           </a> */}
+          © 2021 Copyright:
+          <p className="text-reset fw-bold">Travis Hoang</p>
         </div>
       </footer>
     </div>

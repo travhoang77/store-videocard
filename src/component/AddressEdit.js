@@ -14,9 +14,14 @@ import { stateoptions } from "../utils/constants";
 import { updateAddress } from "../fetches/userFetch";
 import { getToken, getUserIdFromToken } from "../utils/utils";
 import { useHistory } from "react-router-dom";
+import { useMediaQuery } from "../utils/useMediaQuery";
 import "../css/User.css";
 
 function AddressEdit() {
+  const [width] = useMediaQuery();
+  const componentheightInRem = (width) => {
+    return ((width * 0.269) / 16).toString() + "rem";
+  };
   const { addressid } = useParams();
   const authtoken = getToken();
   const userid = getUserIdFromToken(authtoken);
@@ -105,7 +110,7 @@ function AddressEdit() {
   };
 
   return (
-    <div className="user">
+    <div className="user" style={{ minHeight: componentheightInRem(width) }}>
       <div className="user-container">
         <h3>Update address</h3>
         <Form onSubmit={(event) => save(event)}>
