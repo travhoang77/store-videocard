@@ -77,3 +77,4 @@ export const spinnerduration = 400;
 export const CART_LIMIT = 20;
 export const CAROUSEL_TIME = 5000;
 export const ADDRESS_MAXIMUM = 10;
+export const TAX_RATE = 0.0825;

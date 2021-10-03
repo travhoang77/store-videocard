@@ -1,11 +1,14 @@
 import React, { useState, useEffect } from "react";
 import Rodal from "rodal";
-import { Form } from "react-bootstrap";
+import { Form, Button } from "react-bootstrap";
 import { connect } from "react-redux";
 import { useMediaQuery } from "../utils/useMediaQuery";
 import { getCartSubtotal, getToken } from "../utils/utils";
 import { getUserIdFromToken } from "../utils/utils";
 import { getAddressesFromUser } from "../fetches/userFetch";
+import { useDispatch } from "react-redux";
+import { removeFromCart } from "../redux/actions/cartActions";
+import { useHistory } from "react-router";
 
 import {
   firstNameValidation,
@@ -16,16 +19,21 @@ import {
 } from "./validators/addressValidator";
 import { createAddress } from "../fetches/userFetch";
 import ValidateMessage from "../component/ValidateMessage";
-import { stateoptions } from "../utils/constants";
+import { stateoptions, TAX_RATE } from "../utils/constants";
 
 import "../css/User.css";
 import "../css/Checkout.css";
 import "rodal/lib/rodal.css";
 import CreditCardForm from "./creditcard/CreditCardForm";
 
+import CheckoutItem from "./CheckoutItem";
+import PriceSummary from "./PriceSummary";
+
 const _ = require("lodash");
 
-function Checkout({ cart }) {
+function Checkout({ cart, firstname }) {
+  const dispatch = useDispatch();
+  const history = useHistory();
   const [width] = useMediaQuery();
   const [shippingAddress, setShippingAddress] = useState({});
   const [addressCount, setAddressCount] = useState();
@@ -33,6 +41,8 @@ function Checkout({ cart }) {
     type: "FREE",
     price: 0,
   });
+
+  const [creditCard, setcreditCard] = useState();
   const [showModal, setshowModal] = useState(false);
   const token = getToken();
   const userid = getUserIdFromToken(token);
@@ -40,24 +50,26 @@ function Checkout({ cart }) {
     return ((width * 0.33) / 16).toString() + "rem";
   };
 
-  let subtotal = getCartSubtotal(cart);
+  const subtotal = getCartSubtotal(cart);
+  const tax = TAX_RATE * subtotal;
   let shippingoptions = [
     { type: "FREE", label: "Free 7 Day", price: 0 },
-    { type: "2DAY", label: "2 Day", price: (subtotal * 0.02).toFixed(2) },
+    { type: "2DAY", label: "2 Day", price: subtotal * 0.02 },
     {
       type: "OVERNIGHT",
       label: "Overnight",
-      price: (subtotal * 0.04).toFixed(2),
+      price: subtotal * 0.04,
     },
     {
       type: "SAMEDAY",
       label: "Same Day",
-      price: (subtotal * 0.12).toFixed(2),
+      price: subtotal * 0.12,
     },
   ];
 
-  const testHandler = (value) => {
-    alert(value.number);
+  const handleDelete = (id) => {
+    dispatch(removeFromCart(id));
+    if (cart.length === 1) history.push("/cart");
   };
   const AddressForm = () => {
     const [firstname, setFirstName] = useState("");
@@ -253,13 +265,18 @@ function Checkout({ cart }) {
     setShippingOption({ type: value.type, price: value.price });
   };
 
+  const submitCreditCard = (values) => {
+    setcreditCard(values);
+  };
+
   return (
     <div
       className="checkout-main"
       style={{ minHeight: componentheightInRem(width) }}
     >
       <div className="mt-2" style={{ width: "100%", height: "5rem" }}>
-        <p className="tall-font">Review and place your order</p>
+        <span className="tall-font">Review and place your order</span>
+        <span className="float-right tall-font">Order Summary</span>
       </div>
       <div className="d-flex flex-row" style={{ width: "100%" }}>
         <div style={{ width: "65%" }}>
@@ -328,7 +345,7 @@ function Checkout({ cart }) {
               <div className="mb-3">&nbsp;</div>
               {shippingoptions.map((option) => (
                 <span className="font-weight-bold">
-                  {option.price === 0 ? "FREE" : `$${option.price}`}
+                  {option.price === 0 ? "FREE" : `$${option.price.toFixed(2)}`}
                 </span>
               ))}
             </div>
@@ -336,24 +353,64 @@ function Checkout({ cart }) {
           <div className="d-flex flex-column shadow p-2 mb-4 bg-white rounded">
             <div className="font-weight-bold mb-1">Payment Information</div>
 
-            <CreditCardForm />
+            <CreditCardForm onAction={(values) => submitCreditCard(values)} />
+          </div>
+          <div className="d-flex flex-column shadow p-2 mb-4 bg-white rounded">
+            <div className="font-weight-bold mb-1">Contact Information</div>
+
+            <p>
+              Thank you <span className="font-weight-bold">{firstname} </span>
+              for your order. As you know this is just a demo website for
+              selling and processing orders for video cards. We appreciate any
+              feedback on the design of this website
+            </p>
+            <p>
+              <small>
+                By placing your order, you do not actually agree to anything
+                because this is a fake website.
+              </small>
+            </p>
+            <div>
+              <Button variant="primary" size="lg">
+                Submit Order
+              </Button>
+            </div>
           </div>
         </div>
-        <Rodal
-          visible={showModal}
-          onClose={closeRodal}
-          measure="px"
-          width={380}
-          height={640}
-          animation="fade"
-          customStyles={{
-            border: "1px solid #c9a0dc",
-            borderRadius: "5px",
-          }}
-        >
-          <AddressForm />
-        </Rodal>
+        <div className="ml-4">
+          <div className="d-flex flex-column " style={{ width: "18rem" }}>
+            <div style={{ width: "100%" }}>
+              <PriceSummary
+                subtotal={subtotal}
+                shipping={shippingOption.price}
+                tax={tax}
+              />
+            </div>
+            <div className="mt-4">
+              {cart.map((object) => (
+                <CheckoutItem
+                  object={object}
+                  onAction={(id) => handleDelete(id)}
+                />
+              ))}
+            </div>
+          </div>
+        </div>
       </div>
+      <Rodal
+        visible={showModal}
+        onClose={closeRodal}
+        measure="px"
+        width={380}
+        height={640}
+        animation="fade"
+        customStyles={{
+          border: "1px solid #c9a0dc",
+          borderRadius: "5px",
+        }}
+      >
+        <AddressForm />
+      </Rodal>
     </div>
   );
 }
@@ -361,6 +418,7 @@ function Checkout({ cart }) {
 const mapStateToProps = (state) => {
   return {
     cart: state.cart.cart,
+    firstname: state.login.firstname,
   };
 };
 

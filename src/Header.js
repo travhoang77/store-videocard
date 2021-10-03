@@ -45,7 +45,7 @@ const Header = ({ cart }) => {
   };
   return (
     <div className="header">
-      <div className="header__message">Video cards on sale</div>
+      <div className="header__message">Welcome to GPU World!</div>
       <div className="header__main">
         <div className="header__mainLogo">
           <Link to={"/"}>

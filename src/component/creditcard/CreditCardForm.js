@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Component } from "react";
 import { Form, Field } from "react-final-form";
 import Card from "./Card";
 import {
@@ -6,15 +6,16 @@ import {
   formatCVC,
   formatExpirationDate,
 } from "./cardUtils";
+const _ = require("lodash");
 
-const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
+// const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 
-const onSubmit = async (values) => {
-  await sleep(300);
-  window.alert(JSON.stringify(values, 0, 2));
-};
+// const onSubmit = async (values) => {
+//   await sleep(300);
+//   window.alert(JSON.stringify(values, 0, 2));
+// };
 
-export default class CredditCardForm extends React.Component {
+export default class CredditCardForm extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -23,17 +24,32 @@ export default class CredditCardForm extends React.Component {
       focus: "",
       name: "",
       number: "",
+      readonly: false,
+      inputstyle: { background: "#FFF" },
     };
   }
 
-  onSubmit = () => {
-    alert("submit");
+  onSubmit = (values) => {
+    console.log(values);
+
+    if (!_.isEmpty(values)) {
+      this.props.onAction(values);
+      this.setState({ inputstyle: { background: "#CCC" } });
+      this.setState({ readonly: true });
+    }
   };
+
+  onReset = (form) => {
+    form.reset();
+    this.setState({ readonly: false });
+    this.setState({ inputstyle: { background: "#FFF" } });
+  };
+
   render() {
     return (
       <div>
         <Form
-          onSubmit={onSubmit}
+          onSubmit={this.onSubmit}
           render={({
             handleSubmit,
             form,
@@ -54,25 +70,29 @@ export default class CredditCardForm extends React.Component {
                 <div className="d-flex flex-column ml-4">
                   <div className="mb-2">
                     <Field
+                      style={{ ...this.state.inputstyle }}
                       name="number"
                       component="input"
                       type="text"
                       pattern="[\d| ]{16,22}"
                       placeholder="Card Number"
                       format={formatCreditCardNumber}
+                      readOnly={this.state.readonly}
                     />
                   </div>
                   <div className="mb-2">
                     <Field
+                      style={{ ...this.state.inputstyle }}
                       name="name"
                       component="input"
                       type="text"
                       placeholder="Name"
+                      readOnly={this.state.readonly}
                     />
                   </div>
                   <div className="d-flex flex-row mb-3">
                     <Field
-                      style={{ maxWidth: "3rem" }}
+                      style={{ ...this.state.inputstyle, maxWidth: "3rem" }}
                       name="expiry"
                       component="input"
                       type="text"
@@ -80,9 +100,10 @@ export default class CredditCardForm extends React.Component {
                       placeholder="Exp"
                       format={formatExpirationDate}
                       maxlength={5}
+                      readOnly={this.state.readonly}
                     />
                     <Field
-                      style={{ maxWidth: "3rem" }}
+                      style={{ ...this.state.inputstyle, maxWidth: "3rem" }}
                       className="ml-2"
                       name="cvc"
                       component="input"
@@ -90,6 +111,7 @@ export default class CredditCardForm extends React.Component {
                       pattern="\d{3,4}"
                       placeholder="CVC"
                       format={formatCVC}
+                      readOnly={this.state.readonly}
                     />
                   </div>
                   <div className="buttons d-flex flex-row">
@@ -100,18 +122,19 @@ export default class CredditCardForm extends React.Component {
                     >
                       Submit
                     </button>
+
                     <button
                       type="button"
                       className="ml-2 btn btn-primary"
-                      onClick={form.reset}
+                      onClick={(event) => this.onReset(form)}
                       disabled={submitting || pristine}
                     >
                       Reset
                     </button>
                   </div>
                 </div>
-                <h2>Values</h2>
-                <pre>{JSON.stringify(values, 0, 2)}</pre>
+                {/* <h2>Values</h2>
+                <pre>{JSON.stringify(values, 0, 2)}</pre> */}
               </form>
             );
           }}

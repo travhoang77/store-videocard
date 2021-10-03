@@ -44,11 +44,11 @@ function Footer(props) {
               <div className="col-md-3 col-lg-4 col-xl-3 mx-auto mb-4">
                 <h6 className="text-uppercase fw-bold mb-4 text-light">
                   <FontAwesomeIcon icon={faGem} className="mr-1" />
-                  GPU World
+                  GPU Central
                 </h6>
                 <p>
                   Our e-commerce site is dedicated to the passion of graphic
-                  cards at unbeatable prices.
+                  cards at great prices.
                 </p>
               </div>
               <div className="col-md-2 col-lg-2 col-xl-2 mx-auto mb-4">

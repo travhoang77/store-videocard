@@ -5,9 +5,10 @@ function clearNumber(value = "") {
 }
 
 export function formatCreditCardNumber(value) {
-  if (!value) {
-    return value;
-  }
+  //Prevents clearing of value on Form.reset
+  // if (!value) {
+  //   return value;
+  // }
 
   const issuer = Payment.fns.cardType(value);
   const clearValue = clearNumber(value);
