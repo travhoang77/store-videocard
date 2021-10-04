@@ -62,7 +62,7 @@ function DropdownMenu() {
         <div className="menu">
           <DropDownItem to="/account/profile">Account Profile</DropDownItem>
           <DropDownItem to="/account/passwordchange">
-            Password Reset
+            Password Change
           </DropDownItem>
           <DropDownItem to="/account/addresses">Manage Address</DropDownItem>
         </div>
