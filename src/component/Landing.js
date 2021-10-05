@@ -7,14 +7,21 @@ import { useMediaQuery } from "../utils/useMediaQuery";
 function Landing() {
   const [width] = useMediaQuery();
   const componentwidthInRem = (width) => {
-    return ((width * 0.42) / 16).toString() + "rem";
+    return navigator.platform === "MacIntel"
+      ? ((width * 0.64) / 16).toString() + "rem"
+      : ((width * 0.42) / 16).toString() + "rem";
   };
 
   const frameDimension = (width) => {
-    return {
-      framewidth: (width * 0.13).toString(),
-      frameheight: (width * 0.08).toString(),
-    };
+    return navigator.platform === "MacIntel"
+      ? {
+          framewidth: (width * 0.26).toString(),
+          frameheight: (width * 0.16).toString(),
+        }
+      : {
+          framewidth: (width * 0.13).toString(),
+          frameheight: (width * 0.08).toString(),
+        };
   };
 
   const spantext = "d-flex justify-content-center font-weight-bold text-dark";

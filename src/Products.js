@@ -5,7 +5,7 @@ import Paginators from "./component/Paginators";
 import { getProductsBy } from "./fetches/productFetch";
 import { paginate } from "./utils/paginate";
 import "./css/Products.css";
-import FourZeroFour from "./FourZeroFour";
+import FourZeroFour from "./Error";
 import { useMediaQuery } from "./utils/useMediaQuery";
 import { PAGE_SIZE } from "./utils/constants";
 

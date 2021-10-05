@@ -13,7 +13,7 @@ import ProductNav from "./component/ProductNav";
 import AccountNav from "./component/AccountNav";
 import BreadCrumbs from "./component/Breadcrumbs";
 import Products from "./Products";
-import FourZeroFour from "./FourZeroFour";
+import Error from "./Error";
 import PasswordChange from "./component/PasswordChange";
 import AddressCreate from "./component/AddressCreate";
 import AddressEdit from "./component/AddressEdit";
@@ -23,18 +23,19 @@ import Checkout from "./component/Checkout";
 import Landing from "./component/Landing";
 import EmptyNav from "./component/EmptyNav";
 import { ADDRESS_MAXIMUM } from "./utils/constants";
+import { ProtectedCartRoute } from "./protectedCartRoute";
 class App extends Component {
   render() {
     return (
       <Router>
         <div className="App">
           <Switch>
-            <Route path="/cart">
+            <ProtectedCartRoute path="/cart" redirectTo="/403">
               <Header />
               <ProductNav />
               <BreadCrumbs />
               <Cart />
-            </Route>
+            </ProtectedCartRoute>
             <Route path="/login">
               <Header />
               <ProductNav />
@@ -59,16 +60,27 @@ class App extends Component {
               <BreadCrumbs />
               <Products />
             </Route>
-            <Route exact path="/404">
+            <Route path="/403">
               <Header />
               <ProductNav />
-              <FourZeroFour />
+              <Error status="403" text="Forbidden" />
+            </Route>
+            <Route path="/404">
+              <Header />
+              <ProductNav />
+              <Error status="404" text="Page not found" />
             </Route>
             <Route exact path="/">
               <Header />
               <ProductNav />
               <BreadCrumbs />
               <Landing />
+            </Route>
+
+            <Route>
+              <Header />
+              <ProductNav />
+              <Error status="404" text="Page not found" />
             </Route>
             <ProtectedRoute path="/account/addresses/create" redirectTo="/404">
               <Header />
