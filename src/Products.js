@@ -16,6 +16,7 @@ function Products() {
   };
   const { type } = useParams();
   const [products, setProducts] = useState([]);
+  const [selectedType, setSelectedType] = useState(type);
   const [paginatedProducts, setPaginatedProducts] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [notFound, setNotFound] = useState(false);
@@ -29,13 +30,18 @@ function Products() {
     const fetchData = async () => {
       const results = await getProductsBy(type);
       if (results.success) {
+        //selectedType has changed, reset currentpage back to 1
+        if (type !== selectedType) {
+          setSelectedType(type);
+          setCurrentPage(1);
+        }
         setProducts(results.products);
         setPaginatedProducts(paginate(results.products, currentPage, pageSize));
         setNotFound(false);
       } else setNotFound(true);
     };
     fetchData();
-  }, [type, currentPage, pageSize]);
+  }, [type, currentPage, pageSize, selectedType]);
 
   return (
     <div style={{ minHeight: componentheightInRem(width) }}>

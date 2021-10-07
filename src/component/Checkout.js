@@ -388,10 +388,12 @@ function Checkout({ cart, firstname }) {
             </div>
             <div className="mt-4">
               {cart.map((object) => (
-                <CheckoutItem
-                  object={object}
-                  onAction={(id) => handleDelete(id)}
-                />
+                <div className="mt-3">
+                  <CheckoutItem
+                    object={object}
+                    onAction={(id) => handleDelete(id)}
+                  />{" "}
+                </div>
               ))}
             </div>
           </div>

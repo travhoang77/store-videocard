@@ -81,11 +81,6 @@ class App extends Component {
               <Landing />
             </Route>
 
-            <Route>
-              <Header />
-              <ProductNav />
-              <Error status="404" text="Page not found" />
-            </Route>
             <ProtectedRoute path="/account/addresses/create" redirectTo="/404">
               <Header />
               <AccountNav />
@@ -119,6 +114,11 @@ class App extends Component {
               <BreadCrumbs />
               {/* <Profile/> */}
             </ProtectedRoute>
+            <Route>
+              <Header />
+              <ProductNav />
+              <Error status="404" text="Page not found" />
+            </Route>
           </Switch>
           <Footer />
         </div>
