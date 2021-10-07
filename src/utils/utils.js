@@ -57,7 +57,7 @@ export function getCartSubtotal(cart) {
     .toFixed(2);
 }
 
-export function isEmptytCart() {
+export function isEmptyCart() {
   const state = store.getState();
   console.log(state);
   return state.cart.cart.length === 0;

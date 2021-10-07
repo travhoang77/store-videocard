@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useCallback } from "react";
 import { connect } from "react-redux";
-import { getCartSubtotal } from "../utils/utils";
+import { getCartSubtotal, isAuthenticated } from "../utils/utils";
 import { Link } from "react-router-dom";
 import { Button } from "react-bootstrap";
 import "../css/Cart.css";
@@ -19,8 +19,14 @@ function CartSummary({ cart }) {
           Continue Shopping
         </Button>
       </Link>
-    ) : (
+    ) : isAuthenticated() ? (
       <Link to="/checkout">
+        <Button variant="primary" size="lg">
+          Checkout
+        </Button>
+      </Link>
+    ) : (
+      <Link to="/login?ref=cart">
         <Button variant="primary" size="lg">
           Checkout
         </Button>

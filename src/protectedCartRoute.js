@@ -1,13 +1,15 @@
 import React from "react";
 import { Redirect, Route } from "react-router-dom";
-import { isEmptytCart } from "./utils/utils";
+import { isEmptyCart, isAuthenticated } from "./utils/utils";
 
 export function ProtectedCartRoute({ children, redirectTo, ...rest }) {
+  const authenticated = isAuthenticated();
+
   return (
     <Route
       {...rest}
       render={(props) => {
-        return !isEmptytCart() ? (
+        return !isEmptyCart() && authenticated ? (
           children
         ) : (
           <Redirect

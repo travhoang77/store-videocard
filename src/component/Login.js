@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useLocation } from "react-router";
 import { Link, useHistory } from "react-router-dom";
 import { Form } from "react-bootstrap";
 import "../css/User.css";
@@ -14,6 +15,9 @@ import { useDispatch } from "react-redux";
 import { useMediaQuery } from "../utils/useMediaQuery";
 
 function Login(props) {
+  function useQuery() {
+    return new URLSearchParams(useLocation().search);
+  }
   const [width] = useMediaQuery();
   const componentheightInRem = (width) => {
     return ((width * 0.269) / 16).toString() + "rem";
@@ -25,6 +29,8 @@ function Login(props) {
   const [passwordmessage, setPasswordMessage] = useState("");
   const [toggle, setToggle] = useState("d-none");
   const dispatch = useDispatch();
+  const query = useQuery();
+  const ref = query.get("ref");
 
   const submit = async (event) => {
     event.preventDefault();
@@ -45,7 +51,8 @@ function Login(props) {
       return;
     } else {
       dispatch(setToken(result.token));
-      history.push("/");
+
+      ref === "cart" ? history.push("/cart") : history.push("/");
     }
   };
 
@@ -87,7 +94,8 @@ function Login(props) {
             Submit
           </button>
           <p>By signing-in, you agree to the Terms and Conditions</p>
-          <Link to="/register">
+
+          <Link to={ref === "cart" ? "/register?ref=cart" : "/register"}>
             <button type="button" className="user-button">
               Create your account
             </button>

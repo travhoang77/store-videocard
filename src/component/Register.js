@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useLocation } from "react-router";
 import { Link, useHistory } from "react-router-dom";
 import { Form } from "react-bootstrap";
 import "../css/User.css";
@@ -18,6 +19,11 @@ import { setToken } from "../redux/actions/loginActions";
 import { useMediaQuery } from "../utils/useMediaQuery";
 
 function Register(props) {
+  function useQuery() {
+    return new URLSearchParams(useLocation().search);
+  }
+  const query = useQuery();
+  const ref = query.get("ref");
   const [width] = useMediaQuery();
   const componentheightInRem = (width) => {
     return ((width * 0.269) / 16).toString() + "rem";
@@ -64,7 +70,7 @@ function Register(props) {
       const authresult = await authenticate(email, password);
       if (authresult.success) {
         dispatch(setToken(authresult.token));
-        history.push("/");
+        ref === "cart" ? history.push("/cart") : history.push("/");
       }
     } else {
       alert("User could not be created");

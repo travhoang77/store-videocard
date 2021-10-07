@@ -73,9 +73,6 @@ function DropdownMenu() {
           <DropDownItem rightIcon={faChevronRight} goToMenu="RADEON_6000">
             Radeon 6000 Series
           </DropDownItem>
-          {/* <DropDownItem rightIcon={faChevronRight} goToMenu="RTX_10">
-            Geforce GTX 10 Series
-          </DropDownItem> */}
         </div>
       </CSSTransition>
       <CSSTransition
@@ -102,42 +99,10 @@ function DropdownMenu() {
       >
         <div className="menu">
           <DropDownItem leftIcon={faChevronLeft} goToMenu="main" />
-          <DropDownItem to="/products/6900">RADEON RX 6900XT</DropDownItem>
-          <DropDownItem to="/products/6800">RADEON RX 6800XT</DropDownItem>
-          <DropDownItem to="/products/6700">RADEON RX 6700XT</DropDownItem>
-          <DropDownItem to="/products/6600">RADEON RX 6600XT</DropDownItem>
-        </div>
-      </CSSTransition>
-      <CSSTransition
-        in={activeMenu === "RTX_20"}
-        unmountOnExit
-        timeout={speed}
-        classNames="menu-secondary"
-        onEnter={calcHeight}
-      >
-        <div className="menu">
-          <DropDownItem leftIcon={faChevronLeft} goToMenu="main" />
-          <DropDownItem to="/products/2060">Geforce RTX 2060</DropDownItem>
-          <DropDownItem to="/products/2070">Geforce RTX 2070</DropDownItem>
-          <DropDownItem to="/products/2080">Geforce RTX 2080</DropDownItem>
-          <DropDownItem to="/products/1650">Geforce GTX 1650</DropDownItem>
-          <DropDownItem to="/products/1660">Geforce GTX 1660</DropDownItem>
-        </div>
-      </CSSTransition>
-      <CSSTransition
-        in={activeMenu === "RTX_10"}
-        unmountOnExit
-        timeout={speed}
-        classNames="menu-secondary"
-        onEnter={calcHeight}
-      >
-        <div className="menu">
-          <DropDownItem leftIcon={faChevronLeft} goToMenu="main" />
-          <DropDownItem to="/products/1030">Geforce GTX 1030</DropDownItem>
-          <DropDownItem to="/products/1050">Geforce GTX 1050</DropDownItem>
-          <DropDownItem to="/products/1060">Geforce GTX 1060</DropDownItem>
-          <DropDownItem to="/products/1070">Geforce GTX 1070</DropDownItem>
-          <DropDownItem to="/products/1080">Geforce GTX 1080</DropDownItem>
+          <DropDownItem to="/products/6900">RADEON RX 6900</DropDownItem>
+          <DropDownItem to="/products/6800">RADEON RX 6800</DropDownItem>
+          <DropDownItem to="/products/6700">RADEON RX 6700</DropDownItem>
+          <DropDownItem to="/products/6600">RADEON RX 6600</DropDownItem>
         </div>
       </CSSTransition>
     </div>
