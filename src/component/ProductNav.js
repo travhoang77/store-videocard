@@ -70,12 +70,12 @@ function DropdownMenu() {
           <DropDownItem rightIcon={faChevronRight} goToMenu="RTX_30">
             Geforce RTX 30 Series
           </DropDownItem>
-          <DropDownItem rightIcon={faChevronRight} goToMenu="RTX_20">
-            Geforce RTX 20 Series
+          <DropDownItem rightIcon={faChevronRight} goToMenu="RADEON_6000">
+            Radeon 6000 Series
           </DropDownItem>
-          <DropDownItem rightIcon={faChevronRight} goToMenu="RTX_10">
+          {/* <DropDownItem rightIcon={faChevronRight} goToMenu="RTX_10">
             Geforce GTX 10 Series
-          </DropDownItem>
+          </DropDownItem> */}
         </div>
       </CSSTransition>
       <CSSTransition
@@ -91,6 +91,21 @@ function DropdownMenu() {
           <DropDownItem to="/products/3070">Geforce RTX 3070</DropDownItem>
           <DropDownItem to="/products/3080">Geforce RTX 3080</DropDownItem>
           <DropDownItem to="/products/3090">Geforce RTX 3090</DropDownItem>
+        </div>
+      </CSSTransition>
+      <CSSTransition
+        in={activeMenu === "RADEON_6000"}
+        unmountOnExit
+        timeout={speed}
+        classNames="menu-secondary"
+        onEnter={calcHeight}
+      >
+        <div className="menu">
+          <DropDownItem leftIcon={faChevronLeft} goToMenu="main" />
+          <DropDownItem to="/products/6900">RADEON RX 6900XT</DropDownItem>
+          <DropDownItem to="/products/6800">RADEON RX 6800XT</DropDownItem>
+          <DropDownItem to="/products/6700">RADEON RX 6700XT</DropDownItem>
+          <DropDownItem to="/products/6600">RADEON RX 6600XT</DropDownItem>
         </div>
       </CSSTransition>
       <CSSTransition

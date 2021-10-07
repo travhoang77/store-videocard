@@ -248,7 +248,7 @@ function Checkout({ cart, firstname }) {
           ? setShippingAddress(result.addresses[1])
           : setShippingAddress(result.addresses[0]);
       }
-      setAddressCount(result.addresses.length);
+      setAddressCount(result.addresses ? result.addresses.length : 0);
     };
     fetchData();
   }, [token, userid, setShippingAddress]);

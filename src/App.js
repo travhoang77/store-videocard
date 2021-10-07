@@ -30,11 +30,15 @@ class App extends Component {
       <Router>
         <div className="App">
           <Switch>
-            <ProtectedCartRoute path="/cart" redirectTo="/403">
+            <Route path="/cart">
               <Header />
               <ProductNav />
               <BreadCrumbs />
               <Cart />
+            </Route>
+            <ProtectedCartRoute path="/checkout" redirectTo="/403">
+              <EmptyNav />
+              <Checkout />
             </ProtectedCartRoute>
             <Route path="/login">
               <Header />
@@ -115,10 +119,6 @@ class App extends Component {
               <BreadCrumbs />
               {/* <Profile/> */}
             </ProtectedRoute>
-            <Route path="/checkout">
-              <EmptyNav />
-              <Checkout />
-            </Route>
           </Switch>
           <Footer />
         </div>

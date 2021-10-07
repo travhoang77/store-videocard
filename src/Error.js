@@ -1,18 +1,16 @@
 import React from "react";
-import { Link, useLocation } from "react-router-dom";
-import { useHistory } from "react-router";
+
 import { useMediaQuery } from "./utils/useMediaQuery";
 import "./css/FourZeroFour.css";
-import { Button } from "react-bootstrap";
 
 function Error(props) {
-  const { pathname } = useLocation();
-  const history = useHistory();
   const [width] = useMediaQuery();
   const componentheightInRem = (width) => {
     return ((width * 0.269) / 16).toString() + "rem";
   };
 
+  const status = props.status ? props.status : "404";
+  const text = props.text ? props.text : "Not Found";
   return (
     <div
       class="row justify-content-center"
@@ -20,11 +18,9 @@ function Error(props) {
     >
       <div class="col-md-12 col-sm-12">
         <div class="card shadow-lg border-0 rounded-lg mt-5 mx-auto">
-          <h3 class="display-1 text-muted text-center">{props.status}</h3>
+          <h3 class="display-1 text-muted text-center">{status}</h3>
 
-          <span class="card-subtitle mb-2 text-muted text-center">
-            {props.text}
-          </span>
+          <span class="card-subtitle mb-2 text-muted text-center">{text}</span>
 
           <div class="card-body mx-auto">
             <a type="button" href="/" class="btn btn-primary">

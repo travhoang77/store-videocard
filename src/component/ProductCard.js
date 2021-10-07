@@ -66,7 +66,11 @@ function ProductCard(props) {
               <span className="rating-star">&#9734;</span>
             ))}
         </span>
-        <Card.Img className="brand-logo" src={`/img/${brandLogo}`} />
+        <Card.Img
+          className="brand-logo"
+          src={`/img/${brandLogo}`}
+          style={{ width: "4rem" }}
+        />
       </Card.Header>
       <Card.Body>
         <Card.Title
