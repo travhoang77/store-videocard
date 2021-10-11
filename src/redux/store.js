@@ -11,15 +11,6 @@ const persistConfig = {
 
 const persistedReducers = persistReducer(persistConfig, reducers);
 
-const store = createStore(
-  persistedReducers,
-  compose(
-    applyMiddleware(thunk),
-    window.__REDUX_DEVTOOLS_EXTENSION__ &&
-      window.__REDUX_DEVTOOLS_EXTENSION__({
-        latency: 0,
-      })
-  )
-);
+const store = createStore(persistedReducers, applyMiddleware(thunk));
 
 export default store;
