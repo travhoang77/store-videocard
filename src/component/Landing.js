@@ -52,7 +52,7 @@ function Landing() {
           </Link>
         </div>
       </div>
-      <div className="d-flex flex-column">
+      {/* <div className="d-flex flex-column">
         <div width="100%">
           <p className="tall-font">Shop Video Cards</p>
         </div>
@@ -80,7 +80,7 @@ function Landing() {
           <div className="right-border d-flex justify-content-center">
             <Link to="/products">
               <img
-                src="/img/mainsttream.jpg"
+                src="/img/mainstream.jpg"
                 style={{ maxWidth: "100%" }}
                 alt="Mainstream cards"
               />
@@ -99,7 +99,7 @@ function Landing() {
             </Link>
           </div>
         </div>
-      </div>
+      </div> */}
     </div>
   );
 }
