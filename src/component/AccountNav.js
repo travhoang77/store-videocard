@@ -2,18 +2,14 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React, { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import { CSSTransition } from "react-transition-group";
-import { faUser } from "@fortawesome/free-solid-svg-icons";
-import "../css/Nav.css";
+import { faChevronDown } from "@fortawesome/free-solid-svg-icons";
+import "../css/AccountNav.css";
 
-function AccountNav(props) {
+function AccountNav() {
   return (
-    <nav className="navBar">
-      <ul className="nav">
-        <NavItem icon={faUser} text="Account">
-          <DropdownMenu></DropdownMenu>
-        </NavItem>
-      </ul>
-    </nav>
+    <NavItem icon={faChevronDown}>
+      <DropdownMenu></DropdownMenu>
+    </NavItem>
   );
 }
 function DropdownMenu() {
@@ -51,7 +47,11 @@ function DropdownMenu() {
     );
   }
   return (
-    <div className="dropdown" style={{ height: menuHeight }} ref={dropdownRef}>
+    <div
+      className="account-dropdown"
+      style={{ height: menuHeight }}
+      ref={dropdownRef}
+    >
       <CSSTransition
         in={activeMenu === "main"}
         unmountOnExit
@@ -92,17 +92,15 @@ function NavItem(props) {
   }, [open]);
 
   return (
-    <li className="navBar__item" ref={ref}>
-      <Link to="#" className="icon__button" onClick={() => setOpen(!open)}>
+    <li className="account-navBar-item" ref={ref} style={{ maxWidth: "1rem" }}>
+      <Link to="#" onClick={() => setOpen(!open)}>
         {props.icon.prefix === "fas" ? (
-          <FontAwesomeIcon className="fa fa-lg fa__button" icon={props.icon} />
+          <FontAwesomeIcon className="fa fa-xs chev-icon" icon={props.icon} />
         ) : (
-          <img src={faUser} alt="UserIcon" />
+          <img src={faChevronDown} alt="ChevIcon" />
         )}
       </Link>
-      <span className="pl-2" onClick={() => setOpen(!open)}>
-        {props.text}
-      </span>
+      <span onClick={() => setOpen(!open)}>{props.text}</span>
       {open && props.children}
     </li>
   );

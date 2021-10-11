@@ -51,7 +51,10 @@ function ProductCard(props) {
   return (
     <Card className="product-card" id={id}>
       <Link to={`/product/${id}`}>
-        <Card.Img variant="top" src={`/img/${imgurl}`} />
+        <Card.Img
+          variant="top"
+          src={`${process.env.REACT_APP_IMG_URL}/${imgurl}`}
+        />
       </Link>
       <Card.Header>
         <span>
@@ -68,7 +71,7 @@ function ProductCard(props) {
         </span>
         <Card.Img
           className="brand-logo"
-          src={`/img/${brandLogo}`}
+          src={`${process.env.REACT_APP_IMG_URL}/${brandLogo}`}
           style={{ width: "4rem" }}
         />
       </Card.Header>
@@ -81,7 +84,7 @@ function ProductCard(props) {
         </Card.Title>
         <div className="bottom-card">
           <Card.Text>${props.product.price}</Card.Text>
-          {props.product.quanitiy === 0 && (
+          {props.product.quantity === 0 && (
             <Button
               className="btn"
               style={{ minWidth: "7rem" }}

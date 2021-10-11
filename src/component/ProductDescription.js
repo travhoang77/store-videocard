@@ -88,7 +88,7 @@ function ProductDescription(props) {
       <div className={description}>
         <div className="float-left">
           <Image
-            src={`/img/${imgurl}`}
+            src={`${process.env.REACT_APP_IMG_URL}/${imgurl}`}
             style={{ maxWidth: "26rem" }}
             className="border-0"
             thumbnail

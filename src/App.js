@@ -10,7 +10,6 @@ import Login from "./component/Login";
 import Register from "./component/Register";
 import ProductDescription from "./component/ProductDescription";
 import ProductNav from "./component/ProductNav";
-import AccountNav from "./component/AccountNav";
 import BreadCrumbs from "./component/Breadcrumbs";
 import Products from "./Products";
 import Error from "./Error";
@@ -21,6 +20,7 @@ import Addresses from "./component/Addresses";
 import Cart from "./component/Cart";
 import Checkout from "./component/Checkout";
 import Landing from "./component/Landing";
+import CenteredLogo from "./component/CenteredLogo";
 import EmptyNav from "./component/EmptyNav";
 import { ADDRESS_MAXIMUM } from "./utils/constants";
 import { ProtectedCartRoute } from "./protectedCartRoute";
@@ -37,6 +37,7 @@ class App extends Component {
               <Cart />
             </Route>
             <ProtectedCartRoute path="/checkout" redirectTo="/403">
+              <CenteredLogo />
               <EmptyNav />
               <Checkout />
             </ProtectedCartRoute>
@@ -83,7 +84,7 @@ class App extends Component {
 
             <ProtectedRoute path="/account/addresses/create" redirectTo="/404">
               <Header />
-              <AccountNav />
+              <EmptyNav />
               <BreadCrumbs />
               <AddressCreate />
             </ProtectedRoute>
@@ -92,25 +93,25 @@ class App extends Component {
               redirectTo="/404"
             >
               <Header />
-              <AccountNav />
+              <EmptyNav />
               <BreadCrumbs />
               <AddressEdit />
             </ProtectedRoute>
             <ProtectedRoute path="/account/addresses" redirectTo="/404">
               <Header />
-              <AccountNav />
+              <EmptyNav />
               <BreadCrumbs />
               <Addresses maximum={ADDRESS_MAXIMUM} />
             </ProtectedRoute>
             <ProtectedRoute path="/account/passwordchange" redirectTo="/404">
               <Header />
-              <AccountNav />
+              <EmptyNav />
               <BreadCrumbs />
               <PasswordChange />
             </ProtectedRoute>
             <ProtectedRoute path="/account" redirectTo="/404">
               <Header />
-              <AccountNav />
+              <EmptyNav />
               <BreadCrumbs />
               {/* <Profile/> */}
             </ProtectedRoute>

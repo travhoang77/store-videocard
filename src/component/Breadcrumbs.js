@@ -4,9 +4,7 @@ import "../css/BreadCrumbs.css";
 function BreadCrumbs() {
   return (
     <div className="breadcrumbs">
-      <span>
-        HOME &#62; <span className="active">VIDEO CARD</span>
-      </span>
+      <span>{/* HOME &#62; <span className="active">VIDEO CARD</span> */}</span>
     </div>
   );
 }

@@ -1,0 +1,99 @@
+.account-navBar-item {
+  text-align: center;
+  color: white;
+  cursor: pointer;
+  line-height: 1.1rem;
+  width: 14px;
+}
+
+.fa__button {
+  color: var(--color-dark);
+}
+
+.account-dropdown {
+  position: absolute;
+  top: 35px;
+  right: 0px;
+  width: 230px;
+  transform: translateX(-45%);
+  background-color: var(--color-dark);
+  border: var(--border);
+  border-radius: var(--border-radius);
+  padding: 0.4em;
+  overflow: hidden;
+
+  transition: height var(--speed) ease;
+  z-index: 999;
+}
+
+.menu-item {
+  color: var(--color-secondary);
+  height: 40px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  border-radius: var(--border-radius);
+  transition: background var(--speed);
+  padding: 0.5em;
+}
+
+.menu-item:hover {
+  color: white;
+  text-decoration: none;
+  background-color: var(--color-accent);
+}
+
+.menu-item:hover > .icon {
+  color: white;
+}
+
+.icon-right {
+  margin-left: auto;
+}
+
+.menu {
+  width: 100%;
+}
+
+.menu-primary-enter {
+  position: absolute;
+  transform: translateX(-110%);
+}
+
+.menu-primary-enter-active {
+  transform: translateX(0%);
+  transition: all var(--speed) ease;
+}
+
+.menu-primary-exit {
+  position: absolute;
+}
+
+.menu-primary-exit-active {
+  transform: translateX(-110%);
+  transition: all var(--speed) ease;
+}
+
+.menu-secondary-enter {
+  transform: translateX(110%);
+}
+
+.mene-secondary-enter-active {
+  transform: translateX(0%);
+  transition: all var(--speed) ease;
+}
+
+.menu-secondary-exit {
+}
+
+.menu-secondary-exit-active {
+  transform: translateX(110%);
+  transition: all var(--speed) ease;
+}
+
+.chev-icon {
+  color: var(--color-dark);
+}
+.chev-icon:hover {
+  color: var(--color-light);
+}

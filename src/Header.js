@@ -4,6 +4,7 @@ import { useHistory } from "react-router-dom";
 import "./css/Header.css";
 import { InputGroup, Button, FormControl } from "react-bootstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+
 import {
   faSearch,
   faShoppingCart,
@@ -14,7 +15,13 @@ import Logo from "./assets/logo.png";
 import { signout } from "./fetches/authFetch";
 import { useSelector, useDispatch } from "react-redux";
 import { removeToken } from "./redux/actions/loginActions";
-import { getToken, getCartCount, getCartSubtotal } from "./utils/utils";
+import {
+  getToken,
+  getCartCount,
+  getCartSubtotal,
+  isAuthenticated,
+} from "./utils/utils";
+import AccountNav from "./component/AccountNav";
 
 const Header = ({ cart }) => {
   const history = useHistory();
@@ -45,7 +52,7 @@ const Header = ({ cart }) => {
   };
   return (
     <div className="header">
-      <div className="header__message">Welcome to GPU World!</div>
+      <div className="header__message">Welcome to GPU Central!</div>
       <div className="header__main">
         <div className="header__mainLogo">
           <Link to={"/"}>
@@ -57,7 +64,7 @@ const Header = ({ cart }) => {
         <div className="ml-auto mt-2 d-flex align-content-start flex-wrap">
           {/* TO-DO Search Component */}
           <div className="header__mainSearch">
-            <InputGroup className="w-200">
+            {/* <InputGroup className="w-200">
               <FormControl
                 placeholder="Search"
                 aria-label="Search"
@@ -68,7 +75,7 @@ const Header = ({ cart }) => {
                   <FontAwesomeIcon icon={faSearch} />
                 </Button>
               </InputGroup.Append>
-            </InputGroup>
+            </InputGroup> */}
           </div>
           <div className="ml-2">
             {/* TO-DO Cart component    */}
@@ -104,17 +111,16 @@ const Header = ({ cart }) => {
               </Link>
             ) : (
               <div className="inner">
-                <FontAwesomeIcon
-                  className="fa fa-2x clickable"
-                  icon={faUser}
-                  aria-label="Account"
-                  title="Account Settings"
-                  onClick={() => {
-                    history.push(`/account/profile`);
-                  }}
-                />
-
-                <div className="ml-1">
+                <span className="d-flex flex-row">
+                  <FontAwesomeIcon
+                    className="fa fa-2x clickable"
+                    icon={faUser}
+                    aria-label="Account"
+                    title="Account Settings"
+                  />
+                  <AccountNav />
+                </span>
+                <div>
                   <div className="inner__smallText">Welcome {firstname}</div>
                   <div
                     className="inner__largeText click"
