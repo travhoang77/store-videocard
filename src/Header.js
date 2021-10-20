@@ -31,7 +31,6 @@ const Header = ({ cart }) => {
   const [subtotal, setSubtotal] = useState();
   const [itemtext, setItemText] = useState();
 
-  const authenticated = state.login.authenticated;
   const firstname = state.login.firstname;
   const authtoken = getToken();
 
@@ -97,7 +96,7 @@ const Header = ({ cart }) => {
           </div>
           {/* TODO : ACCOUNT Component */}
           <div className="ml-2 mr-2">
-            {!authenticated ? (
+            {!isAuthenticated() ? (
               <Link
                 to="/login"
                 className="inner"
