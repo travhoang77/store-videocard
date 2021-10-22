@@ -90,7 +90,7 @@ function Landing() {
           <div className="ml-1 d-flex justify-content-center">
             <Link to="productsByCategory/Budget">
               <img
-                src="/img/lowprofile.jpg"
+                src="/img/lowprofile.JPG"
                 style={{ maxWidth: "100%" }}
                 alt="Low Profile cards"
                 label="Low Profile cards"
