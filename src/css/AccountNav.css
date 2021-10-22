@@ -13,7 +13,7 @@
 .account-dropdown {
   position: absolute;
   top: 35px;
-  right: 0px;
+  right: -10px;
   width: 230px;
   transform: translateX(-45%);
   background-color: var(--color-dark);
@@ -21,7 +21,6 @@
   border-radius: var(--border-radius);
   padding: 0.4em;
   overflow: hidden;
-
   transition: height var(--speed) ease;
   z-index: 999;
 }

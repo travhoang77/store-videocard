@@ -52,13 +52,13 @@ function Landing() {
           </Link>
         </div>
       </div>
-      {/* <div className="d-flex flex-column">
+      <div className="d-flex flex-column">
         <div width="100%">
           <p className="tall-font">Shop Video Cards</p>
         </div>
         <div className="d-flex flex-row">
           <div className="right-border d-flex justify-content-center">
-            <Link to="/products">
+            <Link to="/productsByCategory/Enthusiast">
               <img
                 src="/img/enthusiasts.jpg"
                 style={{ maxWidth: "100%" }}
@@ -68,7 +68,7 @@ function Landing() {
             </Link>
           </div>
           <div className="right-border d-flex justify-content-center">
-            <Link to="/products">
+            <Link to="/productsByCategory/Performance">
               <img
                 src="/img/performance.jpg"
                 style={{ maxWidth: "100%" }}
@@ -78,7 +78,7 @@ function Landing() {
             </Link>
           </div>
           <div className="right-border d-flex justify-content-center">
-            <Link to="/products">
+            <Link to="/productsByCategory/Mainstream">
               <img
                 src="/img/mainstream.jpg"
                 style={{ maxWidth: "100%" }}
@@ -88,7 +88,7 @@ function Landing() {
             </Link>
           </div>
           <div className="ml-1 d-flex justify-content-center">
-            <Link to="/products">
+            <Link to="productsByCategory/Budget">
               <img
                 src="/img/lowprofile.jpg"
                 style={{ maxWidth: "100%" }}
@@ -99,7 +99,7 @@ function Landing() {
             </Link>
           </div>
         </div>
-      </div> */}
+      </div>
     </div>
   );
 }

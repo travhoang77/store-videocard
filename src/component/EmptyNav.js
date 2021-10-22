@@ -1,3 +1,5 @@
+import React from 'react'
+
 import "../css/Nav.css";
 
 function EmptyNav() {

@@ -12,6 +12,7 @@ import ProductDescription from "./component/ProductDescription";
 import ProductNav from "./component/ProductNav";
 import BreadCrumbs from "./component/Breadcrumbs";
 import Products from "./Products";
+import ProductCategory from "./ProductCategory";
 import Error from "./Error";
 import PasswordChange from "./component/PasswordChange";
 import AddressCreate from "./component/AddressCreate";
@@ -64,6 +65,12 @@ class App extends Component {
               <ProductNav />
               <BreadCrumbs />
               <Products />
+            </Route>
+            <Route path="/productsByCategory/:category">
+              <Header />
+              <ProductNav />
+              <BreadCrumbs />
+              <ProductCategory />
             </Route>
             <Route path="/403">
               <Header />

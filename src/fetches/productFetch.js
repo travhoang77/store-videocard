@@ -37,3 +37,20 @@ export async function getProductsBy(type) {
 
   return results;
 }
+
+export async function getProductsByCategory(category) {
+  let results = { success: false, products: null };
+
+  await instance
+    .get(`/productService?category=${category}`)
+    .then((response) => {
+      if (response.data.success) {
+        results = { success: true, products: response.data.body };
+      }
+    })
+    .catch((error) => {
+      console.log(`getProductsByCategory(${category}) error-->`, error);
+    });
+
+  return results;
+}
