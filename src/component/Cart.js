@@ -51,6 +51,7 @@ function Cart({ cart }) {
                           width="130"
                           height="130"
                           class="img-fluid mb-4 mr-3"
+                          alt="CartIcon"
                         />
                         <h3>
                           <strong>Your Cart is Empty</strong>

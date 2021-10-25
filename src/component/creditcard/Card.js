@@ -284,7 +284,7 @@ const Container = styled.div`
     font-weight: 700;
     opacity: 1 !important;
   }
-`;
+`
 
 export default (props) => (
   <Container>

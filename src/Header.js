@@ -2,11 +2,10 @@ import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
 import { useHistory } from "react-router-dom";
 import "./css/Header.css";
-import { InputGroup, Button, FormControl } from "react-bootstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 import {
-  faSearch,
+  // faSearch,
   faShoppingCart,
   faUser,
 } from "@fortawesome/free-solid-svg-icons";
@@ -31,7 +30,6 @@ const Header = ({ cart }) => {
   const [subtotal, setSubtotal] = useState();
   const [itemtext, setItemText] = useState();
 
-  const authenticated = state.login.authenticated;
   const firstname = state.login.firstname;
   const authtoken = getToken();
 
@@ -97,7 +95,7 @@ const Header = ({ cart }) => {
           </div>
           {/* TODO : ACCOUNT Component */}
           <div className="ml-2 mr-2">
-            {!authenticated ? (
+            {!isAuthenticated() ? (
               <Link
                 to="/login"
                 className="inner"

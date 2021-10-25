@@ -18,8 +18,8 @@ export function getUserIdFromToken(token) {
 export function updateObject(oldObj, newObj) {
   let keys = Object.keys(newObj);
 
-  keys.map((x) => {
-    oldObj[x] = newObj[x];
+  keys.map(x => {
+    return oldObj[x] = newObj[x];
   });
 
   return oldObj;
