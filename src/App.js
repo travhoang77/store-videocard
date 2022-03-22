@@ -25,6 +25,7 @@ import CenteredLogo from "./component/CenteredLogo";
 import EmptyNav from "./component/EmptyNav";
 import { ADDRESS_MAXIMUM } from "./utils/constants";
 import { ProtectedCartRoute } from "./protectedCartRoute";
+//Genspark Branch
 class App extends Component {
   render() {
     return (

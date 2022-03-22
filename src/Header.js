@@ -10,7 +10,7 @@ import {
   faUser,
 } from "@fortawesome/free-solid-svg-icons";
 import { Link } from "react-router-dom";
-import Logo from "./assets/logo.png";
+import Logo from "./assets/logo2.png";
 import { signout } from "./fetches/authFetch";
 import { useSelector, useDispatch } from "react-redux";
 import { removeToken } from "./redux/actions/loginActions";
@@ -50,11 +50,11 @@ const Header = ({ cart }) => {
   };
   return (
     <div className="header">
-      <div className="header__message">Welcome to GPU Central!</div>
+      <div className="header__message">Welcome to Genspark Computer Store!</div>
       <div className="header__main">
         <div className="header__mainLogo">
           <Link to={"/"}>
-            <img src={Logo} className="pt-1 pb-1 pl-2" alt="Logo" />
+            <img src={Logo} className="pt-1 pb-1 pl-2" alt="Logo" style={{width: "45%"}}/>
           </Link>
         </div>
         <div className="header__mainAdvertisement"></div>

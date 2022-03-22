@@ -3,7 +3,7 @@ import { useLocation } from "react-router";
 import { Link, useHistory } from "react-router-dom";
 import { Form } from "react-bootstrap";
 import "../css/User.css";
-import Logo from "../assets/logo.png";
+import Logo from "../assets/logo2.png";
 import { authenticate } from "../fetches/authFetch";
 import ValidateMessage from "./ValidateMessage";
 import {

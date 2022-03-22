@@ -44,7 +44,7 @@ function Footer(props) {
               <div className="col-md-3 col-lg-4 col-xl-3 mx-auto mb-4">
                 <h6 className="text-uppercase fw-bold mb-4 text-light">
                   <FontAwesomeIcon icon={faGem} className="mr-1" />
-                  GPU Central
+                  Genspark Computer Store
                 </h6>
                 <p>
                   Our e-commerce site is dedicated to the passion of graphic
@@ -90,13 +90,13 @@ function Footer(props) {
                   <i>
                     <FontAwesomeIcon className="mr-3" icon={faHome} />
                   </i>
-                  San Jose, CA 95111
+                  Alpharetta, GA 30022
                 </p>
                 <p>
                   <i>
                     <FontAwesomeIcon className="mr-3" icon={faEnvelope} />
                   </i>
-                  info@gpuworld.com
+                  info@genspark.net
                 </p>
                 <p>
                   <i>
@@ -121,7 +121,7 @@ function Footer(props) {
             MDBootstrap.com
           </a> */}
           © 2021 Copyright:
-          <p className="text-reset fw-bold">Travis Hoang</p>
+          <p className="text-reset fw-bold">Genspark</p>
         </div>
       </footer>
     </div>
